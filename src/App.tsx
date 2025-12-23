@@ -12,7 +12,9 @@ import Partners from './pages/Partners'
 function App() {
   return (
     <div className="h-screen bg-gray-950">
-      <Navbar />
+      <div className='mb-10'>
+        <Navbar />
+      </div>
 
       <div className='px-4'>
         <div className="max-w-255 m-auto text-white">
