@@ -5,7 +5,7 @@ function Navbar() {
         <div className="bg-[#1E1E23] border-b border-[#2D2D2D] px-4 text-white">
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
                 <Link to='/'>
-                    <img src="/logo.png" className="w-15.75" alt="logo" />
+                    <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                 </Link>
 
                 <div className="flex items-center gap-2 w-87.5 px-4 py-2 bg-[#2F2F36] rounded-[10px]">

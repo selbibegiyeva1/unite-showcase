@@ -4,7 +4,6 @@ function Home() {
     return (
         <div>
             <Slider />
-            Home
         </div>
     )
 }
