@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 
 import { EffectCoverflow } from "swiper/modules";
 
