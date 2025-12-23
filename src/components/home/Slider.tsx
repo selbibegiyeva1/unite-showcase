@@ -12,7 +12,7 @@ function Slider() {
     const [slides] = useState([
         {
             id: "pubg",
-            img: "/home/1.png",
+            img: "/home/slider/1.png",
             title: "PUBG Mobile",
             description: "Пополняйте PUBG Mobile без комиссии по UID",
             descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium",
@@ -25,7 +25,7 @@ function Slider() {
         },
         {
             id: "steam",
-            img: "/home/2.png",
+            img: "/home/slider/2.png",
             title: "Самый выгодный стим",
             titleClassName: "text-[32px] w-79 flex leading-9",
             button: {
@@ -37,7 +37,7 @@ function Slider() {
         },
         {
             id: "ps",
-            img: "/home/3.png",
+            img: "/home/slider/3.png",
             title: "PlayStation под рукой",
             description: "Погружайся в мир топовых игр без ограничений.",
             descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium",
@@ -50,7 +50,7 @@ function Slider() {
         },
         {
             id: "partners",
-            img: "/home/4.png",
+            img: "/home/slider/4.png",
             title: "Пополняйте у наших партнёров",
             description: "Выбирай удобный способ оплаты и возвращайся в игру за секунды",
             descriptionClassName: "mt-3 mb-6 w-65 text-[14px] font-medium",
@@ -78,7 +78,6 @@ function Slider() {
                     modifier: 0,
                     slideShadows: true,
                 }}
-                pagination={true}
                 modules={[EffectCoverflow]}
                 className="overflow-hidden rounded-3xl"
             >
