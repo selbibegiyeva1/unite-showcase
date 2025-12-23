@@ -83,7 +83,7 @@ function Slider() {
                 className="overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
-                    <SwiperSlide key={slide.id}>
+                    <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl">
                         <div className="h-90">
                             <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" />
                         </div>
