@@ -1,13 +1,33 @@
 import Slider from "../components/home/Slider"
 import SliderPopular from "../components/home/SliderPopular"
+import Products from "../components/home/Products"
+import News from "../components/home/News"
+import Faq from "../components/home/Faq"
+
+import Footer from "../components/layout/Footer"
 
 function Home() {
     return (
         <div>
-            <div className="mb-15">
-                <Slider />
+            <div className="max-w-255 m-auto px-4 text-white">
+                <div className="mb-15">
+                    <Slider />
+                </div>
+                <SliderPopular />
+
+                <div className="pt-10 pb-15">
+                    <Products />
+                </div>
+
+                <div className="pb-15">
+                    <News />
+                </div>
+
+                <div className="pb-46">
+                    <Faq />
+                </div>
             </div>
-            <SliderPopular />
+            <Footer />
         </div>
     )
 }
