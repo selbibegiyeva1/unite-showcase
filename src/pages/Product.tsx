@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
 
@@ -6,6 +7,16 @@ function Product() {
     const group = params.get("group");
 
     const { data, isLoading, isError, error, refetch } = useProductGroupDetailsQuery(group);
+
+    useEffect(() => {
+        if (isLoading) {
+            document.title = "Loading...";
+            return;
+        }
+
+        const name = data?.group ?? group ?? "Product";
+        document.title = `Unite Gaming Shop | ${name}`;
+    }, [isLoading, data?.group, group]);
 
     if (isLoading) {
         return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
