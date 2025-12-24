@@ -1,10 +1,13 @@
 import Slider from "../components/home/Slider"
+import SliderPopular from "../components/home/SliderPopular"
 
 function Home() {
     return (
         <div>
-            <Slider />
-            Home
+            <div className="mb-15">
+                <Slider />
+            </div>
+            <SliderPopular />
         </div>
     )
 }
