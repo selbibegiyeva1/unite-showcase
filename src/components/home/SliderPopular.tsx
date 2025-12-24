@@ -10,11 +10,11 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 
 function SliderPopular() {
     const [slides] = useState([
-        { id: 1, img: "/home/slider2/1.png", title: "Steam" },
-        { id: 2, img: "/home/slider2/2.png", title: "Spotify" },
-        { id: 3, img: "/home/slider2/3.png", title: "PlayStation" },
-        { id: 4, img: "/home/slider2/4.png", title: "PUBG Mobile" },
-        { id: 5, img: "/home/slider2/4.png", title: "PUBG Mobile" },
+        { id: 1, img: "/home/slider2/1.png", title: "Steam", group: "Steam" },
+        { id: 2, img: "/home/slider2/2.png", title: "Spotify", group: "Spotify" },
+        { id: 3, img: "/home/slider2/3.png", title: "PlayStation", group: "Playstation" },
+        { id: 4, img: "/home/slider2/4.png", title: "PUBG Mobile", group: "PUBG Mobile" },
+        { id: 5, img: "/home/slider2/4.png", title: "PUBG Mobile", group: "PUBG Mobile" },
     ]);
 
     const prevRef = useRef<HTMLButtonElement | null>(null);
@@ -105,7 +105,7 @@ function SliderPopular() {
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id} className="w-57.5! shrink-0">
-                        <Link to="/product" className="block">
+                        <Link to={`/product?group=${encodeURIComponent(slide.group)}`} className="block">
                             <img
                                 src={slide.img}
                                 alt={slide.title}

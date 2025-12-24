@@ -74,7 +74,11 @@ export default function Products() {
                 {!isLoading && !isError && (
                     <div className="grid grid-cols-4 gap-6 mt-6">
                         {activeGroups.map((g) => (
-                            <Link to='/product' key={`${g.category}:${g.group_name}`} className="flex flex-col gap-3">
+                            <Link
+                                to={`/product?group=${encodeURIComponent(g.group_name)}`}
+                                key={`${g.category}:${g.group_name}`}
+                                className="flex flex-col gap-3"
+                            >
                                 <img src={g.icon_url} alt="product" className="max-w-57.5 rounded-2xl" />
                                 <center>
                                     <span className="font-bold">{g.group_name}</span>

@@ -16,7 +16,7 @@ function Slider() {
             description: "Пополняйте PUBG Mobile без комиссии по UID",
             descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium",
             button: {
-                to: "/product",
+                group: "PUBG Mobile",
                 text: "Пополнить аккаунт",
                 className:
                     "text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
@@ -28,7 +28,7 @@ function Slider() {
             title: "Самый выгодный стим",
             titleClassName: "text-[32px] w-79 flex leading-9",
             button: {
-                to: "/product",
+                group: "Steam",
                 text: "Посмотреть",
                 className:
                     "text-[14px] mt-6 shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
@@ -41,7 +41,7 @@ function Slider() {
             description: "Погружайся в мир топовых игр без ограничений.",
             descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium",
             button: {
-                to: "/product",
+                group: "Playstation",
                 text: "Посмотреть",
                 className:
                     "text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
@@ -96,7 +96,10 @@ function Slider() {
 
                             {slide.button ? (
                                 <Link
-                                    to={slide.button.to}
+                                    to={
+                                        slide.button.to ??
+                                        `/product?group=${encodeURIComponent((slide.button as any).group)}`
+                                    }
                                     style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
                                     className={slide.button.className ?? ""}
                                 >
