@@ -63,7 +63,7 @@ function Slider() {
     ]);
 
     return (
-        <div>
+        <div className="max-w-255 m-auto">
             <Swiper
                 effect={"coverflow"}
                 grabCursor={true}

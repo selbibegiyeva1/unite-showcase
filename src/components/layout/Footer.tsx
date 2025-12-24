@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <div className="text-white bg-[#1E1E23] py-9.25 px-4">
-            <div className="max-w-255 m-auto px-4 grid grid-cols-2 gap-7">
+            <div className="max-w-255 m-auto grid grid-cols-2 gap-7">
                 <div className="flex flex-col">
                     <b className="text-[14px] mb-2 text-[#FFFFFFCC]">Поддержка клиентов в Telegram</b>
                     <div className="flex items-center gap-2">

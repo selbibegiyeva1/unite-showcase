@@ -9,7 +9,7 @@ import Footer from "../components/layout/Footer"
 function Home() {
     return (
         <div>
-            <div className="max-w-255 m-auto px-4 text-white">
+            <div className="m-auto px-4 text-white">
                 <div className="mb-15">
                     <Slider />
                 </div>

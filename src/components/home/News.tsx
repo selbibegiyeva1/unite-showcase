@@ -43,8 +43,11 @@ function News() {
     const prevRef = useRef<HTMLButtonElement | null>(null);
     const nextRef = useRef<HTMLButtonElement | null>(null);
 
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+
     return (
-        <div className="pb-10 relative">
+        <div className="pb-10 relative max-w-255 m-auto">
             <div className="flex items-center justify-between pb-6">
                 <b className="text-[32px]">Популярное</b>
 
@@ -53,7 +56,8 @@ function News() {
                         ref={prevRef}
                         type="button"
                         aria-label="Previous"
-                        className="w-10 h-10 rounded-[10px] bg-[#79109D] flex items-center justify-center"
+                        disabled={isBeginning}
+                        className={`slider-arrow ${isBeginning ? "slider-arrow--inactive" : "slider-arrow--active"}`}
                     >
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
@@ -70,7 +74,8 @@ function News() {
                         ref={nextRef}
                         type="button"
                         aria-label="Next"
-                        className="w-10 h-10 rounded-[10px] bg-[#79109D] flex items-center justify-center"
+                        disabled={isEnd}
+                        className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"}`}
                     >
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path
@@ -90,7 +95,7 @@ function News() {
                 slidesPerView={"auto"}
                 grabCursor
                 centeredSlides={false}
-                spaceBetween={33}
+                spaceBetween={33.333}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
@@ -109,11 +114,21 @@ function News() {
                     // @ts-expect-error Swiper types
                     swiper.params.navigation.nextEl = nextRef.current;
                 }}
+                onInit={(swiper) => {
+                    setIsBeginning(swiper.isBeginning);
+                    setIsEnd(swiper.isEnd);
+                }}
+                onSlideChange={(swiper) => {
+                    setIsBeginning(swiper.isBeginning);
+                    setIsEnd(swiper.isEnd);
+                }}
+                onReachBeginning={() => setIsBeginning(true)}
+                onReachEnd={() => setIsEnd(true)}
                 className="overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id} className="w-79.5! shrink-0 rounded-4xl overflow-hidden bg-[#1D2023]">
-                        <Link to="/product" className="block">
+                        <Link to="/news" className="block">
                             <div className="w-79.5! h-42.5!">
                                 <img
                                     src={slide.img}
