@@ -50,7 +50,7 @@ export default function Products() {
                     <div className="grid grid-cols-4 gap-6 mt-6">
                         {Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="flex flex-col gap-3">
-                                <div className="max-w-57.75 rounded-2xl overflow-hidden">
+                                <div className="max-w-57.5 rounded-2xl overflow-hidden">
                                     <Skeleton baseColor="#2F2F33" highlightColor="#47474e" height={231} />
                                 </div>
                                 <center>
@@ -75,7 +75,7 @@ export default function Products() {
                     <div className="grid grid-cols-4 gap-6 mt-6">
                         {activeGroups.map((g) => (
                             <Link to='/product' key={`${g.category}:${g.group_name}`} className="flex flex-col gap-3">
-                                <img src={g.icon_url} alt="product" className="max-w-57.75 rounded-2xl" />
+                                <img src={g.icon_url} alt="product" className="max-w-57.5 rounded-2xl" />
                                 <center>
                                     <span className="font-bold">{g.group_name}</span>
                                 </center>

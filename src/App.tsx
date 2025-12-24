@@ -11,7 +11,7 @@ import Partners from './pages/Partners'
 
 function App() {
   return (
-    <div className="h-full bg-[#18181B]">
+    <div className="bg-[#18181B]">
       <div className='mb-10'>
         <Navbar />
       </div>
