@@ -12,7 +12,7 @@ export default function Products() {
     }, [data, activeCategory]);
 
     return (
-        <div>
+        <div className="max-w-255 m-auto">
             <div className="flex gap-2">
                 <button
                     type="button"

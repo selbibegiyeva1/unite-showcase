@@ -98,7 +98,7 @@ function Faq() {
     };
 
     return (
-        <div>
+        <div className="max-w-255 m-auto">
             <b className="text-[32px]">FAQ</b>
 
             <div className="mt-6 flex flex-col gap-2.5">
