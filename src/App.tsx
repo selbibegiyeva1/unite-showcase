@@ -12,7 +12,7 @@ import Partners from './pages/Partners'
 function App() {
   return (
     <div className="bg-[#18181B]">
-      <div className='mb-10'>
+      <div className='pb-28'>
         <Navbar />
       </div>
 
