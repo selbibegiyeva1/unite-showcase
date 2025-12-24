@@ -19,6 +19,10 @@
         @apply bg-[#2F2F33] text-white/60;
     }
 
+    .switch--inactive-img {
+        @apply opacity-60;
+    }
+
     .switch--inactive svg {
         opacity: .6;
     }
