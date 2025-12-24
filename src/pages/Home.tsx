@@ -5,12 +5,8 @@ function Home() {
     return (
         <div>
             <div className="mb-15">
-
-                {/* First Slider */}
                 <Slider />
             </div>
-
-            {/* Second Slider */}
             <SliderPopular />
         </div>
     )
