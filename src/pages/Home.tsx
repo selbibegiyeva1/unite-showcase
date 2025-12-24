@@ -7,6 +7,8 @@ import Faq from "../components/home/Faq"
 import Footer from "../components/layout/Footer"
 
 function Home() {
+    document.title = "Unite Gaming Shop | Home"
+
     return (
         <div>
             <div className="m-auto px-4 text-white">
