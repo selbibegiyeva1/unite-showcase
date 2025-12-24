@@ -2,6 +2,9 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductGroupsQuery, type ProductGroupCategory } from "../../hooks/home/useProductGroupsQuery";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function Products() {
     const [activeCategory, setActiveCategory] = useState<ProductGroupCategory>("games");
     const { data, isLoading, isError, error, refetch } = useProductGroupsQuery();
@@ -40,7 +43,20 @@ export default function Products() {
             </div>
 
             <div className="mt-4">
-                {isLoading && <div>Loading…</div>}
+                {isLoading && (
+                    <div className="grid grid-cols-4 gap-6 mt-6">
+                        {Array.from({ length: 8 }).map((_, i) => (
+                            <div key={i} className="flex flex-col gap-3">
+                                <div className="max-w-57.75 rounded-2xl overflow-hidden">
+                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" height={231} />
+                                </div>
+                                <center>
+                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" borderRadius={8} width={120} height={21} />
+                                </center>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {isError && (
                     <div>
                         <div style={{ color: "red" }}>
