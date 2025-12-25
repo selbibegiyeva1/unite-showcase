@@ -13,7 +13,7 @@ import Partners from './pages/Partners'
 
 function App() {
   return (
-    <div className="bg-[#18181B] relative">
+    <div className="bg-[#18181B] min-h-screen relative">
       <div className='pb-28'>
         <Navbar />
       </div>
