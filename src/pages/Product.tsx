@@ -78,6 +78,8 @@ function Product() {
         return checkFields(forms.topup_fields) || checkFields(forms.voucher_fields);
     }, [forms]);
 
+    const groupName = data?.group ?? group ?? "";
+
     if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
 
     if (isError) {
@@ -102,6 +104,7 @@ function Product() {
                         />
 
                         <FormOne
+                            groupName={groupName}
                             forms={data!.forms}
                             mode={mode}
                             setMode={setMode}
@@ -110,6 +113,8 @@ function Product() {
                         />
 
                         <FormTwo
+                            groupName={groupName}
+                            mode={mode}
                             fields={activeFields}
                             values={values}
                             setValues={setValues}

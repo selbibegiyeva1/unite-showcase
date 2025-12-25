@@ -1,9 +1,11 @@
+// FormOne.tsx
 import React, { useEffect, useMemo } from "react";
 import type { ProductGroupForms, FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
 
 export type TopUpMode = "topup" | "voucher";
 
 type Props = {
+    groupName: string; // ✅ add
     forms: ProductGroupForms;
 
     mode: TopUpMode;
@@ -27,11 +29,16 @@ function uniqBy<T>(arr: T[], keyFn: (x: T) => string) {
     return out;
 }
 
-function FormOne({ forms, mode, setMode, values, setValues }: Props) {
+// ✅ custom Steam topup nominals (TMT) — adjust if your design changes
+const STEAM_TOPUP_NOMINALS_TMT = [20, 40, 100, 150, 200, 500, 1000];
+
+function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) {
     const voucherAvailable = (forms?.voucher_fields?.length ?? 0) > 0;
     const topupAvailable = (forms?.topup_fields?.length ?? 0) > 0;
 
     const showModeSwitch = voucherAvailable && topupAvailable;
+
+    const isSteamTopup = groupName === "Steam" && mode === "topup";
 
     const fields = mode === "voucher" ? forms.voucher_fields : forms.topup_fields;
 
@@ -46,6 +53,7 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
     const selectedRegionLabel = String(values.region_label ?? "");
 
     const regions: RegionItem[] = useMemo(() => {
+        // Steam topup: you usually have "Любой" only, but keep normal logic anyway
         if (regionField?.options?.length) {
             return regionField.options.map((o) => ({
                 label: String(o.name),
@@ -83,9 +91,22 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                 product_id: null,
             }));
         }
-    }, [mode, regions]);
+    }, [mode, regions]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // ✅ nominals logic:
+    // - Steam + topup: use custom list
+    // - otherwise: use backend productOptions filtered by region
     const nominals = useMemo(() => {
+        if (isSteamTopup) {
+            return STEAM_TOPUP_NOMINALS_TMT.map((amt) => ({
+                value: amt,
+                product: `${amt} TMT`,
+                price: amt,
+                region: "Любой",
+                type: "TOPUP",
+            })) as FormFieldOption[];
+        }
+
         if (!productOptions.length) return [];
 
         if (selectedRegionLabel) {
@@ -99,7 +120,7 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
         }
 
         return [];
-    }, [productOptions, selectedRegionLabel, selectedRegionValue]);
+    }, [isSteamTopup, productOptions, selectedRegionLabel, selectedRegionValue]);
 
     useEffect(() => {
         if (!nominals.length) return;
@@ -141,9 +162,9 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                                 }));
                             }}
                             className={`
-                                cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
-                                ${mode === "topup" ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
-                            `}
+                cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
+                ${mode === "topup" ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
+              `}
                         >
                             Пополнение
                         </button>
@@ -160,10 +181,10 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                                 }));
                             }}
                             className={`
-                                cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
-                                relative flex items-center gap-2
-                                ${isVoucherActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
-                            `}
+                cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
+                relative flex items-center gap-2
+                ${isVoucherActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
+              `}
                         >
                             Ваучер
 
@@ -175,20 +196,17 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
 
                             <p
                                 className={`
-                                    bg-[#2F2F36] p-4 w-72.5
-                                    text-left rounded-2xl text-[14px] font-medium
-                                    absolute top-0 left-35 z-10
-                                    ${isVoucherActive
+                  bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                  absolute top-0 left-35 z-10
+                  ${isVoucherActive
                                         ? `
-                                        opacity-0 translate-y-1 pointer-events-none
-                                        transition-all duration-150
-                                        peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
-                                    `
-                                        : `
-                                        opacity-0 pointer-events-none
-                                    `
+                        opacity-0 translate-y-1 pointer-events-none
+                        transition-all duration-150
+                        peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
+                      `
+                                        : `opacity-0 pointer-events-none`
                                     }
-                                `}
+                `}
                             >
                                 Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
                                 игровой кошелёк при активации.
@@ -226,19 +244,15 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                         {selectedRegionLabel === "СНГ" ? (
                             <div className="absolute top-1/2 left-15 flex -translate-y-1/2">
                                 <div className="relative">
-                                    <img
-                                        src="/product/region.png"
-                                        alt="region"
-                                        className="w-5 peer"
-                                    />
+                                    <img src="/product/region.png" alt="region" className="w-5 peer" />
                                     <p
                                         className={`
-                                            absolute top-8.75 left-0 z-10
-                                            bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
-                                            opacity-0 translate-y-1 pointer-events-none
-                                            transition-all duration-150
-                                            peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
-                                        `}
+                      absolute top-8.75 left-0 z-10
+                      bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                      opacity-0 translate-y-1 pointer-events-none
+                      transition-all duration-150
+                      peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
+                    `}
                                     >
                                         Азербайджан, Армения, Беларусь, Казахстан, Киргизия, Молдова, Таджикистан, Туркменистан, Узбекистан
                                     </p>
@@ -255,6 +269,8 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                 </div>
             ) : null}
 
+            {/* ✅ If backend has NO nominals -> nominals.length = 0 -> this block won't render.
+          ✅ Steam topup always renders custom ones. */}
             {nominals.length ? (
                 <div className="flex flex-col gap-4">
                     <b className="text-[24px]">Выберите номинал</b>
@@ -270,10 +286,9 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                                     type="button"
                                     onClick={() => setValues((prev) => ({ ...prev, product_id: n.value }))}
                                     className={`
-                                        cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
-                                        ${isActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
-                                    `}
-                                    title={n.name_prefix ?? ""}
+                    cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
+                    ${isActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
+                  `}
                                 >
                                     {label}
                                 </button>
