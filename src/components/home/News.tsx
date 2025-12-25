@@ -47,7 +47,7 @@ function News() {
     const [isEnd, setIsEnd] = useState(false);
 
     return (
-        <div className="pb-10 relative max-w-255 m-auto">
+        <div className="relative max-w-255 m-auto">
             <div className="flex items-center justify-between pb-6">
                 <b className="text-[32px]">Популярное</b>
 
