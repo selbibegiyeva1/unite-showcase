@@ -9,7 +9,7 @@
 
 @layer {
     .switch {
-        @apply px-4 py-2.25 text-[15px] font-bold rounded-[10px] flex items-center gap-1.5 cursor-pointer transition-all duration-200 ease-out select-none;
+        @apply px-4 py-2.25 text-[15px] font-bold relative rounded-[10px] flex items-center gap-1.5 cursor-pointer transition-all duration-200 ease-out select-none;
     }
 
     .switch--active {

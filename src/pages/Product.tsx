@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
 import { ProductHeader } from "../components/product/ProductHeader";
+import FormOne from "../components/product/FormOne";
+import FormTwo from "../components/product/FormTwo";
 
 import Total from "../components/product/Total";
 
@@ -44,10 +46,14 @@ function Product() {
         <div className="text-white px-4">
             <div className="max-w-255 m-auto">
                 <div className="flex items-start gap-4 pb-15">
-                    <ProductHeader icon={data?.icon} group={data?.group} short_info={data?.short_info} />
+                    <div className="flex flex-col gap-4">
+                        <ProductHeader icon={data?.icon} group={data?.group} short_info={data?.short_info} />
+                        <FormOne />
+                        <FormTwo />
+                    </div>
                     <Total />
                 </div>
-                
+
                 <div className="pb-15">
                     <News />
                 </div>
