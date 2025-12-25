@@ -57,7 +57,7 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
             productOptions
                 .map((o) => String(o.region ?? ""))
                 .filter(Boolean)
-                .map((r) => ({ label: r, value: r })), 
+                .map((r) => ({ label: r, value: r })),
             (x) => x.value
         );
 
@@ -202,7 +202,7 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                 <div className="flex flex-col gap-4">
                     <b className="text-[24px]">Выберите регион</b>
 
-                    <div className="border border-[#FFFFFF1A] rounded-2xl relative">
+                    <div className="border border-[#FFFFFF1A] rounded-2xl relative cursor-pointer">
                         <select
                             value={selectValue}
                             onChange={(e) => {
@@ -222,6 +222,29 @@ function FormOne({ forms, mode, setMode, values, setValues }: Props) {
                                 </option>
                             ))}
                         </select>
+
+                        {selectedRegionLabel === "СНГ" ? (
+                            <div className="absolute top-1/2 left-15 flex -translate-y-1/2">
+                                <div className="relative">
+                                    <img
+                                        src="/product/region.png"
+                                        alt="region"
+                                        className="w-5 peer"
+                                    />
+                                    <p
+                                        className={`
+                                            absolute top-8.75 left-0 z-10
+                                            bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                                            opacity-0 translate-y-1 pointer-events-none
+                                            transition-all duration-150
+                                            peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
+                                        `}
+                                    >
+                                        Азербайджан, Армения, Беларусь, Казахстан, Киргизия, Молдова, Таджикистан, Туркменистан, Узбекистан
+                                    </p>
+                                </div>
+                            </div>
+                        ) : null}
 
                         <img
                             src="/product/arrow-down-simple.png"
