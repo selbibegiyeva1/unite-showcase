@@ -61,6 +61,23 @@ function Product() {
         document.title = `Unite Gaming Shop | ${name}`;
     }, [isLoading, data?.group, group]);
 
+    // Product.tsx (inside component, after forms is defined)
+
+    const showAnyRegionBadge = useMemo(() => {
+        if (!forms) return false;
+
+        const checkFields = (fields: any[]) => {
+            const regionField = fields?.find((f) => f.name === "region");
+            const opts = regionField?.options ?? [];
+            if (opts.length !== 1) return false;
+
+            // backend uses: { name: "Любой", value: "Any" }
+            return String(opts[0]?.name ?? "") === "Любой";
+        };
+
+        return checkFields(forms.topup_fields) || checkFields(forms.voucher_fields);
+    }, [forms]);
+
     if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
 
     if (isError) {
@@ -77,7 +94,12 @@ function Product() {
             <div className="max-w-255 m-auto">
                 <div className="flex items-start gap-4 pb-15">
                     <div className="flex flex-col gap-4 w-167">
-                        <ProductHeader icon={data?.icon} group={data?.group} short_info={data?.short_info} />
+                        <ProductHeader
+                            icon={data?.icon}
+                            group={data?.group}
+                            short_info={data?.short_info}
+                            showAnyRegionBadge={showAnyRegionBadge}
+                        />
 
                         <FormOne
                             forms={data!.forms}
