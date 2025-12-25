@@ -76,7 +76,7 @@ function Navbar() {
 
                         <input
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Поиск..."
                             className="outline-0 w-full text-[14px] font-medium bg-transparent"
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
