@@ -31,12 +31,12 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
                                 />
                                 <p
                                     className={`
-                    absolute top-6 left-0 z-10
-                    bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
-                    opacity-0 translate-y-1 pointer-events-none
-                    transition-all duration-150
-                    peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
-                  `}
+                                        absolute top-6 left-0 z-10
+                                        bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                                        opacity-0 translate-y-1 pointer-events-none
+                                        transition-all duration-150
+                                        peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
+                                    `}
                                 >
                                     Введите логин Steam (не никнейм). Его можно посмотреть в профиле или в клиенте Steam.
                                 </p>
@@ -72,11 +72,16 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
         <div className="p-8 bg-[#1D1D22] rounded-4xl">
             <b className="text-[24px]">Оформление покупки</b>
 
-            <div className="mt-4 flex flex-col gap-4">
+            <div
+                className={`
+                    mt-4 gap-4
+                    ${renderFields.length > 1 ? "grid grid-cols-2" : "flex flex-col"}
+                `}
+            >
                 {renderFields.map((f) => {
                     if (f.type === "text") {
                         return (
-                            <div key={f.name}>
+                            <div key={f.name} className="flex flex-col justify-between">
                                 <p className="text-[#FFFFFF99] text-[14px] mb-3">{f.label}</p>
                                 <input
                                     type="text"
