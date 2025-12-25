@@ -1,14 +1,80 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ProductGroupCategory } from "../home/useProductGroupsQuery";
 
+export type FormFieldOption = {
+    name: string;
+    value: string | number;
+    // product_id options often contain extra meta
+    product?: string;
+    price?: number;
+    region?: string;
+    name_prefix?: string;
+    type?: string;
+};
+
+export type FormField = {
+    name: string; // "region" | "email" | "product_id" | etc
+    type: "text" | "options" | string;
+    label: string;
+    options?: FormFieldOption[];
+};
+
+export type ProductGroupForms = {
+    voucher_fields: FormField[];
+    topup_fields: FormField[];
+};
+
 export type ProductGroupDetails = {
     image: string;
     icon: string;
     group: string;
     category: ProductGroupCategory;
     short_info: string;
-    forms: unknown;
+    forms: ProductGroupForms;
 };
+
+function asArray<T>(v: unknown): T[] {
+    return Array.isArray(v) ? (v as T[]) : [];
+}
+
+function normalizeField(raw: any): FormField | null {
+    if (!raw || typeof raw !== "object") return null;
+
+    const name = String(raw.name ?? "");
+    const type = String(raw.type ?? "");
+    const label = String(raw.label ?? "");
+
+    if (!name || !type || !label) return null;
+
+    const options = asArray<any>(raw.options).map((o) => ({
+        name: String(o?.name ?? o?.product ?? ""),
+        value: (o?.value ?? "") as string | number,
+        product: o?.product != null ? String(o.product) : undefined,
+        price: typeof o?.price === "number" ? o.price : undefined,
+        region: o?.region != null ? String(o.region) : undefined,
+        name_prefix: o?.name_prefix != null ? String(o.name_prefix) : undefined,
+        type: o?.type != null ? String(o.type) : undefined,
+    }));
+
+    return {
+        name,
+        type: type as FormField["type"],
+        label,
+        ...(options.length ? { options } : {}),
+    };
+}
+
+function normalizeForms(rawForms: any): ProductGroupForms {
+    const voucher_fields = asArray<any>(rawForms?.voucher_fields)
+        .map(normalizeField)
+        .filter(Boolean) as FormField[];
+
+    const topup_fields = asArray<any>(rawForms?.topup_fields)
+        .map(normalizeField)
+        .filter(Boolean) as FormField[];
+
+    return { voucher_fields, topup_fields };
+}
 
 async function fetchProductGroupDetails(group: string): Promise<ProductGroupDetails> {
     const API_HOST = import.meta.env.VITE_API_HOST as string | undefined;
@@ -40,7 +106,7 @@ async function fetchProductGroupDetails(group: string): Promise<ProductGroupDeta
         group: String(x?.group ?? group),
         category: x?.category === "business" ? "business" : "games",
         short_info: String(x?.short_info ?? ""),
-        forms: x?.forms,
+        forms: normalizeForms(x?.forms),
     };
 }
 

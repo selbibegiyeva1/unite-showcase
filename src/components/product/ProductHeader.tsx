@@ -8,7 +8,7 @@ export function ProductHeader({ icon, group, short_info }: ProductHeaderProps) {
     if (!group && !icon && !short_info) return null;
 
     return (
-        <div className="w-167 px-8 pt-8 pb-11 bg-[#1D1D22] rounded-4xl">
+        <div className="px-8 pt-8 pb-11 bg-[#1D1D22] rounded-4xl">
             <div className="flex items-center gap-7.25">
                 {icon ? (
                     <img src={icon} alt={group ?? "Product"} className="w-40 rounded-3xl" />
