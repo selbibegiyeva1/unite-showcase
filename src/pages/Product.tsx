@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
+import { ProductHeader } from "../components/product/ProductHeader";
+
+import Total from "../components/product/Total";
+
+import News from "../components/home/News";
+import Faq from "../components/home/Faq";
+import Footer from "../components/layout/Footer";
 
 function Product() {
     const [params] = useSearchParams();
@@ -36,13 +43,20 @@ function Product() {
     return (
         <div className="text-white px-4">
             <div className="max-w-255 m-auto">
-                <div className="flex items-center gap-3">
-                    <img src={data?.icon} alt={data?.group} style={{ width: 32, height: 32 }} />
-                    <h1 className="text-2xl font-bold">{data?.group}</h1>
+                <div className="flex items-start gap-4 pb-15">
+                    <ProductHeader icon={data?.icon} group={data?.group} short_info={data?.short_info} />
+                    <Total />
+                </div>
+                
+                <div className="pb-15">
+                    <News />
                 </div>
 
-                <p className="mt-3 text-white/80 max-w-3xl">{data?.short_info}</p>
+                <div className="pb-46">
+                    <Faq />
+                </div>
             </div>
+            <Footer />
         </div>
     );
 }

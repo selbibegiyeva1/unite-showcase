@@ -41,4 +41,10 @@
     .slider-arrow--inactive {
         @apply bg-[#2F2F33] cursor-not-allowed opacity-60;
     }
+
+    /* // Total */
+
+    .total-div {
+        @apply flex justify-between items-center py-4 border-b border-[#FFFFFF1A] text-[#FFFFFFCC];
+    }
 }
