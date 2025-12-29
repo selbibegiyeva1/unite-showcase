@@ -11,9 +11,10 @@ type Props = {
     topupUsd: number | null;
     rateLoading: boolean;
     rateError: boolean;
+    onOpenBanks: () => void;
 };
 
-function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError }: Props) {
+function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, onOpenBanks }: Props) {
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
     const topupUsdText = useMemo(() => {
@@ -56,6 +57,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
     const valueCls = "text-right max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap";
 
+    const bankText = String(values.bank ?? "Выбрать банк");
+
     return (
         <form className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8">
             <b className="text-[24px]">Оплата</b>
@@ -64,8 +67,11 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                     bg-[#2E2E31] border border-[#FFFFFF1A] rounded-[10px] font-medium
                     transition-all duration-150
                     hover:bg-[#3A3A3E]"
+                onClick={onOpenBanks}
             >
-                <p>Выбрать банк</p>
+                <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {bankText}
+                </p>
                 <img src="/product/chevron-down.png" alt="chevron-down" className="w-6" />
             </div>
 
