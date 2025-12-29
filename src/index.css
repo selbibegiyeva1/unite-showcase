@@ -45,6 +45,6 @@
     /* // Total */
 
     .total-div {
-        @apply flex justify-between items-center py-4 border-b border-[#FFFFFF1A] text-[#FFFFFFCC];
+        @apply flex justify-between items-center gap-5 py-4 border-b border-[#FFFFFF1A] text-[#FFFFFFCC];
     }
 }
