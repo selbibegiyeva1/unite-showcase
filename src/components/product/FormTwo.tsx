@@ -8,10 +8,18 @@ type Props = {
     fields: FormField[];
     values: Record<string, any>;
     setValues: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+    errors: Record<string, string>;
+    showErrors: boolean;
 };
 
-function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
+function FormTwo({ groupName, mode, fields, values, setValues, errors, showErrors }: Props) {
     const isSteamTopup = groupName === "Steam" && mode === "topup";
+
+    const err = (name: string) => (showErrors ? errors[name] : "");
+    const inputCls = (name: string) =>
+        `w-full outline-0 rounded-2xl appearance-none text-[14px] font-medium px-4 py-3.5 bg-[#1D1D22] border ${err(name) ? "border-red-500" : "border-[#FFFFFF1A]"
+        }`;
+    const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
 
     if (isSteamTopup) {
         return (
@@ -47,8 +55,9 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
                             value={String(values.steam_login ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, steam_login: e.target.value }))}
                             placeholder="Введите логин в Steam"
-                            className="w-full border border-[#FFFFFF1A] outline-0 rounded-2xl appearance-none text-[14px] font-medium px-4 py-3.5 bg-[#1D1D22]"
+                            className={inputCls("steam_login")}
                         />
+                        {err("steam_login") ? <p className={alertCls}>{err("steam_login")}</p> : null}
                     </div>
 
                     <div>
@@ -58,8 +67,9 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
                             value={String(values.email ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
                             placeholder="Введите свой e-mail"
-                            className="w-full border border-[#FFFFFF1A] outline-0 rounded-2xl appearance-none text-[14px] font-medium px-4 py-3.5 bg-[#1D1D22]"
+                            className={inputCls("email")}
                         />
+                        {err("email") ? <p className={alertCls}>{err("email")}</p> : null}
                     </div>
                 </div>
             </div>
@@ -88,8 +98,9 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
                                     value={String(values[f.name] ?? "")}
                                     onChange={(e) => setValues((prev) => ({ ...prev, [f.name]: e.target.value }))}
                                     placeholder={f.label}
-                                    className="w-full border border-[#FFFFFF1A] outline-0 rounded-2xl appearance-none text-[14px] font-medium px-4 py-3.5 bg-[#1D1D22]"
+                                    className={inputCls(f.name)}
                                 />
+                                {err(f.name) ? <p className={alertCls}>{err(f.name)}</p> : null}
                             </div>
                         );
                     }
@@ -117,6 +128,7 @@ function FormTwo({ groupName, mode, fields, values, setValues }: Props) {
                                         className="absolute top-1/2 right-4 -translate-y-1/2 w-4 pointer-events-none"
                                     />
                                 </div>
+                                {err(f.name) ? <p className={alertCls}>{err(f.name)}</p> : null}
                             </div>
                         );
                     }

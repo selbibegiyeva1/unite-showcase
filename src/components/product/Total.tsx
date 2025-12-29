@@ -12,9 +12,14 @@ type Props = {
     rateLoading: boolean;
     rateError: boolean;
     onOpenBanks: () => void;
+
+    errors: Record<string, string>;
+    showErrors: boolean;
+    onValidate: () => boolean;
+    setValues: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 };
 
-function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, onOpenBanks }: Props) {
+function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
     const topupUsdText = useMemo(() => {
@@ -58,20 +63,35 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const valueCls = "text-right max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap";
     const bankText = String(values.bank ?? "Выбрать банк");
 
+    const bankErr = showErrors ? errors.bank : "";
+    const confirmErr = showErrors ? errors.confirmed : "";
+    const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
+
     return (
-        <form className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8">
+        <form
+            className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8"
+            onSubmit={(e) => {
+                e.preventDefault();
+                if (!enabled) return;
+
+                const ok = onValidate();
+                if (!ok) return;
+            }}
+        >
             <b className="text-[24px]">Оплата</b>
 
             <div
-                className="my-4 px-4 py-3 flex items-center justify-between cursor-pointer
-          bg-[#2E2E31] border border-[#FFFFFF1A] rounded-[10px] font-medium
-          transition-all duration-150
-          hover:bg-[#3A3A3E]"
+                className={`
+                    mt-4 mb-2 px-4 py-3 flex items-center justify-between cursor-pointer
+                    bg-[#2E2E31] rounded-[10px] font-medium transition-all duration-150 hover:bg-[#3A3A3E]
+                    border ${bankErr ? "border-red-500" : "border-[#FFFFFF1A]"}
+                `}
                 onClick={onOpenBanks}
             >
                 <p className="overflow-hidden text-ellipsis whitespace-nowrap">{bankText}</p>
                 <img src="/product/chevron-down.png" alt="chevron-down" className="w-6" />
             </div>
+            {bankErr ? <p className={alertCls}>{bankErr}</p> : null}
 
             <div>
                 <div className="total-div">
@@ -113,26 +133,30 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             <label className="text-[14px] font-medium flex items-center gap-3 cursor-pointer select-none">
                 <input
                     type="checkbox"
-                    className="
-                        min-h-6 min-w-6 cursor-pointer outline-none
-                        appearance-none rounded-sm
-                        border-2 border-[#FFFFFF26] bg-transparent
-                        grid place-items-center
-                        transition-colors duration-150
+                    checked={Boolean(values.confirmed)}
+                    onChange={(e) => setValues((prev) => ({ ...prev, confirmed: e.target.checked }))}
+                    className={`
+                        min-h-6 min-w-6 cursor-pointer outline-none appearance-none rounded-sm border-2 bg-transparent
+                        grid place-items-center transition-colors duration-150
                         checked:bg-[#A132C7] checked:border-[#A132C7]
-                    "
+                        ${confirmErr ? "border-red-500" : "border-[#FFFFFF26]"}
+                    `}
                 />
                 <span>Я подтверждаю, что правильно указал все данные</span>
             </label>
 
             <button
-                style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
+                type="submit"
+                disabled={!enabled}
+                style={{
+                    background: "linear-gradient(to right, #79109D, #A132C7)",
+                    opacity: enabled ? 1 : 0.6,
+                }}
                 className="text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
                     font-bold py-[14.5px] cursor-pointer flex items-center justify-center rounded-[10px]"
             >
                 {enabled ? `Оплатить ${amountTmt} TMT` : "Оплатить"}
             </button>
-
             <center>
                 <p className="text-[12px] text-[#FFFFFF99] font-medium">
                     Баланс Steam будет пополнен в течение 15 минут после успешной оплаты.

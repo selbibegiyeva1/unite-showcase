@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
 import type { ProductGroupForms, FormField } from "../hooks/product/useProductGroupDetailsQuery";
+import { useCheckoutValidation } from "../hooks/product/useCheckoutValidation";
 
 import { ProductHeader } from "../components/product/ProductHeader";
 import FormOne from "../components/product/FormOne";
@@ -85,6 +86,11 @@ function Product() {
         return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
     }, [activeFields]);
 
+    const validation = useCheckoutValidation({
+        requiredFields: checkoutFields,
+        values,
+    });
+
     if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
 
     if (isError) {
@@ -123,6 +129,8 @@ function Product() {
                             fields={activeFields}
                             values={values}
                             setValues={setValues}
+                            errors={validation.errors}
+                            showErrors={validation.showErrors}
                         />
                     </div>
 
@@ -131,11 +139,15 @@ function Product() {
                         mode={mode}
                         fields={checkoutFields}
                         values={values}
+                        setValues={setValues}
                         amountTmt={amountTmt}
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
                         rateLoading={rateQuery.isLoading}
                         rateError={rateQuery.isError}
                         onOpenBanks={() => setBanksOpen(true)}
+                        errors={validation.errors}
+                        showErrors={validation.showErrors}
+                        onValidate={validation.validateNow}
                     />
                 </div>
 
@@ -145,6 +157,7 @@ function Product() {
                     selectedBank={values.bank ?? null}
                     onSelect={(bank) => {
                         setValues((prev) => ({ ...prev, bank }));
+                        validation.resetSubmitted();
                         setBanksOpen(false);
                     }}
                 />
