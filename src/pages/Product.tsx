@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
 import type { ProductGroupForms, FormField } from "../hooks/product/useProductGroupDetailsQuery";
+import { useCheckoutValidation } from "../hooks/product/useCheckoutValidation";
 
 import { ProductHeader } from "../components/product/ProductHeader";
 import FormOne from "../components/product/FormOne";
@@ -85,6 +86,36 @@ function Product() {
         return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
     }, [activeFields]);
 
+    const requiredFields: FormField[] = useMemo(() => {
+        const base = activeFields.filter(
+            (f) => f.name !== "region" && f.name !== "product_id"
+        );
+
+        const isSteamTopup = groupName === "Steam" && mode === "topup";
+
+        if (!isSteamTopup) return base;
+
+        const hasSteamLogin = base.some((f) => f.name === "steam_login");
+        const hasEmail = base.some((f) => f.name === "email");
+
+        const extra: FormField[] = [];
+
+        if (!hasSteamLogin) {
+            extra.push({ name: "steam_login", type: "text", label: "Логин в Steam" });
+        }
+
+        if (!hasEmail) {
+            extra.push({ name: "email", type: "text", label: "Почта" });
+        }
+
+        return [...extra, ...base];
+    }, [activeFields, groupName, mode]);
+
+    const validation = useCheckoutValidation({
+        requiredFields,
+        values,
+    });
+
     if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
 
     if (isError) {
@@ -123,6 +154,8 @@ function Product() {
                             fields={activeFields}
                             values={values}
                             setValues={setValues}
+                            errors={validation.errors}
+                            showErrors={validation.showErrors}
                         />
                     </div>
 
@@ -131,11 +164,15 @@ function Product() {
                         mode={mode}
                         fields={checkoutFields}
                         values={values}
+                        setValues={setValues}
                         amountTmt={amountTmt}
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
                         rateLoading={rateQuery.isLoading}
                         rateError={rateQuery.isError}
                         onOpenBanks={() => setBanksOpen(true)}
+                        errors={validation.errors}
+                        showErrors={validation.showErrors}
+                        onValidate={validation.validateNow}
                     />
                 </div>
 
@@ -145,6 +182,7 @@ function Product() {
                     selectedBank={values.bank ?? null}
                     onSelect={(bank) => {
                         setValues((prev) => ({ ...prev, bank }));
+                        validation.resetSubmitted();
                         setBanksOpen(false);
                     }}
                 />
