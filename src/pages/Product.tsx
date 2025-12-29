@@ -17,7 +17,12 @@ export type TopUpMode = "topup" | "voucher";
 function Product() {
     const [params] = useSearchParams();
     const group = params.get("group");
-    const { data, isLoading, isError, error, refetch } = useProductGroupDetailsQuery(group);
+    
+    const [mode, setMode] = useState<TopUpMode>("topup");
+    const [values, setValues] = useState<Record<string, any>>({});
+
+    const { data, isLoading, isError, error, refetch, amountTmt, rateQuery } =
+        useProductGroupDetailsQuery(group, { mode, productId: values.product_id });
 
     const forms: ProductGroupForms | null = data?.forms ?? null;
 
@@ -29,7 +34,6 @@ function Product() {
             topupAvailable && !voucherAvailable ? "topup" :
                 null;
 
-    const [mode, setMode] = useState<TopUpMode>("topup");
 
     useEffect(() => {
         if (onlyMode) setMode(onlyMode);
@@ -37,7 +41,6 @@ function Product() {
         else if (!topupAvailable && voucherAvailable) setMode("voucher");
     }, [onlyMode, voucherAvailable, topupAvailable]);
 
-    const [values, setValues] = useState<Record<string, any>>({});
 
     const activeFields = useMemo(() => {
         if (!forms) return [];
@@ -121,7 +124,13 @@ function Product() {
                         />
                     </div>
 
-                    <Total />
+                    <Total
+                        values={values}
+                        amountTmt={amountTmt}
+                        topupUsd={rateQuery.data?.topup_amount_usd ?? null}
+                        rateLoading={rateQuery.isLoading}
+                        rateError={rateQuery.isError}
+                    />
                 </div>
 
                 <div className="pb-15"><News /></div>

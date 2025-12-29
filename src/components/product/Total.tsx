@@ -1,4 +1,27 @@
-function Total() {
+import { useMemo } from "react";
+
+type Props = {
+    values: Record<string, any>;
+    amountTmt: number | null;
+    topupUsd: number | null;
+    rateLoading: boolean;
+    rateError: boolean;
+};
+
+function Total({ values, amountTmt, topupUsd, rateLoading, rateError }: Props) {
+    const enabled = typeof amountTmt === "number" && amountTmt > 0;
+
+    const topupUsdText = useMemo(() => {
+        if (!enabled) return "-";
+        if (rateLoading) return "...";
+        if (rateError) return "-";
+        return typeof topupUsd === "number" ? `~${topupUsd.toFixed(2)} $` : "-";
+    }, [enabled, rateLoading, rateError, topupUsd]);
+
+    const region = String(values.region_label ?? values.region_value ?? "");
+    const login = String(values.login ?? values.steam_login ?? values.username ?? "");
+    const email = String(values.email ?? "");
+
     return (
         <form className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8">
             <b className="text-[24px]">Оплата</b>
@@ -27,12 +50,12 @@ function Total() {
                 </div>
                 <div className="total-div">
                     <p>К зачислению</p>
-                    <p>~5 $</p>
+                    <p>{topupUsdText}</p>
                 </div>
             </div>
             <div className="flex items-center justify-between font-bold text-[20px] py-4">
                 <p>Итого</p>
-                <p>200 TMT</p>
+                <p>{amountTmt != null ? `${amountTmt} TMT` : "-"}</p>
             </div>
             <div className="my-4 flex items-center gap-2.5 bg-[#2F2F36] rounded-[10px] px-4 py-3">
                 <img src="/product/report.png" alt="report" className="w-6" />

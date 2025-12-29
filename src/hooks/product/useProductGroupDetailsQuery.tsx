@@ -1,10 +1,13 @@
+// useProductGroupDetailsQuery.tsx
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { ProductGroupCategory } from "../home/useProductGroupsQuery";
+
+export type TopUpMode = "topup" | "voucher";
 
 export type FormFieldOption = {
     name: string;
     value: string | number;
-    // product_id options often contain extra meta
     product?: string;
     price?: number;
     region?: string;
@@ -13,7 +16,7 @@ export type FormFieldOption = {
 };
 
 export type FormField = {
-    name: string; // "region" | "email" | "product_id" | etc
+    name: string;
     type: "text" | "options" | string;
     label: string;
     options?: FormFieldOption[];
@@ -33,8 +36,16 @@ export type ProductGroupDetails = {
     forms: ProductGroupForms;
 };
 
+export type RateResponse = { amount_tmt: number; topup_amount_usd: number };
+
 function asArray<T>(v: unknown): T[] {
     return Array.isArray(v) ? (v as T[]) : [];
+}
+
+function toNumberOrUndef(v: any): number | undefined {
+    if (typeof v === "number" && Number.isFinite(v)) return v;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : undefined;
 }
 
 function normalizeField(raw: any): FormField | null {
@@ -50,7 +61,7 @@ function normalizeField(raw: any): FormField | null {
         name: String(o?.name ?? o?.product ?? ""),
         value: (o?.value ?? "") as string | number,
         product: o?.product != null ? String(o.product) : undefined,
-        price: typeof o?.price === "number" ? o.price : undefined,
+        price: toNumberOrUndef(o?.price),
         region: o?.region != null ? String(o.region) : undefined,
         name_prefix: o?.name_prefix != null ? String(o.name_prefix) : undefined,
         type: o?.type != null ? String(o.type) : undefined,
@@ -110,10 +121,74 @@ async function fetchProductGroupDetails(group: string): Promise<ProductGroupDeta
     };
 }
 
-export function useProductGroupDetailsQuery(group: string | null) {
-    return useQuery({
+async function fetchRate(amountTmt: number): Promise<RateResponse> {
+    const API_HOST = import.meta.env.VITE_API_HOST as string | undefined;
+    const BEARER = import.meta.env.VITE_PARTNER_BEARER as string | undefined;
+
+    if (!API_HOST) throw new Error("Missing API host");
+    if (!BEARER) throw new Error("Missing token");
+
+    const url = `${API_HOST}/v1/partner/steam/rate?amount_tmt=${encodeURIComponent(String(amountTmt))}`;
+
+    const res = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${BEARER}`,
+            Accept: "application/json",
+        },
+    });
+
+    if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(`Rate failed (${res.status}). ${text}`);
+    }
+
+    return res.json();
+}
+
+type Params = {
+    mode?: TopUpMode;
+    productId?: string | number | null;
+};
+
+export function useProductGroupDetailsQuery(group: string | null, params?: Params) {
+    const detailsQuery = useQuery({
         queryKey: ["product-group-details", group],
         queryFn: () => fetchProductGroupDetails(group as string),
         enabled: Boolean(group),
     });
+
+    const amountTmt = useMemo(() => {
+        const data = detailsQuery.data;
+        if (!data) return null;
+
+        const mode = params?.mode;
+        const productId = params?.productId;
+        if (!mode || productId == null) return null;
+
+        // Steam topup: productId is the nominal itself (20/40/100...)
+        if (data.group === "Steam" && mode === "topup") {
+            const v = Number(productId);
+            return Number.isFinite(v) ? v : null;
+        }
+
+        // Other groups: amount = selected option.price
+        const fields = mode === "voucher" ? data.forms.voucher_fields : data.forms.topup_fields;
+        const productField = fields.find((f) => f.name === "product_id");
+        const opt = productField?.options?.find((o) => String(o.value) === String(productId));
+        return typeof opt?.price === "number" ? opt.price : null;
+    }, [detailsQuery.data, params?.mode, params?.productId]);
+
+    const rateQuery = useQuery({
+        queryKey: ["rate", amountTmt],
+        queryFn: () => fetchRate(amountTmt as number),
+        enabled: typeof amountTmt === "number" && Number.isFinite(amountTmt) && amountTmt > 0,
+        staleTime: 60_000,
+    });
+
+    // keep old API intact (+ add new fields)
+    return {
+        ...detailsQuery,
+        amountTmt,
+        rateQuery,
+    };
 }
