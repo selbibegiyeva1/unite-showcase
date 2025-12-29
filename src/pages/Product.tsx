@@ -86,8 +86,33 @@ function Product() {
         return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
     }, [activeFields]);
 
+    const requiredFields: FormField[] = useMemo(() => {
+        const base = activeFields.filter(
+            (f) => f.name !== "region" && f.name !== "product_id"
+        );
+
+        const isSteamTopup = groupName === "Steam" && mode === "topup";
+
+        if (!isSteamTopup) return base;
+
+        const hasSteamLogin = base.some((f) => f.name === "steam_login");
+        const hasEmail = base.some((f) => f.name === "email");
+
+        const extra: FormField[] = [];
+
+        if (!hasSteamLogin) {
+            extra.push({ name: "steam_login", type: "text", label: "Логин в Steam" });
+        }
+
+        if (!hasEmail) {
+            extra.push({ name: "email", type: "text", label: "Почта" });
+        }
+
+        return [...extra, ...base];
+    }, [activeFields, groupName, mode]);
+
     const validation = useCheckoutValidation({
-        requiredFields: checkoutFields,
+        requiredFields,
         values,
     });
 

@@ -63,7 +63,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                     <div>
                         <p className="text-[#FFFFFF99] text-[14px] mb-3">Почта</p>
                         <input
-                            type="text"
+                            type="email"
                             value={String(values.email ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
                             placeholder="Введите свой e-mail"
