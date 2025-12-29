@@ -1,0 +1,96 @@
+import { useEffect } from "react";
+
+type Props = {
+    isOpen: boolean;
+    onClose: () => void;
+    selectedBank: string | null;
+    onSelect: (bank: string) => void;
+};
+
+function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isOpen, onClose]);
+
+    if (!isOpen) return null;
+
+    const Row = ({ title, value, disabled, isSection }: {
+        title: string;
+        value?: string;
+        disabled?: boolean;
+        isSection?: boolean;
+    }) => {
+        if (isSection) {
+            return (
+                <li className="opacity-40 select-none flex items-center justify-between">
+                    <span>{title}</span>
+                    <span className="w-6 h-6 rounded-full border border-white/20" />
+                </li>
+            );
+        }
+
+        const checked = value ? selectedBank === value : false;
+
+        return (
+            <li
+                role={disabled ? undefined : "button"}
+                tabIndex={disabled ? -1 : 0}
+                onClick={() => {
+                    if (disabled || !value) return;
+                    onSelect(value);
+                }}
+                onKeyDown={(e) => {
+                    if (disabled || !value) return;
+                    if (e.key === "Enter" || e.key === " ") onSelect(value);
+                }}
+                className={`
+                    flex items-center justify-between
+                    ${disabled ? "opacity-40 cursor-not-allowed select-none" : "cursor-pointer"}
+                `}
+            >
+                <span>{title}</span>
+
+                <span
+                    className={`
+                    w-6 h-6 rounded-full border
+                    ${checked ? "bg-[#79109D] border-[#79109D]" : "bg-transparent border-white/30"}
+                `}
+                />
+            </li>
+        );
+    };
+
+    return (
+        <div
+            className="fixed top-0 left-0 bg-[#00000090] w-full h-screen z-50 grid place-items-center"
+            onMouseDown={onClose}
+        >
+            <div
+                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-150"
+                onMouseDown={(e) => e.stopPropagation()}
+            >
+                <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
+                    <p className="text-[28px] font-medium">Выберите ваш банк</p>
+
+                    <button type="button" onClick={onClose} className="cursor-pointer" aria-label="Close">
+                        <img src="/product/banks.png" className="w-12" alt="close" />
+                    </button>
+                </div>
+
+                <ul className="banks flex flex-col gap-7.5">
+                    <Row title="Rysgal" value="Rysgal" />
+                    <Row title="Senagat" value="Senagat" />
+                    <Row title="Другие банки" isSection />
+                    <Row title="TDDYIB" value="TDDYIB" disabled />
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+export default Banks;

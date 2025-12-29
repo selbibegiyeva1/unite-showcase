@@ -7,6 +7,7 @@ import { ProductHeader } from "../components/product/ProductHeader";
 import FormOne from "../components/product/FormOne";
 import FormTwo from "../components/product/FormTwo";
 import Total from "../components/product/Total";
+import Banks from "../components/product/Banks";
 
 import News from "../components/home/News";
 import Faq from "../components/home/Faq";
@@ -20,6 +21,7 @@ function Product() {
 
     const [mode, setMode] = useState<TopUpMode>("topup");
     const [values, setValues] = useState<Record<string, any>>({});
+    const [banksOpen, setBanksOpen] = useState(false);
 
     const { data, isLoading, isError, error, refetch, amountTmt, rateQuery } =
         useProductGroupDetailsQuery(group, { mode, productId: values.product_id });
@@ -133,8 +135,19 @@ function Product() {
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
                         rateLoading={rateQuery.isLoading}
                         rateError={rateQuery.isError}
+                        onOpenBanks={() => setBanksOpen(true)}
                     />
                 </div>
+
+                <Banks
+                    isOpen={banksOpen}
+                    onClose={() => setBanksOpen(false)}
+                    selectedBank={values.bank ?? null}
+                    onSelect={(bank) => {
+                        setValues((prev) => ({ ...prev, bank }));
+                        setBanksOpen(false);
+                    }}
+                />
 
                 <div className="pb-15"><News /></div>
                 <div className="pb-46"><Faq /></div>

@@ -47,4 +47,10 @@
     .total-div {
         @apply flex justify-between items-center gap-5 py-4 border-b border-[#FFFFFF1A] text-[#FFFFFFCC];
     }
+
+    /* // Banks */
+
+    .banks li {
+        @apply flex items-center justify-between font-medium text-[20px];
+    }
 }
