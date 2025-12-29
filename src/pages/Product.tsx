@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
-import type { ProductGroupForms } from "../hooks/product/useProductGroupDetailsQuery";
+import type { ProductGroupForms, FormField } from "../hooks/product/useProductGroupDetailsQuery";
 
 import { ProductHeader } from "../components/product/ProductHeader";
 import FormOne from "../components/product/FormOne";
@@ -17,7 +17,7 @@ export type TopUpMode = "topup" | "voucher";
 function Product() {
     const [params] = useSearchParams();
     const group = params.get("group");
-    
+
     const [mode, setMode] = useState<TopUpMode>("topup");
     const [values, setValues] = useState<Record<string, any>>({});
 
@@ -33,7 +33,6 @@ function Product() {
         voucherAvailable && !topupAvailable ? "voucher" :
             topupAvailable && !voucherAvailable ? "topup" :
                 null;
-
 
     useEffect(() => {
         if (onlyMode) setMode(onlyMode);
@@ -64,8 +63,6 @@ function Product() {
         document.title = `Unite Gaming Shop | ${name}`;
     }, [isLoading, data?.group, group]);
 
-    // Product.tsx (inside component, after forms is defined)
-
     const showAnyRegionBadge = useMemo(() => {
         if (!forms) return false;
 
@@ -74,7 +71,6 @@ function Product() {
             const opts = regionField?.options ?? [];
             if (opts.length !== 1) return false;
 
-            // backend uses: { name: "Любой", value: "Any" }
             return String(opts[0]?.name ?? "") === "Любой";
         };
 
@@ -82,6 +78,10 @@ function Product() {
     }, [forms]);
 
     const groupName = data?.group ?? group ?? "";
+
+    const checkoutFields: FormField[] = useMemo(() => {
+        return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
+    }, [activeFields]);
 
     if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
 
@@ -125,6 +125,9 @@ function Product() {
                     </div>
 
                     <Total
+                        groupName={groupName}
+                        mode={mode}
+                        fields={checkoutFields}
                         values={values}
                         amountTmt={amountTmt}
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
