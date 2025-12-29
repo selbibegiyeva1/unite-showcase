@@ -13,6 +13,7 @@ import Banks from "../components/product/Banks";
 import News from "../components/home/News";
 import Faq from "../components/home/Faq";
 import Footer from "../components/layout/Footer";
+import ProductLoading from "../components/product/ProductLoading";
 
 export type TopUpMode = "topup" | "voucher";
 
@@ -116,7 +117,7 @@ function Product() {
         values,
     });
 
-    if (isLoading) return <div className="text-white px-4 max-w-255 m-auto">Loading…</div>;
+    if (isLoading) return <ProductLoading />;
 
     if (isError) {
         return (
