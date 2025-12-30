@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "../../pages/Product";
+import { useCheckoutStore } from "../../store/checkoutStore";
 
 import { FaCheck } from "react-icons/fa6";
 import { IconContext } from "react-icons";
@@ -25,6 +26,10 @@ type Props = {
 function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
+    const paying = useCheckoutStore((s) => s.paying);
+    const payError = useCheckoutStore((s) => s.payError);
+    const submitPayment = useCheckoutStore((s) => s.submitPayment);
+
     const topupUsdText = useMemo(() => {
         if (!enabled) return "-";
         if (rateLoading) return "...";
@@ -38,14 +43,10 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
         const isSteamTopup = groupName === "Steam" && mode === "topup";
         if (!isSteamTopup) return fields;
 
-        const hasSteamLogin = fields.some((f) => f.name === "steam_login");
-        const hasEmail = fields.some((f) => f.name === "email");
-
-        const extra: FormField[] = [];
-        if (!hasSteamLogin) extra.push({ name: "steam_login", type: "text", label: "Логин в Steam" });
-        if (!hasEmail) extra.push({ name: "email", type: "text", label: "Почта" });
-
-        return [...extra, ...fields];
+        return [
+            { name: "steam_username", type: "text", label: "Где искать" },
+            { name: "email", type: "text", label: "Почта" },
+        ];
     }, [fields, groupName, mode]);
 
     const rows = useMemo(() => {
@@ -73,12 +74,14 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     return (
         <form
             className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
                 e.preventDefault();
-                if (!enabled) return;
+                if (!enabled || paying) return;
 
                 const ok = onValidate();
                 if (!ok) return;
+
+                await submitPayment({ groupName, fields, amountTmt });
             }}
         >
             <b className="text-[24px]">Оплата</b>
@@ -162,16 +165,17 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <button
                 type="submit"
-                disabled={!enabled}
+                disabled={!enabled || paying}
                 style={{
                     background: "linear-gradient(to right, #79109D, #A132C7)",
-                    opacity: enabled ? 1 : 0.6,
+                    opacity: enabled && !paying ? 1 : 0.6,
                 }}
                 className="text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
                     font-bold py-[14.5px] cursor-pointer flex items-center justify-center rounded-[10px]"
             >
-                {enabled ? `Оплатить ${amountTmt} TMT` : "Оплатить"}
+                {paying ? "Создаём платёж..." : enabled ? `Оплатить ${amountTmt} TMT` : "Оплатить"}
             </button>
+            {payError ? <p className="mt-2 text-[12px] text-red-500 font-medium">{payError}</p> : null}
             <center>
                 <p className="text-[12px] text-[#FFFFFF99] font-medium">
                     Баланс Steam будет пополнен в течение 15 минут после успешной оплаты.

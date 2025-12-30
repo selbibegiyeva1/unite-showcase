@@ -52,14 +52,13 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                         </div>
                         <input
                             type="text"
-                            value={String(values.steam_login ?? "")}
-                            onChange={(e) => setValues((prev) => ({ ...prev, steam_login: e.target.value }))}
+                            value={String(values.steam_username ?? "")}
+                            onChange={(e) => setValues((prev) => ({ ...prev, steam_username: e.target.value }))}
                             placeholder="Введите логин в Steam"
-                            className={inputCls("steam_login")}
+                            className={inputCls("steam_username")}
                         />
-                        {err("steam_login") ? <p className={alertCls}>{err("steam_login")}</p> : null}
+                        {err("steam_username") ? <p className={alertCls}>{err("steam_username")}</p> : null}
                     </div>
-
                     <div>
                         <p className="text-[#FFFFFF99] text-[14px] mb-3">Почта</p>
                         <input

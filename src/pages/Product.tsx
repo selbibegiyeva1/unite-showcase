@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProductGroupDetailsQuery } from "../hooks/product/useProductGroupDetailsQuery";
 import type { ProductGroupForms, FormField } from "../hooks/product/useProductGroupDetailsQuery";
 import { useCheckoutValidation } from "../hooks/product/useCheckoutValidation";
+import { useCheckoutStore } from "../store/checkoutStore";
 
 import { ProductHeader } from "../components/product/ProductHeader";
 import FormOne from "../components/product/FormOne";
@@ -21,19 +22,33 @@ function Product() {
     const [params] = useSearchParams();
     const group = params.get("group");
 
-    const [mode, setMode] = useState<TopUpMode>("topup");
-    const [values, setValues] = useState<Record<string, any>>({});
-    const [banksOpen, setBanksOpen] = useState(false);
+    const mode = useCheckoutStore((s) => s.mode);
+    const values = useCheckoutStore((s) => s.values);
+    const setMode = useCheckoutStore((s) => s.setMode);
+    const setValues = useCheckoutStore((s) => s.setValues);
+
+    const banksOpen = useCheckoutStore((s) => s.banksOpen);
+    const openBanks = useCheckoutStore((s) => s.openBanks);
+    const closeBanks = useCheckoutStore((s) => s.closeBanks);
+    const selectBank = useCheckoutStore((s) => s.selectBank);
+
+    const ensureGroup = useCheckoutStore((s) => s.ensureGroup);
 
     const { data, isLoading, isError, error, refetch, amountTmt, rateQuery } =
         useProductGroupDetailsQuery(group, { mode, productId: values.product_id });
 
     const forms: ProductGroupForms | null = data?.forms ?? null;
 
+    const groupName = data?.group ?? group ?? "";
+
+    useEffect(() => {
+        if (groupName) ensureGroup(groupName);
+    }, [groupName, ensureGroup]);
+
     const voucherAvailable = Boolean(forms?.voucher_fields?.length);
     const topupAvailable = Boolean(forms?.topup_fields?.length);
 
-    const onlyMode: TopUpMode | null =
+    const onlyMode =
         voucherAvailable && !topupAvailable ? "voucher" :
             topupAvailable && !voucherAvailable ? "topup" :
                 null;
@@ -42,8 +57,7 @@ function Product() {
         if (onlyMode) setMode(onlyMode);
         else if (!voucherAvailable && topupAvailable) setMode("topup");
         else if (!topupAvailable && voucherAvailable) setMode("voucher");
-    }, [onlyMode, voucherAvailable, topupAvailable]);
-
+    }, [onlyMode, voucherAvailable, topupAvailable, setMode]);
 
     const activeFields = useMemo(() => {
         if (!forms) return [];
@@ -53,69 +67,43 @@ function Product() {
     useEffect(() => {
         setValues((prev) => ({
             ...prev,
-            region: prev.region ?? "",
+            region_value: prev.region_value ?? "",
+            region_label: prev.region_label ?? "",
             product_id: prev.product_id ?? null,
+            confirmed: prev.confirmed ?? false,
+            bank: prev.bank ?? null,
         }));
-    }, [mode]);
+    }, [mode, setValues]);
+
+    const isSteamTopup = groupName === "Steam" && mode === "topup";
+
+    const steamTopupFields: FormField[] = useMemo(() => ([
+        { name: "steam_username", type: "text", label: "Где искать" },
+        { name: "email", type: "text", label: "Почта" },
+    ]), []);
+
+    const checkoutFields: FormField[] = useMemo(() => {
+        if (isSteamTopup) return steamTopupFields;
+        return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
+    }, [activeFields, isSteamTopup, steamTopupFields]);
+
+    const requiredFields: FormField[] = useMemo(() => {
+        if (isSteamTopup) return steamTopupFields;
+
+        return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
+    }, [activeFields, isSteamTopup, steamTopupFields]);
 
     useEffect(() => {
         if (isLoading) {
             document.title = "Loading...";
             return;
         }
-        const name = data?.group ?? group ?? "Product";
+
+        const name = groupName || group || "Product";
         document.title = `Unite Gaming Shop | ${name}`;
-    }, [isLoading, data?.group, group]);
+    }, [isLoading, groupName, group]);
 
-    const showAnyRegionBadge = useMemo(() => {
-        if (!forms) return false;
-
-        const checkFields = (fields: any[]) => {
-            const regionField = fields?.find((f) => f.name === "region");
-            const opts = regionField?.options ?? [];
-            if (opts.length !== 1) return false;
-
-            return String(opts[0]?.name ?? "") === "Любой";
-        };
-
-        return checkFields(forms.topup_fields) || checkFields(forms.voucher_fields);
-    }, [forms]);
-
-    const groupName = data?.group ?? group ?? "";
-
-    const checkoutFields: FormField[] = useMemo(() => {
-        return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
-    }, [activeFields]);
-
-    const requiredFields: FormField[] = useMemo(() => {
-        const base = activeFields.filter(
-            (f) => f.name !== "region" && f.name !== "product_id"
-        );
-
-        const isSteamTopup = groupName === "Steam" && mode === "topup";
-
-        if (!isSteamTopup) return base;
-
-        const hasSteamLogin = base.some((f) => f.name === "steam_login");
-        const hasEmail = base.some((f) => f.name === "email");
-
-        const extra: FormField[] = [];
-
-        if (!hasSteamLogin) {
-            extra.push({ name: "steam_login", type: "text", label: "Логин в Steam" });
-        }
-
-        if (!hasEmail) {
-            extra.push({ name: "email", type: "text", label: "Почта" });
-        }
-
-        return [...extra, ...base];
-    }, [activeFields, groupName, mode]);
-
-    const validation = useCheckoutValidation({
-        requiredFields,
-        values,
-    });
+    const validation = useCheckoutValidation({ requiredFields, values });
 
     if (isLoading) return <ProductLoading />;
 
@@ -137,7 +125,7 @@ function Product() {
                             icon={data?.icon}
                             group={data?.group}
                             short_info={data?.short_info}
-                            showAnyRegionBadge={showAnyRegionBadge}
+                            showAnyRegionBadge={false}
                         />
 
                         <FormOne
@@ -170,7 +158,7 @@ function Product() {
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
                         rateLoading={rateQuery.isLoading}
                         rateError={rateQuery.isError}
-                        onOpenBanks={() => setBanksOpen(true)}
+                        onOpenBanks={openBanks}
                         errors={validation.errors}
                         showErrors={validation.showErrors}
                         onValidate={validation.validateNow}
@@ -179,12 +167,11 @@ function Product() {
 
                 <Banks
                     isOpen={banksOpen}
-                    onClose={() => setBanksOpen(false)}
+                    onClose={closeBanks}
                     selectedBank={values.bank ?? null}
                     onSelect={(bank) => {
-                        setValues((prev) => ({ ...prev, bank }));
+                        selectBank(bank);
                         validation.resetSubmitted();
-                        setBanksOpen(false);
                     }}
                 />
 
