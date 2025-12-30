@@ -11,7 +11,21 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
     return (
         <div className="px-8 pt-8 pb-11 bg-[#1D1D22] rounded-4xl">
             <div className="flex items-center gap-7.25">
-                {icon ? <img src={icon} alt={group ?? "Product"} className="w-40 rounded-3xl" /> : null}
+                {icon ? (
+                    <img
+                        src={icon}
+                        alt={group ?? "Product"}
+                        className="w-40 rounded-3xl"
+                        onError={(e) => {
+                            const img = e.currentTarget;
+                            if (img.dataset.fallbackApplied) return;
+                            img.dataset.fallbackApplied = "1";
+                            img.src = "/product/alt.png";
+                        }}
+                    />
+                ) : (
+                    <img src="/product/alt.png" alt={group ?? "Product"} className="w-40 rounded-3xl" />
+                )}
 
                 <div>
                     <h1 className="text-2xl font-bold">Пополнение баланса {group}</h1>

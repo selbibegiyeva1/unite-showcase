@@ -79,7 +79,17 @@ export default function Products() {
                                 key={`${g.category}:${g.group_name}`}
                                 className="flex flex-col gap-3"
                             >
-                                <img src={g.icon_url} alt="product" className="max-w-57.5 rounded-2xl" />
+                                <img
+                                    src={g.icon_url}
+                                    alt="product"
+                                    className="max-w-57.5 rounded-2xl"
+                                    onError={(e) => {
+                                        const img = e.currentTarget;
+                                        if (img.dataset.fallbackApplied) return;
+                                        img.dataset.fallbackApplied = "1";
+                                        img.src = "/product/alt.png";
+                                    }}
+                                />
                                 <center>
                                     <span className="font-bold">{g.group_name}</span>
                                 </center>

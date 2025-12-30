@@ -93,6 +93,15 @@ function Product() {
         return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
     }, [activeFields, isSteamTopup, steamTopupFields]);
 
+    useEffect(() => {
+        if (isLoading) {
+            document.title = "Loading...";
+            return;
+        }
+
+        const name = groupName || group || "Product";
+        document.title = `Unite Gaming Shop | ${name}`;
+    }, [isLoading, groupName, group]);
 
     const validation = useCheckoutValidation({ requiredFields, values });
 
