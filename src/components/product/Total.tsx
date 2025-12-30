@@ -2,6 +2,9 @@ import { useMemo } from "react";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "../../pages/Product";
 
+import { FaCheck } from "react-icons/fa6";
+import { IconContext } from "react-icons";
+
 type Props = {
     groupName: string;
     mode: TopUpMode;
@@ -131,17 +134,29 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             </div>
 
             <label className="text-[14px] font-medium flex items-center gap-3 cursor-pointer select-none">
-                <input
-                    type="checkbox"
-                    checked={Boolean(values.confirmed)}
-                    onChange={(e) => setValues((prev) => ({ ...prev, confirmed: e.target.checked }))}
-                    className={`
-                        min-h-6 min-w-6 cursor-pointer outline-none appearance-none rounded-sm border-2 bg-transparent
-                        grid place-items-center transition-colors duration-150
-                        checked:bg-[#A132C7] checked:border-[#A132C7]
-                        ${confirmErr ? "border-red-500" : "border-[#FFFFFF26]"}
-                    `}
-                />
+                <div className="relative">
+                    <input
+                        type="checkbox"
+                        checked={Boolean(values.confirmed)}
+                        onChange={(e) => setValues((prev) => ({ ...prev, confirmed: e.target.checked }))}
+                        className={`
+                            peer min-h-6 min-w-6 cursor-pointer outline-none appearance-none rounded-sm border-2 bg-transparent
+                            grid place-items-center transition-colors duration-150
+                            checked:bg-[#A132C7] checked:border-[#A132C7]
+                            ${confirmErr ? "border-red-500" : "border-[#FFFFFF26]"}
+                        `}
+                    />
+
+                    <IconContext.Provider
+                        value={{
+                            className:
+                                "pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 peer-checked:opacity-100 transition-opacity duration-150",
+                            size: "12px",
+                        }}
+                    >
+                        <FaCheck />
+                    </IconContext.Provider>
+                </div>
                 <span>Я подтверждаю, что правильно указал все данные</span>
             </label>
 
