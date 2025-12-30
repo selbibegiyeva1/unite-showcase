@@ -64,6 +64,15 @@ function Product() {
         return mode === "voucher" ? forms.voucher_fields : forms.topup_fields;
     }, [forms, mode]);
 
+    const nominalLabel = useMemo(() => {
+        if (groupName === "Steam") return null;
+
+        const productField = activeFields.find((f) => f.name === "product_id");
+        const opt = productField?.options?.find((o) => String(o.value) === String(values.product_id));
+
+        return opt?.name ? String(opt.name) : "-";
+    }, [activeFields, groupName, values.product_id]);
+
     useEffect(() => {
         setValues((prev) => ({
             ...prev,
@@ -158,6 +167,7 @@ function Product() {
                         topupUsd={rateQuery.data?.topup_amount_usd ?? null}
                         rateLoading={rateQuery.isLoading}
                         rateError={rateQuery.isError}
+                        nominalLabel={nominalLabel}
                         onOpenBanks={openBanks}
                         errors={validation.errors}
                         showErrors={validation.showErrors}
