@@ -1,4 +1,3 @@
-// useProductGroupDetailsQuery.tsx
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { ProductGroupCategory } from "../home/useProductGroupsQuery";
@@ -165,13 +164,11 @@ export function useProductGroupDetailsQuery(group: string | null, params?: Param
         const productId = params?.productId;
         if (!mode || productId == null) return null;
 
-        // Steam topup: productId is the nominal itself (20/40/100...)
         if (data.group === "Steam" && mode === "topup") {
             const v = Number(productId);
             return Number.isFinite(v) ? v : null;
         }
 
-        // Other groups: amount = selected option.price
         const fields = mode === "voucher" ? data.forms.voucher_fields : data.forms.topup_fields;
         const productField = fields.find((f) => f.name === "product_id");
         const opt = productField?.options?.find((o) => String(o.value) === String(productId));
@@ -185,7 +182,6 @@ export function useProductGroupDetailsQuery(group: string | null, params?: Param
         staleTime: 60_000,
     });
 
-    // keep old API intact (+ add new fields)
     return {
         ...detailsQuery,
         amountTmt,
