@@ -56,7 +56,7 @@ function Navbar() {
     };
 
     return (
-        <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white fixed left-0 top-0 w-full z-40">
+        <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white fixed left-0 top-0 w-full z-60">
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
                 <Link to="/">
                     <img src="/logo.png" style={{ width: 63 }} alt="logo" />

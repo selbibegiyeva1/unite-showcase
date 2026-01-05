@@ -53,4 +53,20 @@
     .banks li {
         @apply flex items-center justify-between font-medium text-[20px];
     }
+
+    /* // Regions */
+
+    .scrollbar-regions {
+        scrollbar-width: none;
+        scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    }
+
+    .scrollbar-regions::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .scrollbar-regions::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 9999px;
+    }
 }
