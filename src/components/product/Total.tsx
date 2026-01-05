@@ -120,7 +120,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 ))}
 
                 <div className="total-div">
-                    <p>К зачислению</p>
+                    <p className="whitespace-nowrap">К зачислению</p>
                     <p className={valueCls} title={creditText}>
                         {creditText}
                     </p>
