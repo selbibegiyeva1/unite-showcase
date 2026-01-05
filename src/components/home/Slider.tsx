@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 
-import { EffectCoverflow } from "swiper/modules";
+import { EffectCoverflow, Navigation } from "swiper/modules";
 
 function Slider() {
     const [slides] = useState([
@@ -62,14 +64,56 @@ function Slider() {
         },
     ]);
 
+    const [swiper, setSwiper] = useState<SwiperType | null>(null);
+    const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
+    const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
+
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+
+    useEffect(() => {
+        if (!swiper || !prevEl || !nextEl) return;
+
+        // @ts-expect-error Swiper types
+        swiper.params.navigation.prevEl = prevEl;
+        // @ts-expect-error Swiper types
+        swiper.params.navigation.nextEl = nextEl;
+
+        swiper.navigation?.destroy();
+        swiper.navigation?.init();
+        swiper.navigation?.update();
+
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
+    }, [swiper, prevEl, nextEl]);
+
     return (
-        <div className="max-w-255 m-auto">
+        <div className="max-w-282.5 m-auto flex items-center justify-between gap-4">
+            <button
+                ref={setPrevEl}
+                type="button"
+                aria-label="Previous"
+                disabled={isBeginning}
+                className={`slider-arrow ${isBeginning ? "slider-arrow--inactive" : "slider-arrow--active"}`}
+            >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                        d="M9.16732 5L4.16732 10M4.16732 10L9.16732 15M4.16732 10H15.834"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </button>
+
             <Swiper
+                onSwiper={setSwiper}
                 effect={"coverflow"}
-                grabCursor={true}
-                centeredSlides={true}
                 slidesPerView={"auto"}
-                spaceBetween={30}
+                grabCursor
+                centeredSlides={false}
+                spaceBetween={33.333}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
@@ -77,29 +121,36 @@ function Slider() {
                     modifier: 0,
                     slideShadows: true,
                 }}
-                modules={[EffectCoverflow]}
-                className="overflow-hidden rounded-3xl"
+                modules={[EffectCoverflow, Navigation]}
+                navigation={{ prevEl, nextEl }}
+                onInit={(s) => {
+                    setIsBeginning(s.isBeginning);
+                    setIsEnd(s.isEnd);
+                }}
+                onSlideChange={(s) => {
+                    setIsBeginning(s.isBeginning);
+                    setIsEnd(s.isEnd);
+                }}
+                onReachBeginning={() => setIsBeginning(true)}
+                onReachEnd={() => setIsEnd(true)}
+                className="flex-1 w-255 overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
-                    <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl">
+                    <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
                         <div className="h-90">
-                            <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" />
+                            <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} />
                         </div>
-                        <div className={"absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent"}>
+
+                        <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent">
                             <b className={slide.titleClassName ?? "text-[32px]"}>{slide.title}</b>
 
                             {slide.description ? (
-                                <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>
-                                    {slide.description}
-                                </p>
+                                <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
                             ) : null}
 
                             {slide.button ? (
                                 <Link
-                                    to={
-                                        slide.button.to ??
-                                        `/product?group=${encodeURIComponent((slide.button as any).group)}`
-                                    }
+                                    to={slide.button.to ?? `/product?group=${encodeURIComponent((slide.button as any).group)}`}
                                     style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
                                     className={slide.button.className ?? ""}
                                 >
@@ -110,6 +161,16 @@ function Slider() {
                     </SwiperSlide>
                 ))}
             </Swiper>
+
+            <button
+                ref={setNextEl}
+                type="button"
+                aria-label="Next"
+                disabled={isEnd}
+                className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"}`}
+            >
+                <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" />
+            </button>
         </div>
     );
 }

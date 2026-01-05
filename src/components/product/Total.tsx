@@ -16,6 +16,7 @@ type Props = {
     rateLoading: boolean;
     rateError: boolean;
     onOpenBanks: () => void;
+    nominalLabel?: string | null;
 
     errors: Record<string, string>;
     showErrors: boolean;
@@ -23,7 +24,7 @@ type Props = {
     setValues: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 };
 
-function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
+function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
     const paying = useCheckoutStore((s) => s.paying);
@@ -70,6 +71,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const bankErr = showErrors ? errors.bank : "";
     const confirmErr = showErrors ? errors.confirmed : "";
     const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
+
+    const creditText = groupName === "Steam" ? topupUsdText : (nominalLabel ?? "-");
 
     return (
         <form
@@ -118,8 +121,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
                 <div className="total-div">
                     <p>К зачислению</p>
-                    <p className={valueCls} title={topupUsdText}>
-                        {topupUsdText}
+                    <p className={valueCls} title={creditText}>
+                        {creditText}
                     </p>
                 </div>
             </div>
