@@ -37,17 +37,22 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                     alt="info"
                                     className="w-5 peer"
                                 />
-                                <p
+                                <div
                                     className={`
                                         absolute top-6 left-0 z-10
-                                        bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                                        bg-[#2F2F36] p-8 text-left rounded-2xl text-[14px] font-medium
                                         opacity-0 translate-y-1 pointer-events-none
                                         transition-all duration-150
                                         peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
                                     `}
                                 >
-                                    Введите логин Steam (не никнейм). Его можно посмотреть в профиле или в клиенте Steam.
-                                </p>
+                                    <p className="text-[24px] mb-6">Как найти свой логин в Steam?</p>
+                                    <ul className="mb-4 list-disc ml-5 flex flex-col gap-4">
+                                        <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
+                                        <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
+                                    </ul>
+                                    <img src="/product/steam.png" className="max-w-103.5" alt="steam" />
+                                </div>
                             </div>
                         </div>
                         <input
