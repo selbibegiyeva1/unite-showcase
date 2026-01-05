@@ -114,6 +114,28 @@ function Product() {
 
     const validation = useCheckoutValidation({ requiredFields, values });
 
+    const showAnyRegionBadge = useMemo(() => {
+        if (!forms) return false;
+
+        const fields = mode === "voucher" ? forms.voucher_fields : forms.topup_fields;
+
+        const regionField = fields.find((f) => f.name === "region");
+        const regionOptions = regionField?.options ?? [];
+        const hasAnyInRegionOptions = regionOptions.some((o) => {
+            const name = String(o?.name ?? "").trim().toLowerCase();
+            const value = String(o?.value ?? "").trim().toLowerCase();
+            return name === "любой" || value === "any";
+        });
+        if (hasAnyInRegionOptions) return true;
+
+        const productField = fields.find((f) => f.name === "product_id");
+        const productOptions = productField?.options ?? [];
+        const hasAnyInProducts = productOptions.some((o) => String(o?.region ?? "").trim().toLowerCase() === "любой");
+        if (hasAnyInProducts) return true;
+
+        return false;
+    }, [forms, mode]);
+
     if (isLoading) return <ProductLoading />;
 
     if (isError) {
@@ -134,7 +156,7 @@ function Product() {
                             icon={data?.icon}
                             group={data?.group}
                             short_info={data?.short_info}
-                            showAnyRegionBadge={false}
+                            showAnyRegionBadge={showAnyRegionBadge}
                         />
 
                         <FormOne
