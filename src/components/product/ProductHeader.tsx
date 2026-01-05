@@ -28,7 +28,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
                 )}
 
                 <div>
-                    <h1 className="text-2xl font-bold">Пополнение баланса {group}</h1>
+                    <h1 className="text-2xl font-bold">{group}</h1>
 
                     {showAnyRegionBadge ? (
                         <div className="bg-[#79109D] w-fit flex items-center gap-1 px-[19.5px] py-1.5 rounded-[10px] mt-3">
