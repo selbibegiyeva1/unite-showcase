@@ -123,7 +123,7 @@ function Navbar() {
                             onClick={() => setLangOpen((v) => !v)}
                             aria-haspopup="listbox"
                             aria-expanded={langOpen}
-                            className="bg-[#1E1E23] outline-0 font-bold text-[15px] cursor-pointer rounded-[10px] px-4 py-3 flex items-center gap-2"
+                            className=" outline-0 font-bold text-[15px] cursor-pointer rounded-[10px] px-4 py-3 flex items-center gap-2"
                         >
                             <span>{selectedLang.label}</span>
                             <img
