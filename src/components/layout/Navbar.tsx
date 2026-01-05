@@ -21,8 +21,8 @@ function Navbar() {
     const languages: LangOption[] = useMemo(
         () => [
             { label: "RU", value: "RU" },
-            { label: "ENG", value: "ENG" },
-            { label: "TKM", value: "TKM" },
+            { label: "EN", value: "EN" },
+            { label: "TM", value: "TM" },
         ],
         []
     );
