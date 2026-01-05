@@ -93,12 +93,7 @@ function FlagImg({ region, className }: { region: RegionItem; className?: string
     );
 }
 
-function RegionDropdown({
-    regions,
-    value,
-    selectedRegionLabel,
-    onChange,
-}: {
+function RegionDropdown({ regions, value, selectedRegionLabel, onChange }: {
     regions: RegionItem[];
     value: string;
     selectedRegionLabel: string;
@@ -152,31 +147,6 @@ function RegionDropdown({
         [regions, onChange]
     );
 
-    const onButtonKeyDown = (e: React.KeyboardEvent) => {
-        if (!regions.length) return;
-
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            if (!open) setOpen(true);
-            else commitIndex(activeIndex);
-            return;
-        }
-
-        if (e.key === "ArrowDown") {
-            e.preventDefault();
-            if (!open) return setOpen(true);
-            setActiveIndex((i) => Math.min(i + 1, regions.length - 1));
-            return;
-        }
-
-        if (e.key === "ArrowUp") {
-            e.preventDefault();
-            if (!open) return setOpen(true);
-            setActiveIndex((i) => Math.max(i - 1, 0));
-            return;
-        }
-    };
-
     useEffect(() => {
         if (!open) return;
         const el = listRef.current;
@@ -190,7 +160,6 @@ function RegionDropdown({
             <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                onKeyDown={onButtonKeyDown}
                 className="w-full bg-[#1D1D22] cursor-pointer rounded-2xl outline-0 font-medium px-4 py-3.5 flex items-center justify-between"
                 aria-haspopup="listbox"
                 aria-expanded={open}

@@ -1,16 +1,36 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useProductGroupSearchSuggestions } from "../../hooks/home/useProductGroupSearchSuggestions";
+
+type LangOption = { label: string; value: string };
 
 function Navbar() {
     const [value, setValue] = useState("");
     const [open, setOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
 
-    const navigate = useNavigate();
+    const [lang, setLang] = useState<LangOption["value"]>("RU");
+    const [langOpen, setLangOpen] = useState(false);
+    const [langActiveIndex, setLangActiveIndex] = useState(0);
+    const langRef = useRef<HTMLDivElement | null>(null);
+
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     const { suggestions } = useProductGroupSearchSuggestions(value, 8);
+
+    const languages: LangOption[] = useMemo(
+        () => [
+            { label: "RU", value: "RU" },
+            { label: "ENG", value: "ENG" },
+            { label: "TKM", value: "TKM" },
+        ],
+        []
+    );
+
+    const selectedLang = useMemo(
+        () => languages.find((l) => l.value === lang) ?? languages[0],
+        [languages, lang]
+    );
 
     useEffect(() => {
         const q = value.trim();
@@ -18,42 +38,21 @@ function Navbar() {
         setActiveIndex(-1);
     }, [value, suggestions.length]);
 
+    const commitLangIndex = useCallback(
+        (idx: number) => {
+            const next = languages[idx];
+            if (!next) return;
+            setLang(next.value);
+            setLangOpen(false);
+        },
+        [languages]
+    );
+
     useEffect(() => {
-        const onDown = (e: MouseEvent) => {
-            if (!wrapperRef.current) return;
-            if (!wrapperRef.current.contains(e.target as Node)) setOpen(false);
-        };
-        document.addEventListener("mousedown", onDown);
-        return () => document.removeEventListener("mousedown", onDown);
-    }, []);
-
-    const goToGroup = (group: string) => {
-        setOpen(false);
-        setValue("");
-        navigate(`/product?group=${encodeURIComponent(group)}`);
-    };
-
-    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (!open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
-            if (suggestions.length) setOpen(true);
-            return;
-        }
-
-        if (e.key === "ArrowDown") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
-        } else if (e.key === "ArrowUp") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.max(i - 1, 0));
-        } else if (e.key === "Enter") {
-            if (activeIndex >= 0 && suggestions[activeIndex]) {
-                e.preventDefault();
-                goToGroup(suggestions[activeIndex].group_name);
-            }
-        } else if (e.key === "Escape") {
-            setOpen(false);
-        }
-    };
+        if (!langOpen) return;
+        const idx = languages.findIndex((l) => l.value === lang);
+        setLangActiveIndex(idx >= 0 ? idx : 0);
+    }, [langOpen, languages, lang]);
 
     return (
         <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white fixed left-0 top-0 w-full z-60">
@@ -83,7 +82,6 @@ function Navbar() {
                             onFocus={() => {
                                 if (value.trim() && suggestions.length) setOpen(true);
                             }}
-                            onKeyDown={onKeyDown}
                         />
                     </div>
 
@@ -103,9 +101,7 @@ function Navbar() {
                                 >
                                     <img src={s.icon_url} alt={s.group_name} style={{ width: 24, height: 24, borderRadius: 5 }} />
                                     <div className="flex flex-col min-w-0">
-                                        <span className="text-[14px] font-bold leading-5 line-clamp-1">
-                                            {s.group_name}
-                                        </span>
+                                        <span className="text-[14px] font-bold leading-5 line-clamp-1">{s.group_name}</span>
                                         <span className="text-[12px] text-white/60 leading-4">
                                             {s.category === "games" ? "Игры" : "Программы"}
                                         </span>
@@ -120,12 +116,55 @@ function Navbar() {
                     Партнеры
                 </Link>
 
-                <div className="ml-auto">
-                    <select className="bg-[#1E1E23 outline-0] font-bold text-[15px] cursor-pointer">
-                        <option value="RU">RU</option>
-                        <option value="ENG">ENG</option>
-                        <option value="TKM">TKM</option>
-                    </select>
+                <div className="ml-auto flex items-center">
+                    <div ref={langRef} className="relative">
+                        <button
+                            type="button"
+                            onClick={() => setLangOpen((v) => !v)}
+                            aria-haspopup="listbox"
+                            aria-expanded={langOpen}
+                            className="bg-[#1E1E23] outline-0 font-bold text-[15px] cursor-pointer rounded-[10px] px-4 py-3 flex items-center gap-2"
+                        >
+                            <span>{selectedLang.label}</span>
+                            <img
+                                src="/product/arrow-down-simple.png"
+                                alt="arrow"
+                                className={`w-4 transition-transform duration-150 ${langOpen ? "rotate-180" : ""}`}
+                            />
+                        </button>
+
+                        <div
+                            role="listbox"
+                            aria-hidden={!langOpen}
+                            className={`
+                                absolute right-0 mt-2 z-60 min-w-30
+                                bg-[#1E1E23] border border-[#2D2D2D]
+                                rounded-[10px] overflow-hidden shadow-lg
+                                max-h-56 overflow-y-auto
+                                scrollbar-regions
+                                transition-all duration-150
+                                ${langOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}
+                            `}
+                        >
+                            {langOpen
+                                ? languages.map((l, idx) => (
+                                    <button
+                                        key={l.value}
+                                        type="button"
+                                        role="option"
+                                        aria-selected={l.value === lang}
+                                        onMouseEnter={() => setLangActiveIndex(idx)}
+                                        onClick={() => commitLangIndex(idx)}
+                                        className={`w-full text-left px-4 py-3 font-bold text-[15px] cursor-pointer transition ${idx === langActiveIndex ? "bg-[#2F2F36]" : "bg-transparent"
+                                            }`}
+                                    >
+                                        {l.label}
+                                    </button>
+                                ))
+                                : null}
+                        </div>
+                    </div>
+
                     <a
                         href="https://unite-gaming.com/"
                         target="_blank"
