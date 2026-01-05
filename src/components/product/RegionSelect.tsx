@@ -25,16 +25,9 @@ function uniqBy<T>(arr: T[], keyFn: (x: T) => string) {
     return out;
 }
 
-const FLAG_BASE_DIRS = ["/product/flags/", "/product/flags/image/"];
+const FLAG_BASE_DIRS = ["/product/flags/"];
 
-const NEUTRAL_FLAG_SVG = (() => {
-    const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
-            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="#2F2F33" stroke="#FFFFFF33"/>
-            <path d="M3 4h14M3 7h14M3 10h14" stroke="#FFFFFF26" stroke-width="1"/>
-        </svg>`;
-    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-})();
+const FALLBACK_FLAG_SRC = "/product/flags/Earth.webp";
 
 function uniqStrings(arr: string[]) {
     const seen = new Set<string>();
@@ -76,7 +69,7 @@ function buildFlagCandidates(region: RegionItem) {
         for (const n of names) paths.push(fileUrl(base, n));
     }
 
-    paths.push(NEUTRAL_FLAG_SVG);
+    paths.push(FALLBACK_FLAG_SRC);
     return paths;
 }
 
@@ -86,7 +79,7 @@ function FlagImg({ region, className }: { region: RegionItem; className?: string
 
     useEffect(() => setIdx(0), [region.label, region.value]);
 
-    const src = candidates[idx] ?? NEUTRAL_FLAG_SVG;
+    const src = candidates[idx] ?? FALLBACK_FLAG_SRC;
 
     return (
         <img
@@ -203,7 +196,7 @@ function RegionDropdown({
                 aria-expanded={open}
             >
                 <div className="flex items-center gap-3 min-w-0">
-                    <FlagImg region={selected} className="w-5 h-3.5 rounded-[3px] shrink-0" />
+                    <FlagImg region={selected} className="w-7 h-5 rounded-[3px] shrink-0" />
                     <span className="truncate">{selected?.label ?? "-"}</span>
 
                     {selectedRegionLabel === "СНГ" ? (
@@ -265,7 +258,7 @@ function RegionDropdown({
                                   hover:bg-[#2F2F33] cursor-pointer rounded-lg transition-all
                               `}
                         >
-                            <FlagImg region={r} className="w-5 h-3.5 rounded-[3px] shrink-0" />
+                            <FlagImg region={r} className="w-7 h-5 rounded-[3px] shrink-0" />
                             <span className="truncate">{r.label}</span>
                         </button>
                     ))

@@ -127,7 +127,8 @@ function Navbar() {
                         <option value="TKM">TKM</option>
                     </select>
                     <a
-                        href="#"
+                        href="https://unite-gaming.com/"
+                        target="_blank"
                         className="bg-[#79109D] ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
                     >
                         Перейти в Unite Gaming
