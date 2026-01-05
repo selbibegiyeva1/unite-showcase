@@ -14,7 +14,8 @@ function SliderPopular() {
         { id: 2, img: "/home/slider2/2.png", title: "Spotify", group: "Spotify" },
         { id: 3, img: "/home/slider2/3.png", title: "PlayStation", group: "Playstation" },
         { id: 4, img: "/home/slider2/4.png", title: "PUBG Mobile", group: "PUBG Mobile" },
-        { id: 5, img: "/home/slider2/4.png", title: "PUBG Mobile", group: "PUBG Mobile" },
+        { id: 5, img: "/home/slider2/5.png", title: "APPLE ID", group: "APPLE ID" },
+        // { id: 6, img: "/home/slider2/6.png", title: "Battle.net", group: "Battle.net" },
     ]);
 
     const prevRef = useRef<HTMLButtonElement | null>(null);
