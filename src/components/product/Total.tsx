@@ -129,8 +129,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <div className="flex items-center justify-between font-bold text-[20px] py-4">
                 <p>Итого</p>
-                <p className={valueCls} title={enabled ? `${amountTmt} TMT` : "—"}>
-                    {enabled ? `${amountTmt} TMT` : "—"}
+                <p className={valueCls} title={enabled ? `${amountTmt} TMT` : "-"}>
+                    {enabled ? `${amountTmt} TMT` : "-"}
                 </p>
             </div>
 
