@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import Map, { type PartnerLocation } from "../components/partners/Map"
 import PartnersList from "../components/partners/PartnersList"
+import PartnersMain from "../components/partners/PartnersMain"
 import News from "../components/home/News"
 import Faq from "../components/home/Faq"
 import Footer from "../components/layout/Footer"
@@ -71,9 +72,13 @@ function Partners() {
 
                 <b className="text-[32px] py-8 flex text-white">Пополнение через партнёров</b>
 
-                <div className="flex gap-8 pb-15">
+                <div className="flex gap-8 pb-10">
                     <Map locations={MOCK_LOCATIONS} selectedId={selectedId} onSelect={setSelectedId} />
                     <PartnersList locations={MOCK_LOCATIONS} selectedId={selectedId} onSelect={setSelectedId} />
+                </div>
+
+                <div className="pb-15">
+                    <PartnersMain />
                 </div>
 
                 <div className="pb-15 text-white">
