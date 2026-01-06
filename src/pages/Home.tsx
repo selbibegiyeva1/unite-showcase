@@ -1,7 +1,7 @@
 import Slider from "../components/home/Slider"
 import SliderPopular from "../components/home/SliderPopular"
 import Products from "../components/home/Products"
-import News from "../components/home/News"
+import NewsBlock from "../components/home/NewsBlock"
 import Faq from "../components/home/Faq"
 
 import Footer from "../components/layout/Footer"
@@ -22,7 +22,7 @@ function Home() {
                 </div>
 
                 <div className="pb-15">
-                    <News />
+                    <NewsBlock />
                 </div>
 
                 <div className="pb-46">

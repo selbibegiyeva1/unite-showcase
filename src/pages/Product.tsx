@@ -11,7 +11,7 @@ import FormTwo from "../components/product/FormTwo";
 import Total from "../components/product/Total";
 import Banks from "../components/product/Banks";
 
-import News from "../components/home/News";
+import NewsBlock from "../components/home/NewsBlock";
 import Faq from "../components/home/Faq";
 import Footer from "../components/layout/Footer";
 import ProductLoading from "../components/product/ProductLoading";
@@ -207,7 +207,7 @@ function Product() {
                     }}
                 />
 
-                <div className="pb-15"><News /></div>
+                <div className="pb-15"><NewsBlock /></div>
                 <div className="pb-46"><Faq /></div>
             </div>
             <Footer />

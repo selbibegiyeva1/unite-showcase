@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
-function News() {
+function NewsBlock() {
     const [slides] = useState([
         {
             id: 1,
@@ -150,4 +150,4 @@ function News() {
     );
 }
 
-export default News
+export default NewsBlock
