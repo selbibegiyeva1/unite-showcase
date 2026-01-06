@@ -16,7 +16,7 @@ type MapProps = {
 }
 
 function Map({ locations, selectedId, onSelect }: MapProps) {
-    const apiKey = (import.meta as any)?.env?.VITE_GOOGLE_MAPS_API_KEY as string | undefined
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined
 
     const { isLoaded, loadError } = useJsApiLoader({
         id: "unite-google-maps",
@@ -42,8 +42,6 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
         map.setZoom(14)
     }, [map, selected])
 
-    console.log("GMAPS KEY?", import.meta.env.VITE_GOOGLE_MAPS_API_KEY)
-
     return (
         <div className="p-6 w-147 bg-[#1D2023] rounded-[28.8px] text-white">
             <b className="text-[24px]">Пополни баланс у ближайшего партнера</b>
@@ -51,15 +49,15 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
             <div className="mt-8.25 rounded-[18px] overflow-hidden border border-white/5 bg-black/20">
                 {!apiKey ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8] px-6 text-center">
-                        Add <span className="text-white/90 mx-1">VITE_GOOGLE_MAPS_API_KEY</span> to your .env to render Google Maps.
+                        Не удалось загрузить ключ API!
                     </div>
                 ) : loadError ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8] px-6 text-center">
-                        Failed to load Google Maps.
+                        Не удалось загрузить Google Maps!
                     </div>
                 ) : !isLoaded ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8]">
-                        Loading map…
+                        Загрузка...
                     </div>
                 ) : (
                     <GoogleMap
