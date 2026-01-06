@@ -54,6 +54,27 @@ function Navbar() {
         setLangActiveIndex(idx >= 0 ? idx : 0);
     }, [langOpen, languages, lang]);
 
+    useEffect(() => {
+        if (!langOpen) return;
+
+        const onDown = (e: MouseEvent) => {
+            const el = langRef.current;
+            if (!el) return;
+            if (e.target instanceof Node && !el.contains(e.target)) setLangOpen(false);
+        };
+
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setLangOpen(false);
+        };
+
+        document.addEventListener("mousedown", onDown);
+        document.addEventListener("keydown", onKey);
+        return () => {
+            document.removeEventListener("mousedown", onDown);
+            document.removeEventListener("keydown", onKey);
+        };
+    }, [langOpen]);
+
     return (
         <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white fixed left-0 top-0 w-full z-60">
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
