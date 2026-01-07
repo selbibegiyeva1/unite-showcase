@@ -69,4 +69,24 @@
         background: rgba(255, 255, 255, 0.22);
         border-radius: 9999px;
     }
+
+    /* // Partners List */
+
+    .scrollbar-partners {
+        scrollbar-width: thin;
+        scrollbar-color: #79109D #292731;
+    }
+
+    .scrollbar-partners::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scrollbar-partners::-webkit-scrollbar-track {
+        background: #292731;
+    }
+
+    .scrollbar-partners::-webkit-scrollbar-thumb {
+        background: #79109D;
+        border-radius: 9999px;
+    }
 }

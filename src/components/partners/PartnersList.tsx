@@ -42,7 +42,7 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
                 />
             </div>
 
-            <div className="mt-3.5 h-60 overflow-y-auto pr-1">
+            <div className="mt-3.5 h-60 overflow-y-auto pr-1 scrollbar-partners pr-4">
                 {filtered.length === 0 ? (
                     <div className="text-[#969FA8] py-6 text-center">Ничего не найдено</div>
                 ) : (
