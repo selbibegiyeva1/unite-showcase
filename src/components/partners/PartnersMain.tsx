@@ -19,7 +19,7 @@ function PartnersMain() {
                             <b>Адрес</b>
                             <p className="text-[#FFFFFF99] font-medium text-right w-41.5">Ул. Чехово, Дом Yasyl Yayla, 18 этаж, 9 кабинет</p>
                         </div>
-                        <div className="flex items-center text-[14px] gap-4 justify-between py-4.5 border-b border-b-[#FFFFFF26]">
+                        <div className="flex items-center text-[14px] gap-4 justify-between py-4.5">
                             <b>Номер</b>
                             <p className="text-[#FFFFFF99] font-medium">+993 65 45 84 54</p>
                         </div>
