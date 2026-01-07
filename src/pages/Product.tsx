@@ -11,7 +11,7 @@ import FormTwo from "../components/product/FormTwo";
 import Total from "../components/product/Total";
 import Banks from "../components/product/Banks";
 
-import News from "../components/home/News";
+import NewsBlock from "../components/home/NewsBlock";
 import Faq from "../components/home/Faq";
 import Footer from "../components/layout/Footer";
 import ProductLoading from "../components/product/ProductLoading";
@@ -65,13 +65,11 @@ function Product() {
     }, [forms, mode]);
 
     const nominalLabel = useMemo(() => {
-        if (groupName === "Steam") return null;
-
         const productField = activeFields.find((f) => f.name === "product_id");
         const opt = productField?.options?.find((o) => String(o.value) === String(values.product_id));
 
         return opt?.name ? String(opt.name) : "-";
-    }, [activeFields, groupName, values.product_id]);
+    }, [activeFields, values.product_id]);
 
     useEffect(() => {
         setValues((prev) => ({
@@ -126,14 +124,8 @@ function Product() {
             const value = String(o?.value ?? "").trim().toLowerCase();
             return name === "любой" || value === "any";
         });
-        if (hasAnyInRegionOptions) return true;
 
-        const productField = fields.find((f) => f.name === "product_id");
-        const productOptions = productField?.options ?? [];
-        const hasAnyInProducts = productOptions.some((o) => String(o?.region ?? "").trim().toLowerCase() === "любой");
-        if (hasAnyInProducts) return true;
-
-        return false;
+        return hasAnyInRegionOptions;
     }, [forms, mode]);
 
     if (isLoading) return <ProductLoading />;
@@ -207,7 +199,7 @@ function Product() {
                     }}
                 />
 
-                <div className="pb-15"><News /></div>
+                <div className="pb-15"><NewsBlock /></div>
                 <div className="pb-46"><Faq /></div>
             </div>
             <Footer />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import Map, { type PartnerLocation } from "../components/partners/Map"
 import PartnersList from "../components/partners/PartnersList"
 import PartnersMain from "../components/partners/PartnersMain"
-import News from "../components/home/News"
+import NewsBlock from "../components/home/NewsBlock"
 import Faq from "../components/home/Faq"
 import Footer from "../components/layout/Footer"
 
@@ -82,7 +82,7 @@ function Partners() {
                 </div>
 
                 <div className="pb-15 text-white">
-                    <News />
+                    <NewsBlock />
                 </div>
 
                 <div className="pb-46 text-white">
