@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react"
-import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api"
+import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from "@react-google-maps/api"
 
 export type PartnerLocation = {
     id: string
     name: string
     address: string
+    city: string
     lat: number
     lng: number
     logo_url?: string
@@ -25,6 +26,7 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
     })
 
     const [map, setMap] = useState<google.maps.Map | null>(null)
+    const [clickedMarkerId, setClickedMarkerId] = useState<string | null>(null)
 
     const selected = useMemo(
         () => locations.find((l) => l.id === selectedId) ?? null,
@@ -78,11 +80,26 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
                                 <MarkerF
                                     key={loc.id}
                                     position={{ lat: loc.lat, lng: loc.lng }}
-                                    onClick={() => onSelect(loc.id)}
+                                    onClick={() => {
+                                        onSelect(loc.id)
+                                        setClickedMarkerId(loc.id === clickedMarkerId ? null : loc.id)
+                                    }}
                                     options={{
                                         zIndex: loc.id === selectedId ? 999 : 1,
                                     }}
-                                />
+                                >
+                                    {clickedMarkerId === loc.id && (
+                                        <InfoWindow
+                                            onCloseClick={() => setClickedMarkerId(null)}
+                                        >
+                                            <div className="text-black p-2">
+                                                <div className="font-bold text-sm mb-1">{loc.name}</div>
+                                                <div className="text-xs text-gray-600 mb-1">{loc.city}</div>
+                                                <div className="text-xs text-gray-600">{loc.address}</div>
+                                            </div>
+                                        </InfoWindow>
+                                    )}
+                                </MarkerF>
                             ))}
                         </GoogleMap>
                     </div>
