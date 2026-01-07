@@ -55,7 +55,8 @@ async function fetchPartnersMap(): Promise<PartnersMapResponse> {
             return {
                 id: `partner-${index}-${x.name}`,
                 name: String(x.name),
-                address: String(x?.location_note ?? x?.city ?? ""),
+                address: String(x?.location_note ?? ""),
+                city: String(x?.city ?? ""),
                 lat,
                 lng,
                 logo_url: x?.logo_url,
