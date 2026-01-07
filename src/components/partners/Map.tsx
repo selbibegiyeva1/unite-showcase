@@ -7,6 +7,7 @@ export type PartnerLocation = {
     address: string
     lat: number
     lng: number
+    logo_url?: string
 }
 
 type MapProps = {
@@ -60,29 +61,31 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
                         Загрузка...
                     </div>
                 ) : (
-                    <GoogleMap
-                        mapContainerStyle={{ width: "100%", height: 316 }}
-                        center={defaultCenter}
-                        zoom={12}
-                        onLoad={(m) => setMap(m)}
-                        onUnmount={() => setMap(null)}
-                        options={{
-                            disableDefaultUI: true,
-                            zoomControl: true,
-                            clickableIcons: false,
-                        }}
-                    >
-                        {locations.map((loc) => (
-                            <MarkerF
-                                key={loc.id}
-                                position={{ lat: loc.lat, lng: loc.lng }}
-                                onClick={() => onSelect(loc.id)}
-                                options={{
-                                    zIndex: loc.id === selectedId ? 999 : 1,
-                                }}
-                            />
-                        ))}
-                    </GoogleMap>
+                    <div>
+                        <GoogleMap
+                            mapContainerStyle={{ width: "100%", height: 316 }}
+                            center={defaultCenter}
+                            zoom={12}
+                            onLoad={(m) => setMap(m)}
+                            onUnmount={() => setMap(null)}
+                            options={{
+                                disableDefaultUI: true,
+                                zoomControl: true,
+                                clickableIcons: false,
+                            }}
+                        >
+                            {locations.map((loc) => (
+                                <MarkerF
+                                    key={loc.id}
+                                    position={{ lat: loc.lat, lng: loc.lng }}
+                                    onClick={() => onSelect(loc.id)}
+                                    options={{
+                                        zIndex: loc.id === selectedId ? 999 : 1,
+                                    }}
+                                />
+                            ))}
+                        </GoogleMap>
+                    </div>
                 )}
             </div>
         </div>
