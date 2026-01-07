@@ -178,7 +178,11 @@ export function useProductGroupDetailsQuery(group: string | null, params?: Param
     const rateQuery = useQuery({
         queryKey: ["rate", amountTmt],
         queryFn: () => fetchRate(amountTmt as number),
-        enabled: typeof amountTmt === "number" && Number.isFinite(amountTmt) && amountTmt > 0,
+        enabled: typeof amountTmt === "number" && 
+                 Number.isFinite(amountTmt) && 
+                 amountTmt > 0 &&
+                 detailsQuery.data?.group === "Steam" &&
+                 params?.mode === "topup",
         staleTime: 60_000,
     });
 

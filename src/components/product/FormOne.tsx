@@ -50,6 +50,16 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
 
         if (!productOptions.length) return [];
 
+        // Check if all products have region "Любой" (Any) - special case
+        const allHaveAnyRegion = productOptions.every(
+            (o) => String(o.region ?? "").trim() === "Любой" || String(o.region ?? "").trim() === "Any"
+        );
+        
+        // If all products have "Любой" region, show them all regardless of selected region
+        if (allHaveAnyRegion && productOptions.length > 0) {
+            return productOptions;
+        }
+
         if (selectedRegionLabel) {
             const byLabel = productOptions.filter((o) => String(o.region ?? "") === selectedRegionLabel);
             if (byLabel.length) return byLabel;

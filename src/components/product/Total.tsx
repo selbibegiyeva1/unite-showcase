@@ -72,7 +72,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const confirmErr = showErrors ? errors.confirmed : "";
     const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
 
-    const creditText = groupName === "Steam" ? topupUsdText : (nominalLabel ?? "-");
+    const isSteamTopup = groupName === "Steam" && mode === "topup";
+    const creditText = isSteamTopup ? topupUsdText : (nominalLabel ?? "-");
 
     return (
         <form
