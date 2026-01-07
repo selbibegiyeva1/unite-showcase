@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 import Map, { type PartnerLocation } from "../components/partners/Map"
@@ -7,59 +7,24 @@ import PartnersMain from "../components/partners/PartnersMain"
 import NewsBlock from "../components/home/NewsBlock"
 import Faq from "../components/home/Faq"
 import Footer from "../components/layout/Footer"
-
-const MOCK_LOCATIONS: PartnerLocation[] = [
-    {
-        id: "p1",
-        name: "Juwan Tourism",
-        address: "Ashgabat, Magtymguly Ave 123",
-        lat: 37.9601,
-        lng: 58.3261,
-    },
-    {
-        id: "p2",
-        name: "DN Tours",
-        address: "Ashgabat, Bitarap Türkmenistan St 45",
-        lat: 37.9439,
-        lng: 58.3782,
-    },
-    {
-        id: "p3",
-        name: "KK Tours",
-        address: "Ashgabat, Atamurat Niyazov Ave 9",
-        lat: 37.9353,
-        lng: 58.3899,
-    },
-    {
-        id: "p4",
-        name: "Kemal Turizm",
-        address: "Ashgabat, Turkmenbashi Ave 77",
-        lat: 37.9835,
-        lng: 58.3569,
-    },
-    {
-        id: "p5",
-        name: "Downtown Partner",
-        address: "Ashgabat, Kopetdag District",
-        lat: 37.9132,
-        lng: 58.3446,
-    },
-    {
-        id: "p6",
-        name: "North Partner",
-        address: "Ashgabat, near Hayat Market",
-        lat: 38.0029,
-        lng: 58.3225,
-    },
-]
+import { usePartnersMap } from "../hooks/partners/usePartnersMap"
 
 function Partners() {
     document.title = "Unite Gaming Shop | Partners"
 
-    const [selectedId, setSelectedId] = useState<string | null>(MOCK_LOCATIONS[0]?.id ?? null)
+    const { data, isLoading, error } = usePartnersMap()
+    const locations: PartnerLocation[] = data?.locations ?? []
+    const [selectedId, setSelectedId] = useState<string | null>(null)
+
+    // Update selectedId when data loads
+    useEffect(() => {
+        if (locations.length > 0 && !selectedId) {
+            setSelectedId(locations[0].id)
+        }
+    }, [locations, selectedId])
 
     return (
-        <div className="px-4">
+        <div className="px-4" id="map">
             <div className="max-w-255 m-auto">
                 <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                     <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
@@ -72,14 +37,27 @@ function Partners() {
 
                 <b className="text-[32px] py-8 flex text-white">Пополнение через партнёров</b>
 
-                <div className="flex gap-8 pb-10">
-                    <Map locations={MOCK_LOCATIONS} selectedId={selectedId} onSelect={setSelectedId} />
-                    <PartnersList locations={MOCK_LOCATIONS} selectedId={selectedId} onSelect={setSelectedId} />
-                </div>
+                {isLoading ? (
+                    <div className="text-white text-center py-10">Загрузка партнёров...</div>
+                ) : error ? (
+                    <div className="text-red-400 text-center py-10">
+                        Ошибка загрузки партнёров: {error instanceof Error ? error.message : "Неизвестная ошибка"}
+                    </div>
+                ) : (
+                    <>
+                        <div className="flex gap-8 pb-10">
+                            <Map locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
+                            <PartnersList locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
+                        </div>
 
-                <div className="pb-15">
-                    <PartnersMain />
-                </div>
+                        <div className="pb-15">
+                            <PartnersMain 
+                                partners={data?.partners ?? []} 
+                                onPartnerSelect={setSelectedId}
+                            />
+                        </div>
+                    </>
+                )}
 
                 <div className="pb-15 text-white">
                     <NewsBlock />

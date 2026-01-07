@@ -42,7 +42,7 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
                 />
             </div>
 
-            <div className="mt-3.5 h-60 overflow-y-auto pr-1 scrollbar-partners pr-4">
+            <div className="mt-3.5 h-60 overflow-y-auto scrollbar-partners pr-4">
                 {filtered.length === 0 ? (
                     <div className="text-[#969FA8] py-6 text-center">Ничего не найдено</div>
                 ) : (
@@ -57,7 +57,7 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
                                     }}
                                     onClick={() => onSelect(loc.id)}
                                     className={[
-                                        "w-full text-left py-4 px-3.5 rounded-[10px] transition cursor-pointer",
+                                        "w-full text-left py-[13px] px-3.5 rounded-[10px] transition cursor-pointer",
                                         "border border-transparent hover:bg-white/5",
                                         active ? "bg-white/8 border-white/10" : "bg-transparent",
                                     ].join(" ")}
@@ -65,7 +65,18 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
                                     <div className="flex items-start gap-3">
                                         <div className="min-w-0">
                                             <div className="font-bold flex items-center gap-2.5">
-                                                {loc.name}
+                                                {loc.logo_url && (
+                                                    <img
+                                                        src={loc.logo_url}
+                                                        alt={loc.name}
+                                                        className="w-10 h-10 object-cover rounded"
+                                                        onError={(e) => {
+                                                            const target = e.target as HTMLImageElement
+                                                            target.style.display = "none"
+                                                        }}
+                                                    />
+                                                )}
+                                                <p>{loc.name}</p>
                                             </div>
                                         </div>
                                     </div>
