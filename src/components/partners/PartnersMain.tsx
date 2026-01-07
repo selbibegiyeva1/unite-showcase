@@ -25,7 +25,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                         <div>
                             <div className="flex items-center gap-4 justify-between mb-2.5">
                                 <b className="text-[24px] w-27.75 flex leading-8">{partner.name}</b>
-                                <div className="w-[70px] h-[70px] overflow-hidden rounded-[10px]">
+                                <div className="w-17.5 h-17.5 overflow-hidden rounded-[10px]">
                                     <img
                                         src={partner.logo_url || "/partner/unnamed.png"}
                                         className="w-full h-full object-cover"
@@ -54,7 +54,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                         <a
                             href="#map"
                             onClick={() => onPartnerSelect?.(partner.id)}
-                            className="uppercase bg-[#79109D] mt-[24px] w-full p-[11.5px] rounded-[10px] font-bold text-[14px] flex items-center justify-center cursor-pointer hover:bg-[#8a1aad] transition-colors"
+                            className="uppercase bg-[#79109D] mt-6 w-full p-[11.5px] rounded-[10px] font-bold text-[14px] flex items-center justify-center cursor-pointer hover:bg-[#8a1aad] transition-colors"
                         >
                             на карте
                         </a>
