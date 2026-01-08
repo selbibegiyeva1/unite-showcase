@@ -35,7 +35,7 @@ function Partners() {
                     <p className="text-white">Как пополнить баланс?</p>
                 </div>
 
-                <b className="text-[32px] py-8 flex text-white">Пополнение через партнёров</b>
+                <b className="text-[32px] py-8 flex text-white partner-h">Пополнение через партнёров</b>
 
                 {isLoading ? (
                     <div className="text-white text-center py-10">Загрузка партнёров...</div>
