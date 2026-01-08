@@ -76,7 +76,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
     return (
         <form
-            className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8"
+            className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8 max-medium:w-full"
             onSubmit={async (e) => {
                 e.preventDefault();
                 if (!enabled || paying) return;

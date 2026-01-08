@@ -86,20 +86,17 @@ function ProductLoading() {
                         <div className="mt-4 rounded-[10px]">
                             <Skeleton baseColor={baseColor} borderRadius={8} highlightColor={highlightColor} height={48} />
                         </div>
-                        <div className="mt-2">
-                            <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={16} width={160} />
-                        </div>
 
                         <div className="mt-6 space-y-4">
                             {Array.from({ length: 6 }).map((_, i) => (
-                                <div key={i} className="flex items-center justify-between">
-                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={20} width={110} />
-                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={20} width={120} />
+                                <div key={i} className="flex items-center justify-between gap-4">
+                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={20} width={100} />
+                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={20} width={100} />
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-6 flex items-center justify-between">
+                        <div className="mt-6 flex items-center justify-between gap-4">
                             <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={22} width={80} />
                             <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={22} width={120} />
                         </div>

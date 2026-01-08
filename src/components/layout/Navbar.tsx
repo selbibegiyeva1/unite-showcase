@@ -76,13 +76,16 @@ function Navbar() {
     }, [langOpen]);
 
     return (
-        <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white fixed left-0 top-0 w-full z-60 max-lg:px-[40px]">
+        <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white 
+            fixed left-0 top-0 w-full z-60 
+            max-lg:px-[40px] navbar"
+        >
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
                 <Link to="/">
                     <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                 </Link>
 
-                <div ref={wrapperRef} className="relative w-87.5">
+                <div ref={wrapperRef} className="relative w-87.5 max-nav:w-full">
                     <div className="flex items-center gap-2 px-4 py-2 bg-[#2F2F36] rounded-[10px]">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -133,11 +136,11 @@ function Navbar() {
                     )}
                 </div>
 
-                <Link to="/partners" className="text-[14px] font-bold">
+                <Link to="/partners" className="text-[14px] font-bold max-nav:hidden">
                     Партнеры
                 </Link>
 
-                <div className="ml-auto flex items-center">
+                <div className="ml-auto flex items-center max-nav:hidden">
                     <div ref={langRef} className="relative">
                         <button
                             type="button"

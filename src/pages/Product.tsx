@@ -145,9 +145,9 @@ function Product() {
 
     return (
         <div className="text-white">
-            <div className="max-w-255 m-auto px-4">
-                <div className="flex items-start gap-4 pb-15 max-lg:px-[48px]">
-                    <div className="flex flex-col gap-4 w-167">
+            <div className="max-w-255 m-auto px-4 product-page">
+                <div className="flex items-start gap-4 pb-15 max-lg:px-[48px] max-medium:flex-col product">
+                    <div className="flex flex-col gap-4 w-167 max-medium:w-full">
                         <ProductHeader
                             icon={data?.icon}
                             group={data?.group}
@@ -203,8 +203,8 @@ function Product() {
                     }}
                 />
 
-                <div className="pb-15 max-lg:px-[48px]"><NewsBlock /></div>
-                <div className="pb-46 max-lg:px-[48px]"><Faq /></div>
+                <div className="pb-15 max-lg:px-[48px] product"><NewsBlock /></div>
+                <div className="pb-46 max-lg:px-[48px] product"><Faq /></div>
             </div>
             <Footer />
         </div>

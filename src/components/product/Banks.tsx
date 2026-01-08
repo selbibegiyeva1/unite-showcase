@@ -67,11 +67,11 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
 
     return (
         <div
-            className="fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 grid place-items-center"
+            className="fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 grid place-items-center max-medium:px-[24px]"
             onMouseDown={onClose}
         >
             <div
-                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-150"
+                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-150 max-medium:w-full"
                 onMouseDown={(e) => e.stopPropagation()}
             >
                 <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">

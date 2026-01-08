@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "./FormOne";
 
@@ -14,6 +14,16 @@ type Props = {
 
 function FormTwo({ groupName, mode, fields, values, setValues, errors, showErrors }: Props) {
     const isSteamTopup = groupName === "Steam" && mode === "topup";
+    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+    useEffect(() => {
+        if (!isTooltipOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsTooltipOpen(false);
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isTooltipOpen]);
 
     const err = (name: string) => (showErrors ? errors[name] : "");
     const inputCls = (name: string) =>
@@ -31,28 +41,61 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                         <div className="flex items-center gap-2 mb-3">
                             <p className="text-[#FFFFFF99] text-[14px]">Где искать</p>
 
-                            <div className="relative">
+                            <div className="relative max-medium:static">
                                 <img
                                     src="/product/region.png"
                                     alt="info"
-                                    className="w-5 peer"
+                                    className="w-5 cursor-pointer"
+                                    onClick={() => setIsTooltipOpen(!isTooltipOpen)}
                                 />
-                                <div
-                                    className={`
-                                        absolute top-6 left-0 z-10
-                                        bg-[#2F2F36] p-8 text-left rounded-2xl text-[14px] font-medium
-                                        opacity-0 translate-y-1 pointer-events-none
-                                        transition-all duration-150
-                                        peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
-                                    `}
-                                >
-                                    <p className="text-[24px] mb-6">Как найти свой логин в Steam?</p>
-                                    <ul className="mb-4 list-disc ml-5 flex flex-col gap-4">
-                                        <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
-                                        <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
-                                    </ul>
-                                    <img src="/product/steam.png" className="max-w-103.5" alt="steam" />
-                                </div>
+                                {isTooltipOpen && (
+                                    <>
+                                        {/* Desktop tooltip */}
+                                        <div
+                                            className={`
+                                                max-medium:hidden
+                                                absolute top-6 left-0 z-10
+                                                bg-[#2F2F36] p-8 text-left rounded-2xl text-[14px] font-medium
+                                                opacity-100 translate-y-0 pointer-events-auto
+                                                transition-all duration-150
+                                            `}
+                                        >
+                                            <p className="text-[24px] mb-6">Как найти свой логин в Steam?</p>
+                                            <ul className="mb-4 list-disc ml-5 flex flex-col gap-4">
+                                                <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
+                                                <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
+                                            </ul>
+                                            <img src="/product/steam.png" className="max-w-103.5" alt="steam" />
+                                        </div>
+                                        {/* Mobile modal */}
+                                        <div
+                                            className="hidden max-medium:grid fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 place-items-center max-medium:px-[24px]"
+                                            onMouseDown={() => setIsTooltipOpen(false)}
+                                        >
+                                            <div
+                                                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-full max-w-lg"
+                                                onMouseDown={(e) => e.stopPropagation()}
+                                            >
+                                                <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
+                                                    <p className="text-[28px] font-medium">Как найти свой логин в Steam?</p>
+                                                    <button 
+                                                        type="button" 
+                                                        onClick={() => setIsTooltipOpen(false)} 
+                                                        className="cursor-pointer" 
+                                                        aria-label="Close"
+                                                    >
+                                                        <img src="/product/banks.png" className="w-12" alt="close" />
+                                                    </button>
+                                                </div>
+                                                <ul className="mb-4 list-disc ml-5 flex flex-col gap-4 text-[14px] font-medium">
+                                                    <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
+                                                    <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
+                                                </ul>
+                                                <img src="/product/steam.png" className="max-w-103.5 mt-4" alt="steam" />
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <input

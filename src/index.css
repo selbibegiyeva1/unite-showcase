@@ -7,6 +7,23 @@
     scroll-behavior: smooth
 }
 
+@theme {
+    --breakpoint-nav: 950px;
+    --breakpoint-medium: 886px;
+}
+
+@media(max-width: 886px) {
+    .navbar, .product {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .product-page {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
 @layer {
     .switch {
         @apply px-4 py-2.25 text-[15px] font-bold relative rounded-[10px] flex items-center gap-1.5 cursor-pointer transition-all duration-200 ease-out select-none;
