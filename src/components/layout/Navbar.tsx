@@ -189,7 +189,7 @@ function Navbar() {
                     <a
                         href="https://unite-gaming.com/"
                         target="_blank"
-                        className="bg-[#79109D] ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
+                        className="bg-[#79109D] hover:bg-[#8a1aad] transition-colors ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
                     >
                         Перейти в Unite Gaming
                     </a>

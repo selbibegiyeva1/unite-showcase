@@ -24,7 +24,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                     <div key={partner.id} className="bg-[#282730] px-6 pt-5 pb-8 rounded-3xl flex flex-col justify-between">
                         <div>
                             <div className="flex items-center gap-4 justify-between mb-2.5">
-                                <b className="text-[24px] w-27.75 flex leading-8">{partner.name}</b>
+                                <b className="text-[24px] w-27.75 flex leading-7">{partner.name}</b>
                                 <div className="w-17.5 h-17.5 overflow-hidden rounded-[10px]">
                                     <img
                                         src={partner.logo_url || "/partner/unnamed.png"}

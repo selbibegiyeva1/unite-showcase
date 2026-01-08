@@ -185,7 +185,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                     onClick={() => setValues((prev) => ({ ...prev, product_id: n.value }))}
                                     className={`
                                         cursor-pointer px-6 py-[11.5px] rounded-[10px] text-[14px] font-bold transition-all duration-200
-                                        ${isActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
+                                        ${isActive ? "bg-[#79109D] hover:bg-[#8a1aad] transition-colors text-white" : "bg-[#2F2F33] text-white/60"}
                                     `}
                                 >
                                     {label}

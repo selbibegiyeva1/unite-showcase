@@ -82,7 +82,7 @@ export default function Products() {
                                 <img
                                     src={g.icon_url}
                                     alt="product"
-                                    className="max-w-57.5 rounded-2xl max-lg:max-w-full"
+                                    className="rounded-2xl"
                                     onError={(e) => {
                                         const img = e.currentTarget;
                                         if (img.dataset.fallbackApplied) return;

@@ -35,7 +35,7 @@
     }
 
     .slider-arrow--active {
-        @apply bg-[#79109D] cursor-pointer;
+        @apply bg-[#79109D] cursor-pointer hover:bg-[#8a1aad] transition-colors;
     }
 
     .slider-arrow--inactive {
