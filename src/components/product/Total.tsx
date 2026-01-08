@@ -65,7 +65,6 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
         });
     }, [resolvedFields, values]);
 
-    const valueCls = "text-right max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap";
     const bankText = String(values.bank ?? "Выбрать банк");
 
     const bankErr = showErrors ? errors.bank : "";
@@ -106,7 +105,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             <div>
                 <div className="total-div">
                     <p>Регион</p>
-                    <p className={valueCls} title={region}>
+                    <p className='t-ellipsis' title={region}>
                         {region}
                     </p>
                 </div>
@@ -114,7 +113,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 {rows.map((r) => (
                     <div key={r.label} className="total-div">
                         <p>{r.label}</p>
-                        <p className={valueCls} title={r.value}>
+                        <p className='t-ellipsis' title={r.value}>
                             {r.value}
                         </p>
                     </div>
@@ -122,7 +121,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
                 <div className="total-div">
                     <p className="whitespace-nowrap">К зачислению</p>
-                    <p className={valueCls} title={creditText}>
+                    <p className='t-ellipsis' title={creditText}>
                         {creditText}
                     </p>
                 </div>
@@ -130,7 +129,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <div className="flex items-center justify-between font-bold text-[20px] py-4">
                 <p>Итого</p>
-                <p className={valueCls} title={enabled ? `${amountTmt} TMT` : "-"}>
+                <p className='t-ellipsis' title={enabled ? `${amountTmt} TMT` : "-"}>
                     {enabled ? `${amountTmt} TMT` : "-"}
                 </p>
             </div>

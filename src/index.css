@@ -90,3 +90,13 @@
         border-radius: 9999px;
     }
 }
+
+.t-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    text-align: right;
+}
