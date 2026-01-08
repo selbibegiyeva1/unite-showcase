@@ -85,7 +85,7 @@ function Navbar() {
                     <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                 </Link>
 
-                <div ref={wrapperRef} className="relative w-87.5 max-nav:w-full">
+                <div ref={wrapperRef} className="relative w-87.5 max-nav:w-[200px] max-small:hidden">
                     <div className="flex items-center gap-2 px-4 py-2 bg-[#2F2F36] rounded-[10px]">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -136,11 +136,11 @@ function Navbar() {
                     )}
                 </div>
 
-                <Link to="/partners" className="text-[14px] font-bold max-nav:hidden">
+                <Link to="/partners" className="text-[14px] font-bold max-small:hidden">
                     Партнеры
                 </Link>
 
-                <div className="ml-auto flex items-center max-nav:hidden">
+                <div className="ml-auto flex items-center">
                     <div ref={langRef} className="relative">
                         <button
                             type="button"
@@ -192,7 +192,7 @@ function Navbar() {
                     <a
                         href="https://unite-gaming.com/"
                         target="_blank"
-                        className="bg-[#79109D] hover:bg-[#8a1aad] transition-colors ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
+                        className="bg-[#79109D] hover:bg-[#8a1aad] max-small:hidden transition-colors ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
                     >
                         Перейти в Unite Gaming
                     </a>

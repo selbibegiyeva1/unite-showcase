@@ -15,7 +15,7 @@ export default function Products() {
     }, [data, activeCategory]);
 
     return (
-        <div className="max-w-255 m-auto max-lg:px-[48px]">
+        <div className="max-w-255 m-auto max-lg:px-[48px] product">
             <div className="flex gap-2">
                 <button
                     type="button"
@@ -72,7 +72,7 @@ export default function Products() {
                 )}
 
                 {!isLoading && !isError && (
-                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3">
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 products-grid">
                         {activeGroups.map((g) => (
                             <Link
                                 to={`/product?group=${encodeURIComponent(g.group_name)}`}

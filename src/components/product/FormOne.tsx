@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import type { ProductGroupForms, FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
 import RegionSelect from "./RegionSelect";
 
@@ -54,7 +54,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         const allHaveAnyRegion = productOptions.every(
             (o) => String(o.region ?? "").trim() === "Любой" || String(o.region ?? "").trim() === "Any"
         );
-        
+
         // If all products have "Любой" region, show them all regardless of selected region
         if (allHaveAnyRegion && productOptions.length > 0) {
             return productOptions;
@@ -87,6 +87,16 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
     }, [nominals, values.product_id, setValues]);
 
     const isVoucherActive = mode === "voucher";
+    const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+    useEffect(() => {
+        if (!isTooltipOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsTooltipOpen(false);
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isTooltipOpen]);
 
     return (
         <div className="flex flex-col gap-8 p-8 bg-[#1D1D22] rounded-4xl w-full">
@@ -133,29 +143,62 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                         >
                             Ваучер
 
-                            <img
-                                src="/product/voucher.png"
-                                alt="voucher"
-                                className={`w-5 ${isVoucherActive ? "peer" : ""} ${!isVoucherActive ? "opacity-60" : ""}`}
-                            />
-
-                            <p
-                                className={`
-                                    bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
-                                    absolute top-0 left-35 z-10
-                                    ${isVoucherActive
-                                        ? `
-                                                opacity-0 translate-y-1 pointer-events-none
+                            <div className="relative max-medium:static">
+                                <img
+                                    src="/product/voucher.png"
+                                    alt="voucher"
+                                    className={`w-5 cursor-pointer ${!isVoucherActive ? "opacity-60" : ""}`}
+                                    onClick={(e) => {
+                                        if (isVoucherActive) {
+                                            e.stopPropagation();
+                                            setIsTooltipOpen(!isTooltipOpen);
+                                        }
+                                    }}
+                                />
+                                {isTooltipOpen && isVoucherActive && (
+                                    <>
+                                        <div
+                                            className={`
+                                                max-medium:hidden
+                                                absolute top-7 left-0 z-10
+                                                bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium
+                                                opacity-100 translate-y-0 pointer-events-auto
                                                 transition-all duration-150
-                                                peer-hover:opacity-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto
-                                            `
-                                        : `opacity-0 pointer-events-none`
-                                    }
-                                `}
-                            >
-                                Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
-                                игровой кошелёк при активации.
-                            </p>
+                                            `}
+                                        >
+                                            Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
+                                            игровой кошелёк при активации.
+                                        </div>
+                                        <div
+                                            className="hidden max-medium:grid fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 place-items-center max-medium:px-[24px]"
+                                            onMouseDown={() => setIsTooltipOpen(false)}
+                                        >
+                                            <div
+                                                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-full max-w-lg"
+                                                onMouseDown={(e) => e.stopPropagation()}
+                                            >
+                                                <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
+                                                    <p className="text-[28px] font-medium">Ваучер</p>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setIsTooltipOpen(false)}
+                                                        className="cursor-pointer"
+                                                        aria-label="Close"
+                                                    >
+                                                        <div className="w-12">
+                                                            <img src="/product/banks.png" className="w-full" alt="close" />
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                <p className="text-[14px] font-medium text-left">
+                                                    Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
+                                                    игровой кошелёк при активации.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </button>
                     </div>
                 </div>

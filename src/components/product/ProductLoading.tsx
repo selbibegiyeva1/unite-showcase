@@ -6,13 +6,13 @@ const highlightColor = "#47474e";
 
 function ProductLoading() {
     return (
-        <div className="text-white px-4">
+        <div className="text-white px-4 max-medium:px-0">
             <div className="max-w-255 m-auto">
-                <div className="flex items-start gap-4 pb-15">
-                    <div className="flex flex-col gap-4 w-167">
+                <div className="flex items-start gap-4 pb-15 max-medium:flex-col">
+                    <div className="flex flex-col gap-4 w-167 max-medium:w-full">
                         <div className="bg-[#1D1D22] rounded-4xl px-8 pt-8 pb-11">
                             <div className="flex items-center gap-7.25">
-                                <div className="w-40 h-40">
+                                <div className="w-40 h-40 btn">
                                     <Skeleton baseColor={baseColor} borderRadius={15} highlightColor={highlightColor} height="100%" />
                                 </div>
 
@@ -33,8 +33,8 @@ function ProductLoading() {
 
                         <div className="bg-[#1D1D22] rounded-4xl p-8 flex flex-col gap-8">
                             <div>
-                                <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={26} width={320} />
-                                <div className="mt-4 flex gap-3">
+                                <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={26} width={220} />
+                                <div className="mt-4 flex flex-wrap gap-3">
                                     <Skeleton baseColor={baseColor} highlightColor={highlightColor} height={40} width={150} borderRadius={8} />
                                     <Skeleton baseColor={baseColor} highlightColor={highlightColor} height={40} width={150} borderRadius={8} />
                                 </div>
@@ -43,7 +43,7 @@ function ProductLoading() {
                             <div>
                                 <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={26} width={220} />
                                 <div className="mt-4">
-                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} height={48} borderRadius={8} />
+                                    <Skeleton baseColor={baseColor} highlightColor={highlightColor} width="100%" height={48} borderRadius={8} />
                                 </div>
                             </div>
 
@@ -67,7 +67,7 @@ function ProductLoading() {
                         <div className="bg-[#1D1D22] rounded-4xl p-8">
                             <Skeleton baseColor={baseColor} highlightColor={highlightColor} borderRadius={8} height={26} width={280} />
 
-                            <div className="mt-4 grid grid-cols-2 gap-4">
+                            <div className="mt-4 grid grid-cols-2 gap-4 max-medium:grid-cols-1">
                                 {Array.from({ length: 4 }).map((_, i) => (
                                     <div key={i}>
                                         <Skeleton baseColor={baseColor} borderRadius={8} highlightColor={highlightColor} height={16} width={120} />
@@ -80,7 +80,7 @@ function ProductLoading() {
                         </div>
                     </div>
 
-                    <div className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8">
+                    <div className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8 max-medium:w-full">
                         <Skeleton baseColor={baseColor} borderRadius={8} highlightColor={highlightColor} height={26} width={120} />
 
                         <div className="mt-4 rounded-[10px]">

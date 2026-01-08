@@ -25,7 +25,7 @@ function Partners() {
 
     return (
         <div id="map">
-            <div className="max-w-255 m-auto px-4 max-lg:px-[64px] max-lg:m-0">
+            <div className="max-w-255 m-auto px-4 max-lg:px-[64px] max-lg:m-0 product">
                 <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                     <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
                         <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
@@ -45,7 +45,7 @@ function Partners() {
                     </div>
                 ) : (
                     <>
-                        <div className="flex gap-8 pb-10">
+                        <div className="flex gap-8 pb-10 max-medium:grid max-medium:grid-cols-2 max-small:grid-cols-1">
                             <Map locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
                             <PartnersList locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
                         </div>

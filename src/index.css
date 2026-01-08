@@ -10,6 +10,9 @@
 @theme {
     --breakpoint-nav: 950px;
     --breakpoint-medium: 886px;
+    --breakpoint-small: 750px;
+    --breakpoint-xsmall: 500px;
+    --breakpoint-footer: 590px;
 }
 
 @media(max-width: 886px) {
@@ -21,6 +24,26 @@
     .product-page {
         padding-left: 0px;
         padding-right: 0px;
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .slider-img {
+        height: 300px;
+    }
+}
+
+@media(max-width: 750px) {
+    .footer {
+        padding: 32px 24px;
     }
 }
 
