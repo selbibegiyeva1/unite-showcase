@@ -140,7 +140,7 @@ function Navbar() {
                     Партнеры
                 </Link>
 
-                <div className="ml-auto flex items-center">
+                <div className="ml-auto flex items-center gap-5">
                     <div ref={langRef} className="relative">
                         <button
                             type="button"
@@ -189,10 +189,12 @@ function Navbar() {
                         </div>
                     </div>
 
+                    <img src="/menu.png" alt="" className="max-small:block hidden w-6 cursor-pointer" />
+
                     <a
                         href="https://unite-gaming.com/"
                         target="_blank"
-                        className="bg-[#79109D] hover:bg-[#8a1aad] max-small:hidden transition-colors ml-5 px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
+                        className="bg-[#79109D] hover:bg-[#8a1aad] max-small:hidden transition-colors px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
                     >
                         Перейти в Unite Gaming
                     </a>

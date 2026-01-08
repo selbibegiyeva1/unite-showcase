@@ -10,7 +10,7 @@
 @theme {
     --breakpoint-nav: 950px;
     --breakpoint-medium: 886px;
-    --breakpoint-small: 750px;
+    --breakpoint-small: 755px;
     --breakpoint-xsmall: 500px;
     --breakpoint-footer: 590px;
 }
@@ -53,7 +53,7 @@
     }
 }
 
-@media(max-width: 750px) {
+@media(max-width: 755px) {
     .footer {
         padding: 32px 24px;
     }
