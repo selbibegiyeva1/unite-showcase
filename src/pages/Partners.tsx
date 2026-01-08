@@ -24,8 +24,8 @@ function Partners() {
     }, [locations, selectedId])
 
     return (
-        <div className="px-4" id="map">
-            <div className="max-w-255 m-auto">
+        <div id="map">
+            <div className="max-w-255 m-auto px-4 max-lg:px-[64px] max-lg:m-0 product">
                 <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                     <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
                         <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
@@ -35,7 +35,7 @@ function Partners() {
                     <p className="text-white">Как пополнить баланс?</p>
                 </div>
 
-                <b className="text-[32px] py-8 flex text-white">Пополнение через партнёров</b>
+                <b className="text-[32px] py-8 flex text-white partner-h">Пополнение через партнёров</b>
 
                 {isLoading ? (
                     <div className="text-white text-center py-10">Загрузка партнёров...</div>
@@ -45,14 +45,14 @@ function Partners() {
                     </div>
                 ) : (
                     <>
-                        <div className="flex gap-8 pb-10">
+                        <div className="flex gap-8 pb-10 max-medium:grid max-medium:grid-cols-2 max-small:grid-cols-1">
                             <Map locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
                             <PartnersList locations={locations} selectedId={selectedId} onSelect={setSelectedId} />
                         </div>
 
                         <div className="pb-15">
-                            <PartnersMain 
-                                partners={data?.partners ?? []} 
+                            <PartnersMain
+                                partners={data?.partners ?? []}
                                 onPartnerSelect={setSelectedId}
                             />
                         </div>

@@ -7,6 +7,58 @@
     scroll-behavior: smooth
 }
 
+@theme {
+    --breakpoint-nav: 950px;
+    --breakpoint-medium: 886px;
+    --breakpoint-small: 750px;
+    --breakpoint-xsmall: 500px;
+    --breakpoint-footer: 590px;
+}
+
+@media(max-width: 886px) {
+    .navbar, .product {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .product-page {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .slider-img {
+        height: 300px;
+    }
+
+    .partner-h {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .nap-h {
+        font-size: 20px;
+        line-height: 28px;
+        max-width: 284px;
+        display: flex;
+    }
+}
+
+@media(max-width: 750px) {
+    .footer {
+        padding: 32px 24px;
+    }
+}
+
 @layer {
     .switch {
         @apply px-4 py-2.25 text-[15px] font-bold relative rounded-[10px] flex items-center gap-1.5 cursor-pointer transition-all duration-200 ease-out select-none;
@@ -31,11 +83,11 @@
     /* // Slider Arrows */
 
     .slider-arrow {
-        @apply w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-200 ease-out select-none;
+        @apply w-9.5 h-9.5 rounded-[10px] flex items-center justify-center transition-all duration-200 ease-out select-none;
     }
 
     .slider-arrow--active {
-        @apply bg-[#79109D] cursor-pointer;
+        @apply bg-[#79109D] cursor-pointer hover:bg-[#8a1aad] transition-colors;
     }
 
     .slider-arrow--inactive {

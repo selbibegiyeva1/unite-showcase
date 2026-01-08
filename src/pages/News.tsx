@@ -40,8 +40,8 @@ function News() {
                         <NewsBlock />
                     </div>
                 </div>
-                <Footer />
             </div>
+            <Footer />
         </div>
     )
 }

@@ -15,7 +15,7 @@ export default function Products() {
     }, [data, activeCategory]);
 
     return (
-        <div className="max-w-255 m-auto">
+        <div className="max-w-255 m-auto max-lg:px-[48px] product">
             <div className="flex gap-2">
                 <button
                     type="button"
@@ -47,7 +47,7 @@ export default function Products() {
 
             <div className="mt-4">
                 {isLoading && (
-                    <div className="grid grid-cols-4 gap-6 mt-6">
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3">
                         {Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="flex flex-col gap-3">
                                 <div className="max-w-57.5 rounded-2xl overflow-hidden">
@@ -72,7 +72,7 @@ export default function Products() {
                 )}
 
                 {!isLoading && !isError && (
-                    <div className="grid grid-cols-4 gap-6 mt-6">
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 products-grid">
                         {activeGroups.map((g) => (
                             <Link
                                 to={`/product?group=${encodeURIComponent(g.group_name)}`}
@@ -82,7 +82,7 @@ export default function Products() {
                                 <img
                                     src={g.icon_url}
                                     alt="product"
-                                    className="max-w-57.5 rounded-2xl"
+                                    className="rounded-2xl"
                                     onError={(e) => {
                                         const img = e.currentTarget;
                                         if (img.dataset.fallbackApplied) return;

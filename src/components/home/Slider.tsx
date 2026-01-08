@@ -16,24 +16,24 @@ function Slider() {
             img: "/home/slider/1.png",
             title: "PUBG Mobile",
             description: "Пополняйте PUBG Mobile без комиссии по UID",
-            descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium",
+            descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 group: "PUBG Mobile",
                 text: "Пополнить аккаунт",
                 className:
-                    "text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
+                    "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
         {
             id: "steam",
             img: "/home/slider/2.png",
             title: "Самый выгодный стим",
-            titleClassName: "text-[32px] w-79 flex leading-9",
+            titleClassName: "text-[32px] max-xsmall:text-[24px] w-79 flex leading-9",
             button: {
                 group: "Steam",
                 text: "Посмотреть",
                 className:
-                    "text-[14px] mt-6 shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
+                    "text-[14px] max-xsmall:w-full mt-6 shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
         {
@@ -41,12 +41,12 @@ function Slider() {
             img: "/home/slider/3.png",
             title: "PlayStation под рукой",
             description: "Погружайся в мир топовых игр без ограничений.",
-            descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium",
+            descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 group: "Playstation",
                 text: "Посмотреть",
                 className:
-                    "text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
+                    "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
         {
@@ -54,12 +54,12 @@ function Slider() {
             img: "/home/slider/4.png",
             title: "Пополняйте у наших партнёров",
             description: "Выбирай удобный способ оплаты и возвращайся в игру за секунды",
-            descriptionClassName: "mt-3 mb-6 w-65 text-[14px] font-medium",
+            descriptionClassName: "mt-3 mb-6 w-65 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 to: "/partners",
                 text: "Посмотреть",
                 className:
-                    "text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
+                    "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
     ]);
@@ -88,13 +88,13 @@ function Slider() {
     }, [swiper, prevEl, nextEl]);
 
     return (
-        <div className="max-w-282.5 m-auto flex items-center justify-between gap-4">
+        <div className="max-w-282.5 m-auto flex items-center justify-between gap-2.5 product">
             <button
                 ref={setPrevEl}
                 type="button"
                 aria-label="Previous"
                 disabled={isBeginning}
-                className={`slider-arrow ${isBeginning ? "slider-arrow--inactive" : "slider-arrow--active"}`}
+                className={`slider-arrow ${isBeginning ? "slider-arrow--inactive" : "slider-arrow--active"} btn`}
             >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -137,12 +137,12 @@ function Slider() {
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
-                        <div className="h-90">
+                        <div className="h-90 slider-img">
                             <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} />
                         </div>
 
-                        <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent">
-                            <b className={slide.titleClassName ?? "text-[32px]"}>{slide.title}</b>
+                        <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
+                            <b className={slide.titleClassName ?? "text-[32px] max-xsmall:text-[24px] max-xsmall:w-[300px] max-xsmall:leading-8 flex"}>{slide.title}</b>
 
                             {slide.description ? (
                                 <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
@@ -167,7 +167,7 @@ function Slider() {
                 type="button"
                 aria-label="Next"
                 disabled={isEnd}
-                className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"}`}
+                className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"} btn`}
             >
                 <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" />
             </button>

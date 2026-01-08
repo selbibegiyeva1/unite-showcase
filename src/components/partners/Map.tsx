@@ -46,8 +46,8 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
     }, [map, selected])
 
     return (
-        <div className="p-6 w-147 bg-[#1D2023] rounded-[28.8px] text-white">
-            <b className="text-[24px]">Пополни баланс у ближайшего партнера</b>
+        <div className="p-6 w-147 bg-[#1D2023] rounded-[28.8px] text-white max-medium:w-full">
+            <b className="text-[24px] nap-h">Пополни баланс у ближайшего партнера</b>
 
             <div className="mt-8.25 rounded-[18px] overflow-hidden border border-white/5 bg-black/20">
                 {!apiKey ? (

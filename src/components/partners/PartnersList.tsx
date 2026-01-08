@@ -29,7 +29,7 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
     }, [selectedId])
 
     return (
-        <div className="p-6 w-100 bg-[#1D2023] rounded-[28.8px] text-white">
+        <div className="p-6 w-100 bg-[#1D2023] rounded-[28.8px] text-white max-medium:w-full">
             <b className="text-[24px]">Все партнёры</b>
 
             <div className="mt-5 flex items-center gap-2.5 px-5 rounded-[14px] bg-[#282730]">

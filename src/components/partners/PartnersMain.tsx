@@ -19,12 +19,12 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
         <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
             <b className="text-[32px] pb-6.5 flex text-white">Активные партнеры</b>
 
-            <div className="grid grid-cols-3 gap-8 text-white">
+            <div className="grid grid-cols-3 gap-7.5 text-white max-medium:grid-cols-3 max-medium:gap-4 max-small:grid-cols-1">
                 {partners.map((partner) => (
                     <div key={partner.id} className="bg-[#282730] px-6 pt-5 pb-8 rounded-3xl flex flex-col justify-between">
                         <div>
-                            <div className="flex items-center gap-4 justify-between mb-2.5">
-                                <b className="text-[24px] w-27.75 flex leading-8">{partner.name}</b>
+                            <div className="flex items-center justify-between mb-2.5">
+                                <b className="text-[24px] w-27.75 flex leading-7">{partner.name}</b>
                                 <div className="w-17.5 h-17.5 overflow-hidden rounded-[10px]">
                                     <img
                                         src={partner.logo_url || "/partner/unnamed.png"}
@@ -47,7 +47,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                             </div>
                             <div className="flex items-center text-[14px] gap-4 justify-between py-4.5">
                                 <b>Номер</b>
-                                <p className="text-[#FFFFFF99] font-medium">{partner.phone_support || "—"}</p>
+                                <p className="text-[#FFFFFF99] font-medium text-right">{partner.phone_support || "—"}</p>
                             </div>
                         </div>
 

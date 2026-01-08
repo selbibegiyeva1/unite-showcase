@@ -76,7 +76,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
     return (
         <form
-            className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8"
+            className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8 max-medium:w-full"
             onSubmit={async (e) => {
                 e.preventDefault();
                 if (!enabled || paying) return;
@@ -139,7 +139,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 <p className="w-fit text-[14px] font-medium">Товар возврату не подлежит</p>
             </div>
 
-            <label className="text-[14px] font-medium flex items-center gap-3 cursor-pointer select-none">
+            <label className="text-[13.75px] font-medium flex items-center gap-2.5 cursor-pointer select-none">
                 <div className="relative">
                     <input
                         type="checkbox"
