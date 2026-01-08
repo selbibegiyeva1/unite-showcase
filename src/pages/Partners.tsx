@@ -24,8 +24,8 @@ function Partners() {
     }, [locations, selectedId])
 
     return (
-        <div className="px-4" id="map">
-            <div className="max-w-255 m-auto">
+        <div id="map">
+            <div className="max-w-255 m-auto px-4 max-lg:px-[64px] max-lg:m-0">
                 <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                     <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
                         <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
@@ -51,8 +51,8 @@ function Partners() {
                         </div>
 
                         <div className="pb-15">
-                            <PartnersMain 
-                                partners={data?.partners ?? []} 
+                            <PartnersMain
+                                partners={data?.partners ?? []}
                                 onPartnerSelect={setSelectedId}
                             />
                         </div>

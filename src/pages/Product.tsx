@@ -128,7 +128,11 @@ function Product() {
         return hasAnyInRegionOptions;
     }, [forms, mode]);
 
-    if (isLoading) return <ProductLoading />;
+    if (isLoading) return (
+        <div className="max-lg:px-[48px]"> 
+            <ProductLoading />
+        </div>
+    );
 
     if (isError) {
         return (
@@ -140,9 +144,9 @@ function Product() {
     }
 
     return (
-        <div className="text-white px-4">
-            <div className="max-w-255 m-auto">
-                <div className="flex items-start gap-4 pb-15">
+        <div className="text-white">
+            <div className="max-w-255 m-auto px-4">
+                <div className="flex items-start gap-4 pb-15 max-lg:px-[48px]">
                     <div className="flex flex-col gap-4 w-167">
                         <ProductHeader
                             icon={data?.icon}
@@ -199,8 +203,8 @@ function Product() {
                     }}
                 />
 
-                <div className="pb-15"><NewsBlock /></div>
-                <div className="pb-46"><Faq /></div>
+                <div className="pb-15 max-lg:px-[48px]"><NewsBlock /></div>
+                <div className="pb-46 max-lg:px-[48px]"><Faq /></div>
             </div>
             <Footer />
         </div>

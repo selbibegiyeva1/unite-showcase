@@ -139,7 +139,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 <p className="w-fit text-[14px] font-medium">Товар возврату не подлежит</p>
             </div>
 
-            <label className="text-[14px] font-medium flex items-center gap-3 cursor-pointer select-none">
+            <label className="text-[13.75px] font-medium flex items-center gap-2.5 cursor-pointer select-none">
                 <div className="relative">
                     <input
                         type="checkbox"

@@ -21,11 +21,11 @@ function Home() {
                     <Products />
                 </div>
 
-                <div className="pb-15">
+                <div className="pb-15 max-lg:px-[48px]">
                     <NewsBlock />
                 </div>
 
-                <div className="pb-46">
+                <div className="pb-46 max-lg:px-[48px]">
                     <Faq />
                 </div>
             </div>

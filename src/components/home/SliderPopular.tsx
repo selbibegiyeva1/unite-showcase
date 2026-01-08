@@ -26,7 +26,7 @@ function SliderPopular() {
     const [isEnd, setIsEnd] = useState(false);
 
     return (
-        <div className="pb-10 relative max-w-255 m-auto">
+        <div className="pb-10 relative max-w-255 m-auto max-lg:px-[48px]">
             <div className="flex items-center justify-between pb-6">
                 <b className="text-[32px]">Популярное</b>
 

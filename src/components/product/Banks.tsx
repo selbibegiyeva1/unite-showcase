@@ -67,7 +67,7 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
 
     return (
         <div
-            className="fixed top-0 left-0 bg-[#00000090] w-full h-screen z-50 grid place-items-center"
+            className="fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 grid place-items-center"
             onMouseDown={onClose}
         >
             <div

@@ -88,7 +88,7 @@ function Slider() {
     }, [swiper, prevEl, nextEl]);
 
     return (
-        <div className="max-w-282.5 m-auto flex items-center justify-between gap-4">
+        <div className="max-w-282.5 m-auto flex items-center justify-between gap-2.5">
             <button
                 ref={setPrevEl}
                 type="button"

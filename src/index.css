@@ -31,7 +31,7 @@
     /* // Slider Arrows */
 
     .slider-arrow {
-        @apply w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-200 ease-out select-none;
+        @apply w-9.5 h-9.5 rounded-[10px] flex items-center justify-center transition-all duration-200 ease-out select-none;
     }
 
     .slider-arrow--active {

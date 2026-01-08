@@ -19,7 +19,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
         <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
             <b className="text-[32px] pb-6.5 flex text-white">Активные партнеры</b>
 
-            <div className="grid grid-cols-3 gap-8 text-white">
+            <div className="grid grid-cols-3 gap-7.5 text-white">
                 {partners.map((partner) => (
                     <div key={partner.id} className="bg-[#282730] px-6 pt-5 pb-8 rounded-3xl flex flex-col justify-between">
                         <div>
