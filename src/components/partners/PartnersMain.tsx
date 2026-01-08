@@ -10,7 +10,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
         return (
             <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
                 <b className="text-[32px] pb-6.5 flex text-white">Активные партнеры</b>
-                <div className="text-white text-center py-10 text-[#969FA8]">Нет доступных партнёров</div>
+                <div className="text-center py-10 text-[#969FA8]">Нет доступных партнёров</div>
             </div>
         )
     }

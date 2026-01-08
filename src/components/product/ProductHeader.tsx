@@ -9,7 +9,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
     if (!group && !icon && !short_info) return null;
 
     return (
-        <div className="px-8 pt-8 pb-11 bg-[#1D1D22] rounded-4xl">
+        <div className="px-8 py-8 bg-[#1D1D22] rounded-4xl">
             <div className="flex items-center gap-7.25">
                 {icon ? (
                     <img
