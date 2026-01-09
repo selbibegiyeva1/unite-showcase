@@ -107,13 +107,15 @@ function SliderPopular() {
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id} className="w-57.5! shrink-0 max-medium:w-42!">
-                        <Link to={`/product?group=${encodeURIComponent(slide.group)}`} className="block">
-                            <img
-                                src={slide.img}
-                                alt={slide.title}
-                                className="w-full h-auto block rounded-3xl"
-                                draggable={false}
-                            />
+                        <Link to={`/product?group=${encodeURIComponent(slide.group)}`} className="block group">
+                            <div className="overflow-hidden rounded-3xl">
+                                <img
+                                    src={slide.img}
+                                    alt={slide.title}
+                                    className="w-full h-auto block rounded-3xl transition-transform duration-300 group-hover:scale-110"
+                                    draggable={false}
+                                />
+                            </div>
                             <p className="font-bold mt-2.5 text-center">{slide.title}</p>
                         </Link>
                     </SwiperSlide>
