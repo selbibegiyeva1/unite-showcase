@@ -100,6 +100,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                         </div>
                         <input
                             type="text"
+                            id="field-steam_username"
                             value={String(values.steam_username ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, steam_username: e.target.value }))}
                             placeholder="Введите логин в Steam"
@@ -111,6 +112,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                         <p className="text-[#FFFFFF99] text-[14px] mb-3">Почта</p>
                         <input
                             type="email"
+                            id="field-email"
                             value={String(values.email ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
                             placeholder="Введите свой e-mail"
@@ -132,7 +134,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
             <div
                 className={`
                     mt-4 gap-4
-                    ${renderFields.length > 1 ? "grid grid-cols-2" : "flex flex-col"}
+                    ${renderFields.length > 1 ? "grid grid-cols-2 max-xsmall:grid-cols-1" : "flex flex-col"}
                 `}
             >
                 {renderFields.map((f) => {
@@ -142,6 +144,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                 <p className="text-[#FFFFFF99] text-[14px] mb-3">{f.label}</p>
                                 <input
                                     type="text"
+                                    id={`field-${f.name}`}
                                     value={String(values[f.name] ?? "")}
                                     onChange={(e) => setValues((prev) => ({ ...prev, [f.name]: e.target.value }))}
                                     placeholder={f.label}
@@ -159,6 +162,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                 <p className="text-[#FFFFFF99] text-[14px] mb-3">{f.label}</p>
                                 <div className="border border-[#FFFFFF1A] rounded-2xl relative">
                                     <select
+                                        id={`field-${f.name}`}
                                         value={String(values[f.name] ?? (opts[0]?.value ?? ""))}
                                         onChange={(e) => setValues((prev) => ({ ...prev, [f.name]: e.target.value }))}
                                         className="w-full bg-[#1D1D22] appearance-none text-[14px] cursor-pointer outline-0 font-medium px-4 py-3.5 rounded-2xl"
