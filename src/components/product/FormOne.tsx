@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import type { ProductGroupForms, FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
 import RegionSelect from "./RegionSelect";
 
@@ -88,6 +88,8 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
 
     const isVoucherActive = mode === "voucher";
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLImageElement>(null);
 
     useEffect(() => {
         if (!isTooltipOpen) return;
@@ -96,6 +98,23 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         };
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isTooltipOpen]);
+
+    useEffect(() => {
+        if (!isTooltipOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node;
+            if (
+                tooltipRef.current &&
+                !tooltipRef.current.contains(target) &&
+                triggerRef.current &&
+                !triggerRef.current.contains(target)
+            ) {
+                setIsTooltipOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isTooltipOpen]);
 
     return (
@@ -145,6 +164,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
 
                             <div className="relative max-medium:static">
                                 <img
+                                    ref={triggerRef}
                                     src="/product/voucher.png"
                                     alt="voucher"
                                     className={`w-5 cursor-pointer ${!isVoucherActive ? "opacity-60" : ""}`}
@@ -158,6 +178,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                 {isTooltipOpen && isVoucherActive && (
                                     <>
                                         <div
+                                            ref={tooltipRef}
                                             className={`
                                                 max-medium:hidden
                                                 absolute top-7 left-0 z-10
@@ -174,6 +195,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                             onMouseDown={() => setIsTooltipOpen(false)}
                                         >
                                             <div
+                                                ref={tooltipRef}
                                                 className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-full max-w-lg"
                                                 onMouseDown={(e) => e.stopPropagation()}
                                             >
