@@ -15,7 +15,7 @@ function Slider() {
             id: "pubg",
             img: "/home/slider/1.png",
             title: "PUBG Mobile",
-            description: "Пополняйте PUBG Mobile без комиссии по UID",
+            description: "Быстрое и надёжное пополнение по UID",
             descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 group: "PUBG Mobile",
@@ -27,11 +27,11 @@ function Slider() {
         {
             id: "steam",
             img: "/home/slider/2.png",
-            title: "Самый выгодный стим",
+            title: "Удобно пополнить Steam онлайн",
             titleClassName: "text-[32px] max-xsmall:text-[24px] w-79 flex leading-9",
             button: {
                 group: "Steam",
-                text: "Посмотреть",
+                text: "Пополнить аккаунт",
                 className:
                     "text-[14px] max-xsmall:w-full mt-6 shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
