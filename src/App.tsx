@@ -10,7 +10,7 @@ import Sidebar from './components/layout/Sidebar'
 
 import Home from './pages/Home'
 import Product from './pages/Product'
-import News from './pages/News'
+import News from './pages/news/News'
 import Partners from './pages/Partners'
 
 function App() {
