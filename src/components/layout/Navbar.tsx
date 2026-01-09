@@ -1,22 +1,16 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { useProductGroupSearchSuggestions } from "../../hooks/home/useProductGroupSearchSuggestions";
+import { useSearchBar } from "../../hooks/home/useSearchBar";
 
 type LangOption = { label: string; value: string };
 
 function Navbar() {
-    const [value, setValue] = useState("");
-    const [open, setOpen] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(-1);
+    const { value, open, activeIndex, suggestions, wrapperRef, handleChange, handleFocus, handleSuggestionClick } = useSearchBar(8);
 
     const [lang, setLang] = useState<LangOption["value"]>("RU");
     const [langOpen, setLangOpen] = useState(false);
     const [langActiveIndex, setLangActiveIndex] = useState(0);
     const langRef = useRef<HTMLDivElement | null>(null);
-
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-
-    const { suggestions } = useProductGroupSearchSuggestions(value, 8);
 
     const languages: LangOption[] = useMemo(
         () => [
@@ -31,12 +25,6 @@ function Navbar() {
         () => languages.find((l) => l.value === lang) ?? languages[0],
         [languages, lang]
     );
-
-    useEffect(() => {
-        const q = value.trim();
-        setOpen(Boolean(q) && suggestions.length > 0);
-        setActiveIndex(-1);
-    }, [value, suggestions.length]);
 
     const commitLangIndex = useCallback(
         (idx: number) => {
@@ -102,10 +90,8 @@ function Navbar() {
                             placeholder="Поиск по сайту"
                             className="outline-0 w-full text-[14px] font-medium bg-transparent"
                             value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            onFocus={() => {
-                                if (value.trim() && suggestions.length) setOpen(true);
-                            }}
+                            onChange={(e) => handleChange(e.target.value)}
+                            onFocus={handleFocus}
                         />
                     </div>
 
@@ -116,10 +102,7 @@ function Navbar() {
                                     key={`${s.category}:${s.group_name}`}
                                     to={`/product?group=${encodeURIComponent(s.group_name)}`}
                                     onMouseDown={(e) => e.preventDefault()}
-                                    onClick={() => {
-                                        setOpen(false);
-                                        setValue("");
-                                    }}
+                                    onClick={handleSuggestionClick}
                                     className={`w-full flex items-center gap-3 px-4 py-3 text-left transition ${idx === activeIndex ? "bg-[#2F2F36]" : "bg-transparent"
                                         }`}
                                 >
