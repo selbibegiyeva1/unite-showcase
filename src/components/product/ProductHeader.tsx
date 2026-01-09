@@ -31,7 +31,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
                     <h1 className="text-2xl font-bold">{group}</h1>
 
                     {showAnyRegionBadge ? (
-                        <div className="bg-[#79109D] w-fit flex items-center gap-1 px-[19.5px] py-1.5 rounded-[10px] mt-3">
+                        <div className="bg-[#79109D] w-fit flex items-center gap-3 leading-4 px-[19.5px] py-1.5 rounded-[10px] mt-3">
                             <img src="/product/globe.png" alt="globe" className="w-5" />
                             <p className="text-[12px] font-bold">Для аккаунтов любого региона</p>
                         </div>
