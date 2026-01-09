@@ -11,7 +11,7 @@ function Home() {
 
     return (
         <div>
-            <div className="m-auto px-4 text-white max-medium:px-0">
+            <div className="m-auto px-4 text-white product-page">
                 <div className="mb-15">
                     <Slider />
                 </div>
