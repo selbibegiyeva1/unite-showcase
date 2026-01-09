@@ -56,7 +56,6 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
 
     useEffect(() => {
         if (compact && isVisible && swiperRef.current) {
-            // Update Swiper when sidebar becomes visible
             const timer = setTimeout(() => {
                 swiperRef.current?.update();
                 swiperRef.current?.updateSlides();

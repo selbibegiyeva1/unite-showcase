@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "./FormOne";
 
@@ -15,6 +15,8 @@ type Props = {
 function FormTwo({ groupName, mode, fields, values, setValues, errors, showErrors }: Props) {
     const isSteamTopup = groupName === "Steam" && mode === "topup";
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLImageElement>(null);
 
     useEffect(() => {
         if (!isTooltipOpen) return;
@@ -23,6 +25,23 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
         };
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isTooltipOpen]);
+
+    useEffect(() => {
+        if (!isTooltipOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node;
+            if (
+                tooltipRef.current &&
+                !tooltipRef.current.contains(target) &&
+                triggerRef.current &&
+                !triggerRef.current.contains(target)
+            ) {
+                setIsTooltipOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isTooltipOpen]);
 
     const err = (name: string) => (showErrors ? errors[name] : "");
@@ -43,6 +62,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
 
                             <div className="relative max-medium:static">
                                 <img
+                                    ref={triggerRef}
                                     src="/product/region.png"
                                     alt="info"
                                     className="w-5 cursor-pointer"
@@ -51,6 +71,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                 {isTooltipOpen && (
                                     <>
                                         <div
+                                            ref={tooltipRef}
                                             className={`
                                                 max-medium:hidden
                                                 absolute top-7 left-0 z-10
@@ -71,6 +92,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                             onMouseDown={() => setIsTooltipOpen(false)}
                                         >
                                             <div
+                                                ref={tooltipRef}
                                                 className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-full max-w-lg"
                                                 onMouseDown={(e) => e.stopPropagation()}
                                             >
