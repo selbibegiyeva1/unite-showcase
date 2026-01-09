@@ -20,30 +20,30 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
         {
             id: 1,
             img: "/home/news/1.png",
-            title: "Розыгрыш 500 000 ₽ завершён",
-            text: "Список участников и победителей определён.",
-            date: "20.04.2024",
+            title: "Итоги премии Steam 2025",
+            text: "Названы лучшие игры 2025 года по версии игроков.",
+            date: "07.01.2026",
         },
         {
             id: 2,
             img: "/home/news/2.png",
-            title: "Разыгрываем 500 000 ₽",
-            text: "Совершите от 3 покупок с 20 марта по 10 апреля и выиграйте денежный приз!",
-            date: "20.04.2024",
+            title: "Твой игровой календарь на 2026",
+            text: "Во что поиграть в 2026 году: список самых ожидаемых игр!",
+            date: "07.01.2026",
         },
         {
             id: 3,
             img: "/home/news/3.png",
-            title: "Итоги розыгрыша 500 000 ₽",
-            text: "Список участников и победителей определён.",
-            date: "20.04.2024",
+            title: "Оплата товаров онлайн",
+            text: "Проводим оплату банковскими картами и продолжаем расширять экосистему.",
+            date: "07.01.2026",
         },
         {
             id: 4,
-            img: "/home/news/3.png",
-            title: "Итоги розыгрыша 500 000 ₽",
-            text: "Список участников и победителей определён.",
-            date: "20.04.2024",
+            img: "/home/news/4.png",
+            title: "Не нашел свою игру на сайте?",
+            text: "Реализуем поддержку любой игры или сервиса специально для вас!",
+            date: "07.01.2026",
         }
     ]);
 
@@ -154,7 +154,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
                 className="overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
-                    <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5!"} shrink-0 ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
+                    <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5!"} shrink-0 h-full ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
                         <Link to="/news" className="block" onClick={onNewsClick}>
                             <div className={`${compact ? "w-56! h-23.5!" : "w-79.5! h-42.5!"}`}>
                                 <img
