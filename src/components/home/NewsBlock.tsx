@@ -8,7 +8,12 @@ import "swiper/css/navigation";
 
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
-function NewsBlock() {
+interface NewsBlockProps {
+    compact?: boolean;
+    onNewsClick?: () => void;
+}
+
+function NewsBlock({ compact = false, onNewsClick }: NewsBlockProps = {}) {
     const [slides] = useState([
         {
             id: 1,
@@ -47,9 +52,9 @@ function NewsBlock() {
     const [isEnd, setIsEnd] = useState(false);
 
     return (
-        <div className="relative max-w-255 m-auto">
-            <div className="flex items-center justify-between pb-6">
-                <b className="text-[32px]">Популярное</b>
+        <div className={`relative ${compact ? "" : "max-w-255 m-auto"}`}>
+            <div className={`flex items-center justify-between ${compact ? "pb-4" : "pb-6"}`}>
+                <b className={compact ? "text-[20px]" : "text-[32px]"}>Популярное</b>
 
                 <div className="flex gap-2">
                     <button
@@ -95,7 +100,7 @@ function NewsBlock() {
                 slidesPerView={"auto"}
                 grabCursor
                 centeredSlides={false}
-                spaceBetween={33.333}
+                spaceBetween={compact ? 16 : 33.333}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
@@ -127,9 +132,9 @@ function NewsBlock() {
                 className="overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
-                    <SwiperSlide key={slide.id} className="w-79.5! shrink-0 rounded-4xl overflow-hidden bg-[#1D2023]">
-                        <Link to="/news" className="block">
-                            <div className="w-79.5! h-42.5!">
+                    <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5!"} shrink-0 ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
+                        <Link to="/news" className="block" onClick={onNewsClick}>
+                            <div className={`${compact ? "w-56! h-23.5!" : "w-79.5! h-42.5!"}`}>
                                 <img
                                     src={slide.img}
                                     alt={slide.title}
@@ -137,10 +142,10 @@ function NewsBlock() {
                                     draggable={false}
                                 />
                             </div>
-                            <div className="p-5">
-                                <b className="text-[17px]">{slide.title}</b>
-                                <p className="mt-4 text-[#FFFFFFCC] text-[14px]">{slide.text}</p>
-                                <p className="mt-11.5 text-[#FFFFFF80] text-[14px] font-light">{slide.date}</p>
+                            <div className={compact ? "px-[11px] pt-[11px] pb-[30px]" : "p-5"}>
+                                <b className={`${compact ? "text-[14px]" : "text-[17px]"}`}>{slide.title}</b>
+                                <p className={`${compact ? "mt-2" : "mt-4"} text-[#FFFFFFCC] ${compact ? "text-[12px]" : "text-[14px]"}`}>{slide.text}</p>
+                                <p className={`mt-11.5 text-[#FFFFFF80] text-[14px] font-light ${compact ? "hidden" : "block"}`}>{slide.date}</p>
                             </div>
                         </Link>
                     </SwiperSlide>

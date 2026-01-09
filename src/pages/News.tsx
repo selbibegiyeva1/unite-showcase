@@ -8,7 +8,7 @@ function News() {
 
     return (
         <div>
-            <div className="px-4">
+            <div className="px-4 max-lg:px-[64px] product">
                 <div className="max-w-255 m-auto">
                     <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                         <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
