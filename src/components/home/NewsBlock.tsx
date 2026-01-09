@@ -60,8 +60,8 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             const timer = setTimeout(() => {
                 swiperRef.current?.update();
                 swiperRef.current?.updateSlides();
-                setIsBeginning(swiperRef.current.isBeginning);
-                setIsEnd(swiperRef.current.isEnd);
+                setIsBeginning(swiperRef.current?.isBeginning ?? true);
+                setIsEnd(swiperRef.current?.isEnd ?? false);
             }, 100);
             return () => clearTimeout(timer);
         }
