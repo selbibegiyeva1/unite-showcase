@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useLanguageStore, type LangValue } from "../../store/languageStore";
 
-type LangOption = { label: string; value: string };
+type LangOption = { label: string; value: LangValue };
 
 const LANGUAGES: LangOption[] = [
     { label: "RU", value: "RU" },
@@ -14,7 +15,8 @@ type LanguageDropdownProps = {
 };
 
 function LanguageDropdown({ className = "", dropdownClassName = "" }: LanguageDropdownProps) {
-    const [lang, setLang] = useState<LangOption["value"]>("RU");
+    const lang = useLanguageStore((s) => s.lang);
+    const setLang = useLanguageStore((s) => s.setLang);
     const [langOpen, setLangOpen] = useState(false);
     const [langActiveIndex, setLangActiveIndex] = useState(0);
     const langRef = useRef<HTMLDivElement | null>(null);
@@ -29,7 +31,7 @@ function LanguageDropdown({ className = "", dropdownClassName = "" }: LanguageDr
         if (!next) return;
         setLang(next.value);
         setLangOpen(false);
-    }, []);
+    }, [setLang]);
 
     useEffect(() => {
         if (!langOpen) return;
