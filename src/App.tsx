@@ -10,8 +10,12 @@ import Sidebar from './components/layout/Sidebar'
 
 import Home from './pages/Home'
 import Product from './pages/Product'
-import News from './pages/news/News'
 import Partners from './pages/Partners'
+
+import News from './pages/news/News'
+import News2 from './pages/news/News2'
+import News33 from './pages/news/News33'
+import News4 from './pages/news/News4'
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,8 +33,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/news" element={<News />} />
         <Route path="/partners" element={<Partners />} />
+
+        <Route path="/news" element={<News />} />
+        <Route path="/news2" element={<News2 />} />
+        <Route path="/news3" element={<News33 />} />
+        <Route path="/news4" element={<News4 />} />
       </Routes>
     </div>
   )

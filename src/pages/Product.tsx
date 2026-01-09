@@ -144,8 +144,8 @@ function Product() {
     }
 
     return (
-        <div className="text-white">
-            <div className="max-w-255 m-auto px-4 product-page">
+        <div className="text-white px-4 max-lg:px-0">
+            <div className="max-w-255 m-auto product-page">
                 <div className="flex items-start gap-4 pb-15 max-lg:px-[48px] max-medium:flex-col product">
                     <div className="flex flex-col gap-4 w-167 max-medium:w-full">
                         <ProductHeader

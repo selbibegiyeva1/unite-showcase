@@ -23,6 +23,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             title: "Итоги премии Steam 2025",
             text: "Названы лучшие игры 2025 года по версии игроков.",
             date: "07.01.2026",
+            to: "/news",
         },
         {
             id: 2,
@@ -30,6 +31,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             title: "Твой игровой календарь на 2026",
             text: "Во что поиграть в 2026 году: список самых ожидаемых игр!",
             date: "07.01.2026",
+            to: "/news2",
         },
         {
             id: 3,
@@ -37,6 +39,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             title: "Оплата товаров онлайн",
             text: "Проводим оплату банковскими картами и продолжаем расширять экосистему.",
             date: "07.01.2026",
+            to: "/news3",
         },
         {
             id: 4,
@@ -44,6 +47,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             title: "Не нашел свою игру на сайте?",
             text: "Реализуем поддержку любой игры или сервиса специально для вас!",
             date: "07.01.2026",
+            to: "/news4",
         }
     ]);
 
@@ -155,7 +159,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5!"} shrink-0 h-full ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
-                        <Link to="/news" className="block" onClick={onNewsClick}>
+                        <Link to={slide.to} className="block" onClick={onNewsClick}>
                             <div className={`${compact ? "w-56! h-23.5!" : "w-79.5! h-42.5!"}`}>
                                 <img
                                     src={slide.img}

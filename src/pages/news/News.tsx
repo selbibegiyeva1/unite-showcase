@@ -4,7 +4,7 @@ import NewsBlock from "../../components/home/NewsBlock"
 import Footer from "../../components/layout/Footer"
 
 function News() {
-    document.title = "Unite Gaming Shop | News"
+    document.title = "Unite Gaming Shop | Итоги премии Steam 2025"
 
     return (
         <div>
