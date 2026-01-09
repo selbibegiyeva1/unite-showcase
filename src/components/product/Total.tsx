@@ -74,6 +74,41 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const isSteamTopup = groupName === "Steam" && mode === "topup";
     const creditText = isSteamTopup ? topupUsdText : (nominalLabel ?? "-");
 
+    const scrollToFirstError = () => {
+        const errorKeys = Object.keys(errors);
+        if (errorKeys.length === 0) return;
+
+        for (const field of fields) {
+            if (errors[field.name]) {
+                const element = document.getElementById(`field-${field.name}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth", block: "center" });
+                    if (element instanceof HTMLInputElement || element instanceof HTMLSelectElement) {
+                        element.focus();
+                    }
+                    return;
+                }
+            }
+        }
+
+        if (errors.bank) {
+            const element = document.getElementById("field-bank");
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+        }
+
+        if (errors.confirmed) {
+            const element = document.getElementById("field-confirmed");
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                element.focus();
+                return;
+            }
+        }
+    };
+
     return (
         <form
             className="w-84 bg-[#1D1D22] rounded-4xl px-6 py-8 max-medium:w-full"
@@ -82,7 +117,12 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 if (!enabled || paying) return;
 
                 const ok = onValidate();
-                if (!ok) return;
+                if (!ok) {
+                    setTimeout(() => {
+                        scrollToFirstError();
+                    }, 100);
+                    return;
+                }
 
                 await submitPayment({ groupName, fields, amountTmt });
             }}
@@ -90,6 +130,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             <b className="text-[24px]">Оплата</b>
 
             <div
+                id="field-bank"
                 className={`
                     mt-4 mb-2 px-4 py-3 flex items-center justify-between cursor-pointer
                     bg-[#2E2E31] rounded-[10px] font-medium transition-all duration-150 hover:bg-[#3A3A3E]
@@ -143,6 +184,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 <div className="relative">
                     <input
                         type="checkbox"
+                        id="field-confirmed"
                         checked={Boolean(values.confirmed)}
                         onChange={(e) => setValues((prev) => ({ ...prev, confirmed: e.target.checked }))}
                         className={`

@@ -41,7 +41,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
                 </ul>
             </div>
             <div className="mt-[50px]">
-                <NewsBlock compact onNewsClick={toggleSidebar} />
+                <NewsBlock compact onNewsClick={toggleSidebar} isVisible={isSidebarOpen} />
                 <a
                     href="https://unite-gaming.com/"
                     target="_blank"

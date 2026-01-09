@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Link } from "react-router-dom";
 
 import "swiper/css";
@@ -11,9 +12,10 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 interface NewsBlockProps {
     compact?: boolean;
     onNewsClick?: () => void;
+    isVisible?: boolean;
 }
 
-function NewsBlock({ compact = false, onNewsClick }: NewsBlockProps = {}) {
+function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps = {}) {
     const [slides] = useState([
         {
             id: 1,
@@ -47,9 +49,23 @@ function NewsBlock({ compact = false, onNewsClick }: NewsBlockProps = {}) {
 
     const prevRef = useRef<HTMLButtonElement | null>(null);
     const nextRef = useRef<HTMLButtonElement | null>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
 
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+
+    useEffect(() => {
+        if (compact && isVisible && swiperRef.current) {
+            // Update Swiper when sidebar becomes visible
+            const timer = setTimeout(() => {
+                swiperRef.current?.update();
+                swiperRef.current?.updateSlides();
+                setIsBeginning(swiperRef.current?.isBeginning ?? true);
+                setIsEnd(swiperRef.current?.isEnd ?? false);
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [compact, isVisible]);
 
     return (
         <div className={`relative ${compact ? "" : "max-w-255 m-auto"}`}>
@@ -96,6 +112,9 @@ function NewsBlock({ compact = false, onNewsClick }: NewsBlockProps = {}) {
             </div>
 
             <Swiper
+                onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
                 effect={"coverflow"}
                 slidesPerView={"auto"}
                 grabCursor
@@ -120,6 +139,10 @@ function NewsBlock({ compact = false, onNewsClick }: NewsBlockProps = {}) {
                     swiper.params.navigation.nextEl = nextRef.current;
                 }}
                 onInit={(swiper) => {
+                    setIsBeginning(swiper.isBeginning);
+                    setIsEnd(swiper.isEnd);
+                }}
+                onAfterInit={(swiper) => {
                     setIsBeginning(swiper.isBeginning);
                     setIsEnd(swiper.isEnd);
                 }}
