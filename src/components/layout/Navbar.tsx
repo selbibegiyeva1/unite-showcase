@@ -17,7 +17,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                     <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                 </Link>
 
-                <SearchBar className="w-87.5 max-nav:w-[200px] max-small:hidden" />
+                <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" />
 
                 <Link to="/partners" className="text-[14px] font-bold max-small:hidden">
                     Партнеры
@@ -26,7 +26,9 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                 <div className="ml-auto flex items-center gap-6">
                     {/* <LanguageDropdown /> */}
 
-                    <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block hidden w-6 cursor-pointer" />
+                    <div className="w-6">
+                        <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block hidden cursor-pointer" />
+                    </div>
 
                     <a
                         href="https://unite-gaming.com/"
