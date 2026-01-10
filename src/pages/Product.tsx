@@ -129,7 +129,7 @@ function Product() {
     }, [forms, mode]);
 
     if (isLoading) return (
-        <div className="max-lg:px-[48px]"> 
+        <div className="max-lg:px-[48px]">
             <ProductLoading />
         </div>
     );
@@ -175,22 +175,24 @@ function Product() {
                         />
                     </div>
 
-                    <Total
-                        groupName={groupName}
-                        mode={mode}
-                        fields={checkoutFields}
-                        values={values}
-                        setValues={setValues}
-                        amountTmt={amountTmt}
-                        topupUsd={rateQuery.data?.topup_amount_usd ?? null}
-                        rateLoading={rateQuery.isLoading}
-                        rateError={rateQuery.isError}
-                        nominalLabel={nominalLabel}
-                        onOpenBanks={openBanks}
-                        errors={validation.errors}
-                        showErrors={validation.showErrors}
-                        onValidate={validation.validateNow}
-                    />
+                    <div className="sticky top-0">
+                        <Total
+                            groupName={groupName}
+                            mode={mode}
+                            fields={checkoutFields}
+                            values={values}
+                            setValues={setValues}
+                            amountTmt={amountTmt}
+                            topupUsd={rateQuery.data?.topup_amount_usd ?? null}
+                            rateLoading={rateQuery.isLoading}
+                            rateError={rateQuery.isError}
+                            nominalLabel={nominalLabel}
+                            onOpenBanks={openBanks}
+                            errors={validation.errors}
+                            showErrors={validation.showErrors}
+                            onValidate={validation.validateNow}
+                        />
+                    </div>
                 </div>
 
                 <Banks

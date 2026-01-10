@@ -17,7 +17,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
                     <Link to="/" onClick={toggleSidebar}>
                         <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                     </Link>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-6">
                         <LanguageDropdown />
                         <img src="/product/banks.png" onClick={toggleSidebar} alt="" className="w-[32px] cursor-pointer" />
                     </div>
