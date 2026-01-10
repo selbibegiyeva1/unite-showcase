@@ -72,8 +72,6 @@ async function fetchPartnersMap(): Promise<PartnersMapResponse> {
     return { locations, partners };
 }
 
-// Test comment
-
 export function usePartnersMap() {
     return useQuery({
         queryKey: ["partners-map"],
