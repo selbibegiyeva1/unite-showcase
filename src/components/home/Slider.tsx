@@ -135,31 +135,36 @@ function Slider() {
                 onReachEnd={() => setIsEnd(true)}
                 className="flex-1 w-255 overflow-hidden rounded-3xl"
             >
-                {slides.map((slide) => (
-                    <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
-                        <div className="h-90 slider-img">
-                            <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} />
-                        </div>
+                {slides.map((slide) => {
+                    const slideUrl = slide.button?.to ?? (slide.button?.group ? `/product?group=${encodeURIComponent((slide.button as any).group)}` : "#");
+                    
+                    return (
+                        <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
+                            <Link to={slideUrl} className="block h-full w-full">
+                                <div className="h-90 slider-img">
+                                    <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} />
+                                </div>
 
-                        <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
-                            <b className={slide.titleClassName ?? "text-[32px] max-xsmall:text-[24px] max-xsmall:w-[300px] max-xsmall:leading-8 flex"}>{slide.title}</b>
+                                <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
+                                    <b className={slide.titleClassName ?? "text-[32px] max-xsmall:text-[24px] max-xsmall:w-[300px] max-xsmall:leading-8 flex"}>{slide.title}</b>
 
-                            {slide.description ? (
-                                <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
-                            ) : null}
+                                    {slide.description ? (
+                                        <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
+                                    ) : null}
 
-                            {slide.button ? (
-                                <Link
-                                    to={slide.button.to ?? `/product?group=${encodeURIComponent((slide.button as any).group)}`}
-                                    style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
-                                    className={slide.button.className ?? ""}
-                                >
-                                    {slide.button.text}
-                                </Link>
-                            ) : null}
-                        </div>
-                    </SwiperSlide>
-                ))}
+                                    {slide.button ? (
+                                        <div
+                                            style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
+                                            className={slide.button.className ?? ""}
+                                        >
+                                            {slide.button.text}
+                                        </div>
+                                    ) : null}
+                                </div>
+                            </Link>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
 
             <button
