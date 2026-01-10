@@ -158,9 +158,9 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
                 className="overflow-hidden rounded-3xl"
             >
                 {slides.map((slide) => (
-                    <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5!"} shrink-0 h-full ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
-                        <Link to={slide.to} className="block" onClick={onNewsClick}>
-                            <div className={`${compact ? "w-56! h-23.5!" : "w-79.5! h-42.5!"}`}>
+                    <SwiperSlide key={slide.id} className={`${compact ? "w-56!" : "w-79.5! h-[370px]!"} shrink-0 h-full ${compact ? "rounded-2xl" : "rounded-4xl"} overflow-hidden bg-[#1D2023]`}>
+                        <Link to={slide.to} className="flex flex-col h-full" onClick={onNewsClick}>
+                            <div className={`${compact ? "w-56! h-23.5!" : "w-79.5! h-42.5!"} shrink-0`}>
                                 <img
                                     src={slide.img}
                                     alt={slide.title}
@@ -168,10 +168,12 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
                                     draggable={false}
                                 />
                             </div>
-                            <div className={compact ? "px-[11px] pt-[11px] pb-[30px]" : "p-5"}>
-                                <b className={`${compact ? "text-[14px]" : "text-[17px]"}`}>{slide.title}</b>
-                                <p className={`${compact ? "mt-2" : "mt-4"} text-[#FFFFFFCC] ${compact ? "text-[12px]" : "text-[14px]"}`}>{slide.text}</p>
-                                <p className={`mt-11.5 text-[#FFFFFF80] text-[14px] font-light ${compact ? "hidden" : "block"}`}>{slide.date}</p>
+                            <div className={`flex flex-col flex-1 ${compact ? "px-[11px] pt-[11px] pb-[30px]" : "p-5"}`}>
+                                <div className="flex-1">
+                                    <b className={`${compact ? "text-[14px]" : "text-[17px]"}`}>{slide.title}</b>
+                                    <p className={`${compact ? "mt-2" : "mt-4"} text-[#FFFFFFCC] ${compact ? "text-[12px]" : "text-[14px]"}`}>{slide.text}</p>
+                                </div>
+                                <p className={`mt-auto text-[#FFFFFF80] text-[14px] font-light ${compact ? "hidden" : "block"}`}>{slide.date}</p>
                             </div>
                         </Link>
                     </SwiperSlide>
