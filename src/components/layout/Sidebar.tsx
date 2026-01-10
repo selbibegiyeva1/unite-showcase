@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import LanguageDropdown from "./LanguageDropdown";
+// import LanguageDropdown from "./LanguageDropdown";
 import SearchBar from "./SearchBar";
 import NewsBlock from "../home/NewsBlock";
 
