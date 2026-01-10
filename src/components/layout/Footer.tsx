@@ -13,7 +13,7 @@ function Footer() {
                 </div>
                 <div className="flex flex-col">
                     <b className="text-[14px] mb-2 text-[#FFFFFFCC]">По вопросам сотрудничества</b>
-                    <a href="https://unite-esim.com/en" target="_blank" className="text-[20px] font-bold">esim@unite-venture.com</a>
+                    <a href="mailto:esim@unite-venture.com" target="_blank" className="text-[20px] font-bold">esim@unite-venture.com</a>
                 </div>
                 <div className="flex flex-col">
                     <b className="text-[14px] mb-2 text-[#FFFFFFCC]">Поддержка клиентов</b>
