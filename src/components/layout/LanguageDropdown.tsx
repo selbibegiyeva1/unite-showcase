@@ -67,7 +67,7 @@ function LanguageDropdown({ className = "", dropdownClassName = "" }: LanguageDr
                 onClick={() => setLangOpen((v) => !v)}
                 aria-haspopup="listbox"
                 aria-expanded={langOpen}
-                className="outline-0 font-bold text-[15px] cursor-pointer rounded-[10px] px-4 py-3 flex items-center gap-2"
+                className="outline-0 font-bold text-[15px] cursor-pointer rounded-[10px] py-3 flex items-center gap-2"
             >
                 <span>{selectedLang.label}</span>
                 <img
@@ -81,10 +81,10 @@ function LanguageDropdown({ className = "", dropdownClassName = "" }: LanguageDr
                 role="listbox"
                 aria-hidden={!langOpen}
                 className={`
-                    absolute right-0 mt-2 z-60 min-w-30
+                    absolute right-0 mt-2 z-60
                     bg-[#1E1E23] border border-[#2D2D2D]
                     rounded-[10px] overflow-hidden shadow-lg
-                    max-h-56 overflow-y-auto
+                    overflow-y-auto
                     scrollbar-regions
                     transition-all duration-150
                     ${langOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-1 pointer-events-none"}

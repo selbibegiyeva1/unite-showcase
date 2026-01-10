@@ -23,7 +23,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                     Партнеры
                 </Link>
 
-                <div className="ml-auto flex items-center gap-5">
+                <div className="ml-auto flex items-center gap-6">
                     <LanguageDropdown />
 
                     <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block hidden w-6 cursor-pointer" />
