@@ -223,7 +223,11 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             {payError ? <p className="mt-2 text-[12px] text-red-500 font-medium">{payError}</p> : null}
             <center>
                 <p className="text-[12px] text-[#FFFFFF99] font-medium">
-                    Баланс Steam будет пополнен в течение 15 минут после успешной оплаты.
+                    {groupName === "Steam"
+                        ? "Баланс Steam будет пополнен в течение 15 минут после успешной оплаты."
+                        : mode === "topup"
+                            ? "Инструкция по активации поступит на указанный адрес электронной почты."
+                            : "Ваучер и инструкция по активации поступит на указанный адрес электронной почты."}
                 </p>
             </center>
         </form>
