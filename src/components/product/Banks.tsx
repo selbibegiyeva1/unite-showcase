@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslations } from "../../translations";
 
 type Props = {
     isOpen: boolean;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
+    const t = useTranslations();
+    
     useEffect(() => {
         if (!isOpen) return;
         const onKeyDown = (e: KeyboardEvent) => {
@@ -75,7 +78,7 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
                 onMouseDown={(e) => e.stopPropagation()}
             >
                 <div className="flex items-center justify-between gap-6 mb-6 pb-6 border-b border-b-[#FFFFFF26]">
-                    <p className="text-[28px] font-medium leading-9.5">Выберите ваш банк</p>
+                    <p className="text-[28px] font-medium leading-9.5">{t.product.selectYourBank}</p>
 
                     <button type="button" onClick={onClose} className="cursor-pointer w-12" aria-label="Close">
                         <div className="w-12">
@@ -87,7 +90,7 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
                 <ul className="banks flex flex-col gap-7.5">
                     <Row title="Rysgal" value="Rysgal" />
                     <Row title="Senagat" value="Senagat" />
-                    <Row title="Другие банки" isSection />
+                    <Row title={t.product.otherBanks} isSection />
                     <Row title="TDDYIB" value="TDDYIB" disabled />
                 </ul>
             </div>

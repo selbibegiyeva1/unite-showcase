@@ -1,7 +1,8 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Link } from "react-router-dom";
+import { useTranslations } from "../../translations";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -16,40 +17,42 @@ interface NewsBlockProps {
 }
 
 function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps = {}) {
-    const [slides] = useState([
+    const t = useTranslations();
+
+    const slides = useMemo(() => [
         {
             id: 1,
             img: "/home/news/1.png",
-            title: "Итоги премии Steam 2025",
-            text: "Названы лучшие игры 2025 года по версии игроков.",
+            title: t.newsBlock.slide1.title,
+            text: t.newsBlock.slide1.text,
             date: "07.01.2026",
             to: "/news",
         },
         {
             id: 2,
             img: "/home/news/2.png",
-            title: "Твой игровой календарь на 2026",
-            text: "Во что поиграть в 2026 году: список самых ожидаемых игр!",
+            title: t.newsBlock.slide2.title,
+            text: t.newsBlock.slide2.text,
             date: "07.01.2026",
             to: "/news2",
         },
         {
             id: 3,
             img: "/home/news/3.png",
-            title: "Оплата товаров онлайн",
-            text: "Проводим оплату банковскими картами и продолжаем расширять экосистему.",
+            title: t.newsBlock.slide3.title,
+            text: t.newsBlock.slide3.text,
             date: "07.01.2026",
             to: "/news3",
         },
         {
             id: 4,
             img: "/home/news/4.png",
-            title: "Не нашел свою игру на сайте?",
-            text: "Реализуем поддержку любой игры или сервиса специально для вас!",
+            title: t.newsBlock.slide4.title,
+            text: t.newsBlock.slide4.text,
             date: "07.01.2026",
             to: "/news4",
         }
-    ]);
+    ], [t]);
 
     const prevRef = useRef<HTMLButtonElement | null>(null);
     const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -73,7 +76,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
     return (
         <div className={`relative ${compact ? "" : "max-w-255 m-auto"}`}>
             <div className={`flex items-center justify-between ${compact ? "pb-4" : "pb-6"}`}>
-                <b className={compact ? "text-[20px]" : "text-[32px]"}>Популярное</b>
+                <b className={compact ? "text-[20px]" : "text-[32px]"}>{t.newsBlock.title}</b>
 
                 <div className="flex gap-2">
                     <button

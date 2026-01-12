@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "../../translations";
 import type { FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
 
 type TopUpMode = "topup" | "voucher";
@@ -238,6 +239,7 @@ function RegionDropdown({ regions, value, selectedRegionLabel, onChange }: {
 }
 
 export default function RegionSelect({ mode, regionOptions, productOptions, values, setValues }: Props) {
+    const t = useTranslations();
     const selectedRegionValue = String(values.region_value ?? "");
     const selectedRegionLabel = String(values.region_label ?? "");
 
@@ -291,7 +293,7 @@ export default function RegionSelect({ mode, regionOptions, productOptions, valu
 
     return (
         <div className="flex flex-col gap-4">
-            <b className="text-[24px]">Выберите регион</b>
+            <b className="text-[24px]">{t.product.selectRegion}</b>
 
             <div className="border border-[#FFFFFF1A] rounded-2xl relative">
                 <RegionDropdown

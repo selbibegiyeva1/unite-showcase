@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react"
+import { useTranslations } from "../../translations"
 import type { PartnerLocation } from "./Map"
 
 type PartnersListProps = {
@@ -8,6 +9,7 @@ type PartnersListProps = {
 }
 
 function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
+    const t = useTranslations()
     const [query, setQuery] = useState("")
     const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
@@ -30,21 +32,21 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
 
     return (
         <div className="p-6 w-100 bg-[#1D2023] rounded-[28.8px] text-white max-medium:w-full">
-            <b className="text-[24px] nap-h">Все партнёры</b>
+            <b className="text-[24px] nap-h">{t.partners.allPartners}</b>
 
             <div className="mt-5 flex items-center gap-2.5 px-5 rounded-[14px] bg-[#282730]">
                 <img src="/partner/search.png" alt="search" style={{ width: 24 }} />
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Поиск партнёров"
+                    placeholder={t.partners.searchPartners}
                     className="w-full outline-none text-white py-3.75 text-[16px]"
                 />
             </div>
 
             <div className="mt-3.5 h-60 overflow-y-auto scrollbar-partners pr-4">
                 {filtered.length === 0 ? (
-                    <div className="text-[#969FA8] py-6 text-center">Ничего не найдено</div>
+                    <div className="text-[#969FA8] py-6 text-center">{t.partners.nothingFound}</div>
                 ) : (
                     <div className="flex flex-col">
                         {filtered.map((loc) => {

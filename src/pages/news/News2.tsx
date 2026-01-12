@@ -1,10 +1,13 @@
+import React from "react"
 import { Link } from "react-router-dom"
+import { useTranslations } from "../../translations"
 
 import NewsBlock from "../../components/home/NewsBlock"
 import Footer from "../../components/layout/Footer"
 
 function News2() {
-    document.title = "Unite Gaming Shop | Твой игровой календарь на 2026: Во что ворваться в новом году?"
+    const t = useTranslations();
+    document.title = `Unite Gaming Shop | ${t.news.news2.title}`
 
     return (
         <div>
@@ -13,36 +16,53 @@ function News2() {
                     <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                         <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
                             <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
-                            <span>Главная</span>
+                            <span>{t.news.home}</span>
                             <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} />
                         </Link>
-                        <p className="text-white">Новости</p>
+                        <p className="text-white">{t.news.news}</p>
                     </div>
 
                     <div className="mt-[32px] mb-[40px]">
                         <p className="text-[#888BAA] text-[14px] font-medium">07.01.2026</p>
-                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">Твой игровой календарь на 2026: Во что ворваться в новом году?</p>
+                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">{t.news.news2.title}</p>
                     </div>
                     <img src="home/news/2.png" alt="news" className="w-full rounded-3xl" />
 
                     <div className="mt-[32px] mb-[70px] text-white">
                         <p>
-                            2026 год обещает стать настоящим праздником для геймеров 🔥
-                            <br />
-                            Масштабные <b>AAA-релизы</b> уже на горизонте — от долгожданных продолжений культовых франшиз до свежих историй и перезапусков классики.
-                            <br /><br />
-                            <b>Главные релизы 2026 года, на которые стоит обратить внимание:</b>
+                            {t.news.news2.intro.split('\n').map((line, lineIdx, lines) => (
+                                <React.Fragment key={lineIdx}>
+                                    {line.includes('AAA') ? (
+                                        <>
+                                            {line.split('AAA').map((part, partIdx, parts) => (
+                                                <React.Fragment key={partIdx}>
+                                                    {part}
+                                                    {partIdx < parts.length - 1 && <b>AAA-релизы</b>}
+                                                </React.Fragment>
+                                            ))}
+                                        </>
+                                    ) : line.includes('Главные релизы') || line.includes('Main releases') ? (
+                                        <b>{line}</b>
+                                    ) : (
+                                        line
+                                    )}
+                                    {lineIdx < lines.length - 1 && <br />}
+                                </React.Fragment>
+                            ))}
                         </p>
                         <br /><br /><br />
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Grand Theft Auto VI</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.gta6Title}</p>
                                 <p className="mt-7">
-                                    Крупнейший релиз года от Rockstar Games, возвращение в Vice City с новой историей, огромным открытым миром и кучу возможностей для приключений.
+                                    {t.news.news2.gta6Desc.split('\n\n').map((para, idx, arr) => (
+                                        <React.Fragment key={idx}>
+                                            {para}
+                                            {idx < arr.length - 1 && <><br /><br /></>}
+                                        </React.Fragment>
+                                    ))}
                                     <br /><br />
-                                    Долгожданный блокбастер от Rockstar Games, переносящий игроков в залитый неоном штат Леонида осенью 2025 года и предлагающий криминальную историю в духе Бонни и Клайда с беспрецедентным уровнем детализации живого открытого мира
-                                    <br /><br />
-                                    <b>Дата выхода: 19 ноября</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.gta6Date}</b>
                                 </p>
                             </div>
                             <img src="/news/2/1.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -52,11 +72,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Marvel’s Wolverine</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.wolverineTitle}</p>
                                 <p className="mt-7">
-                                    Брутальный экшен от студии Insomniac Games, предлагающий сюжет и кинематографичную систему боя на адамантиевых когтях в мрачном полуоткрытом мире острова Мадрипур
+                                    {t.news.news2.wolverineDesc}
                                     <br /><br />
-                                    <b>Дата выхода: осень 2026</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.wolverineDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/2.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -66,11 +86,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">007 First Light</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.firstLightTitle}</p>
                                 <p className="mt-7">
-                                    Шпионский экшен от создателей Hitman, где вам представит узнать историю становления 26-летнего Джеймса Бонда, сочетая в себе вариативный стелс, кинематографичные погони на Aston Martin Valhalla и напряженное противостояние со злодеем в исполнении Ленни Кравица.
+                                    {t.news.news2.firstLightDesc}
                                     <br /><br />
-                                    <b>Дата выхода: 27 мая</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.firstLightDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/3.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -80,11 +100,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Tomb Raider: Legacy of Atlantis</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.tombRaiderTitle}</p>
                                 <p className="mt-7">
-                                    Масштабное возвращение Лары Крофт, которое объединяет классическую атмосферу поиска сокровищ с передовыми технологиями Unreal Engine 5, предлагая игрокам раскрыть тайны затонувшей цивилизации в самом амбициозном приключении серии
+                                    {t.news.news2.tombRaiderDesc}
                                     <br /><br />
-                                    <b>Дата выхода: осень 2026</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.tombRaiderDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/4.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -94,11 +114,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Marathon</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.marathonTitle}</p>
                                 <p className="mt-7">
-                                    Первый и амбициозный научно-фантастический extraction-шутер от студии Bungie, который отправит игроков в роли кибернетических наемников на заброшенную планету Тау Кита IV для участия в напряженных сражениях за ценные артефакты и выживание.
+                                    {t.news.news2.marathonDesc}
                                     <br /><br />
-                                    <b>Дата выхода: Март 2026</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.marathonDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/5.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -108,11 +128,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Warhammer 40,000: Dawn of War IV</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.warhammerTitle}</p>
                                 <p className="mt-7">
-                                    Атмосферный FPS во вселенной Warhammer возвращает серию к классическим масштабным битвам, предлагая самую масштабную кампанию на планете Кронус и дебют фракции Адептус Механикус
+                                    {t.news.news2.warhammerDesc}
                                     <br /><br />
-                                    <b>Дата выхода: Лето 2026</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.warhammerDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/6.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -122,11 +142,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Resident Evil: Requiem</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.residentEvilTitle}</p>
                                 <p className="mt-7">
-                                    Возвращение к истокам хоррора в декорациях постапокалиптического Раккун-Сити, где игрокам предстоит выживать в роли аналитика Грейс Эшкрофт и легендарного Леона Кеннеди, распутывая мрачные тайны прошлого.
+                                    {t.news.news2.residentEvilDesc}
                                     <br /><br />
-                                    <b>Дата выхода: 27 февраля</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.residentEvilDate}</b>
                                 </p>
                             </div>
                             <img src="/news/2/8.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -136,11 +156,11 @@ function News2() {
 
                         <div className="flex items-start gap-9 max-lg:flex-col">
                             <div>
-                                <p className="text-[32px] font-medium leading-10.5">Marvel 1943: Rise of Hydra</p>
+                                <p className="text-[32px] font-medium leading-10.5">{t.news.news2.marvel1943Title}</p>
                                 <p className="mt-7">
-                                    Кинематографичный приключенческий экшен, в котором игрокам предстоит взять под управление четырех героев, включая Капитана Америку и Черную Пантеру эпохи Второй мировой, чтобы сокрушить зарождающуюся организацию «Гидра» в оккупированном Париже
+                                    {t.news.news2.marvel1943Desc}
                                     <br /><br />
-                                    <b>Дата выхода: конец 2026</b>
+                                    <b>{t.news.news2.releaseDate} {t.news.news2.marvel1943Date}</b>
                                 </p>
                             </div>
                             <img src="/news/2/7.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
@@ -148,12 +168,15 @@ function News2() {
 
                         <br /><br />
 
-                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">Итоги</p>
+                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">{t.news.news2.summary}</p>
                         <br />
                         <p>
-                            Каждый из этих тайтлов — не просто игра, а настоящее событие, способное увлечь на сотни часов. Чтобы не пропустить старт релизов, сезонные бонусы, внутриигровые предметы и эксклюзивы, важно заранее иметь удобный способ оплаты игр и сервисов.
-                            <br /><br />
-                            В этом вам поможет Unite Shop. Следите за новостями!
+                            {t.news.news2.summaryContent.split('\n\n').map((para, idx, arr) => (
+                                <React.Fragment key={idx}>
+                                    {para}
+                                    {idx < arr.length - 1 && <><br /><br /></>}
+                                </React.Fragment>
+                            ))}
                         </p>
                     </div>
 

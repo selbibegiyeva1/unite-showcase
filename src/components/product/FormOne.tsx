@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
+import { useTranslations } from "../../translations";
 import type { ProductGroupForms, FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
 import RegionSelect from "./RegionSelect";
 
@@ -18,6 +19,7 @@ type Props = {
 const STEAM_TOPUP_NOMINALS_TMT = [20, 40, 100, 150, 200, 500, 1000];
 
 function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) {
+    const t = useTranslations();
     const voucherAvailable = (forms?.voucher_fields?.length ?? 0) > 0;
     const topupAvailable = (forms?.topup_fields?.length ?? 0) > 0;
 
@@ -43,7 +45,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                 value: amt,
                 product: `${amt} TMT`,
                 price: amt,
-                region: "Любой",
+                region: t.product.any,
                 type: "TOPUP",
             })) as FormFieldOption[];
         }
@@ -52,7 +54,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
 
         // Check if all products have region "Любой" (Any) - special case
         const allHaveAnyRegion = productOptions.every(
-            (o) => String(o.region ?? "").trim() === "Любой" || String(o.region ?? "").trim() === "Any"
+            (o) => String(o.region ?? "").trim() === "Любой" || String(o.region ?? "").trim() === "Any" || String(o.region ?? "").trim() === t.product.any
         );
 
         // If all products have "Любой" region, show them all regardless of selected region
@@ -71,7 +73,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         }
 
         return [];
-    }, [isSteamTopup, productOptions, selectedRegionLabel, selectedRegionValue]);
+    }, [isSteamTopup, productOptions, selectedRegionLabel, selectedRegionValue, t.product.any]);
 
     useEffect(() => {
         if (!nominals.length) return;
@@ -121,7 +123,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         <div className="flex flex-col gap-8 p-8 bg-[#1D1D22] rounded-4xl w-full">
             {showModeSwitch ? (
                 <div className="flex flex-col gap-4">
-                    <b className="text-[24px]">Выберите способо пополнения</b>
+                    <b className="text-[24px]">{t.product.selectTopUpMethod}</b>
 
                     <div className="flex gap-3">
                         <button
@@ -140,7 +142,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                 ${mode === "topup" ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
                             `}
                         >
-                            Пополнение
+                            {t.product.topUp}
                         </button>
 
                         <button
@@ -160,7 +162,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                 ${isVoucherActive ? "bg-[#79109D] text-white" : "bg-[#2F2F33] text-white/60"}
                             `}
                         >
-                            Ваучер
+                            {t.product.voucher}
 
                             <div className="relative max-medium:static">
                                 <img
@@ -187,8 +189,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                                 transition-all duration-150
                                             `}
                                         >
-                                            Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
-                                            игровой кошелёк при активации.
+                                            {t.product.voucherDescription}
                                         </div>
                                         <div
                                             className="hidden max-medium:grid fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 place-items-center max-medium:px-[24px]"
@@ -200,7 +201,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                                 onMouseDown={(e) => e.stopPropagation()}
                                             >
                                                 <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
-                                                    <p className="text-[28px] font-medium">Ваучер</p>
+                                                    <p className="text-[28px] font-medium">{t.product.voucher}</p>
                                                     <button
                                                         type="button"
                                                         onClick={() => setIsTooltipOpen(false)}
@@ -213,8 +214,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                                     </button>
                                                 </div>
                                                 <p className="text-[14px] font-medium text-left">
-                                                    Ваучер - уникальная комбинация из цифр и букв. У ваучера есть денежный номинал, который зачисляется на
-                                                    игровой кошелёк при активации.
+                                                    {t.product.voucherDescription}
                                                 </p>
                                             </div>
                                         </div>
@@ -236,7 +236,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
 
             {nominals.length ? (
                 <div className="flex flex-col gap-4">
-                    <b className="text-[24px]">Выберите номинал</b>
+                    <b className="text-[24px]">{t.product.selectNominal}</b>
 
                     <div className="flex gap-3 flex-wrap">
                         {nominals.map((n) => {
