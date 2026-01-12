@@ -19,7 +19,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
     }
 
     return (
-        <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
+        <div className="bg-[#1C1D1D] p-8 rounded-[36px] m-auto max-w-255">
             <b className="text-[32px] pb-6.5 flex text-white">{t.partners.activePartners}</b>
 
             <div className="grid grid-cols-3 gap-7.5 text-white max-medium:grid-cols-3 max-medium:gap-4 max-small:grid-cols-1">
