@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
+import { useTranslations } from "../../translations"
 
 import NewsBlock from "../../components/home/NewsBlock"
 import Footer from "../../components/layout/Footer"
 
 function News4() {
+    const t = useTranslations();
     document.title = "Unite Gaming Shop | Не нашел свою игру на сайте? Мы добавим ее для тебя!"
 
     return (
@@ -13,10 +15,10 @@ function News4() {
                     <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                         <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
                             <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
-                            <span>Главная</span>
+                            <span>{t.news.home}</span>
                             <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} />
                         </Link>
-                        <p className="text-white">Новости</p>
+                        <p className="text-white">{t.news.news}</p>
                     </div>
 
                     <div className="mt-[32px] mb-[40px]">

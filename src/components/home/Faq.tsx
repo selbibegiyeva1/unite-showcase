@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslations } from "../../translations";
 
 type FaqItem = {
     q: string;
@@ -6,92 +7,50 @@ type FaqItem = {
 };
 
 function Faq() {
+    const t = useTranslations();
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const faqs: FaqItem[] = [
-        {
-            q: "Что такое ваучер?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    Вaучер&nbsp;— уникaльнaя комбинaция из&nbsp;цифр и&nbsp;букв. У&nbsp;вaучера есть денежный номинaл, который
-                    зачисляется на кошелек сервиса при&nbsp;активации.
-                </p>
-            ),
-        },
-        {
-            q: "Как я получу ваучер после оплаты?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    После успешной оплаты , ваучер и инструкция по активации придет в течение 3–15 минут на ваш e-mail указанный
-                    при заполнении.
-                    <br />
-                    <br />
-                    <b>
-                        Важно: клиент несет ответственность за корректность указания email.
-                        <br />
-                        Если была допущена ошибка в написании адреса, система отправит ваучер на неверную почту, и это не является
-                        техническим сбоем.
-                    </b>
-                </p>
-            ),
-        },
-        {
-            q: "Есть ли ограничения по региону?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    Да, каждый ваучер привязан к определённому региону.
-                    <br />
-                    При покупке регион указывается заранее.
-                    <br />
-                    <br />
-                    <b>Если вы ошиблись при выборе региона, замена кода невозможна — выбирайте внимательно</b>
-                </p>
-            ),
-        },
-        {
-            q: "Что делать, если письмо с ваучером не пришло?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    Первоначально проверьте в почте папку «Спам», «Промоакции» и «Рассылки».
-                    <br />
-                    <br />
-                    Убедитесь, что адрес почты был указан без ошибок.
-                    <br />
-                    <br />
-                    Если при оформлении была допущена неточность в e-mail, в истории транзакции для вас доступна отдельная ссылка
-                    “QR/Инструкция”. По этой ссылке вы сможете получить ваш ваучер напрямую.
-                </p>
-            ),
-        },
-        {
-            q: "Можно ли вернуть деньги за ваучер после покупки?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    К сожалению, нет. Ваучер невозвратный
-                    <br />
-                    <br />
-                    Если ваучер окажется недействительным, мы проведём проверку и предоставим новый рабочий код.
-                </p>
-            ),
-        },
-        {
-            q: "Как долго действует ваучер?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    Обратитесь в поддержку указанную я в письме. Мы проверим код у поставщика и при подтверждении проблемы заменим
-                    его на новый.
-                </p>
-            ),
-        },
-        {
-            q: "Что делать, если система пишет, что код уже активирован?",
-            a: (
-                <p className="mt-2.5 text-[14px] font-light">
-                    Да, вы можете указать любой email получателя или переслать письмо с кодом вручную.
-                </p>
-            ),
-        },
-    ];
+    const faqs: FaqItem[] = useMemo(() => {
+        return t.faq.items.map((item) => {
+            // Split by double newline to handle paragraphs, then by single newline for line breaks
+            const paragraphs = item.a.split("\n\n");
+            const answerParts: React.ReactNode[] = [];
+            
+            paragraphs.forEach((para, paraIdx) => {
+                if (paraIdx > 0) {
+                    answerParts.push(<br key={`br-para-${paraIdx}`} />);
+                    answerParts.push(<br key={`br-para2-${paraIdx}`} />);
+                }
+                
+                const lines = para.split("\n").filter(l => l.trim() !== "");
+                const isBoldSection = para.trim().startsWith("Важно:") || 
+                                     para.trim().startsWith("Important:") ||
+                                     para.trim().startsWith("Если вы ошиблись") ||
+                                     para.trim().startsWith("If you made a mistake");
+                
+                lines.forEach((line, lineIdx) => {
+                    if (lineIdx > 0) {
+                        answerParts.push(<br key={`br-line-${paraIdx}-${lineIdx}`} />);
+                    }
+                    
+                    if (isBoldSection) {
+                        answerParts.push(<b key={`text-${paraIdx}-${lineIdx}`}>{line}</b>);
+                    } else {
+                        answerParts.push(<span key={`text-${paraIdx}-${lineIdx}`}>{line}</span>);
+                    }
+                });
+            });
+            
+            return {
+                q: item.q,
+                a: (
+                    <p className="mt-2.5 text-[14px] font-light">
+                        {answerParts}
+                    </p>
+                ),
+            };
+        });
+    }, [t]);
 
     const toggle = (idx: number) => {
         setOpenIndex((prev) => (prev === idx ? null : idx));
@@ -99,7 +58,7 @@ function Faq() {
 
     return (
         <div className="max-w-255 m-auto">
-            <b className="text-[32px]">FAQ</b>
+            <b className="text-[32px]">{t.faq.title}</b>
 
             <div className="mt-6 flex flex-col gap-2.5">
                 {faqs.map((item, idx) => {

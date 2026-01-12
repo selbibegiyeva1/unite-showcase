@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import LanguageDropdown from "./LanguageDropdown";
 import SearchBar from "./SearchBar";
+import { useTranslations } from "../../translations";
 
 interface NavbarProps {
     toggleSidebar: () => void;
 }
 
 function Navbar({ toggleSidebar }: NavbarProps) {
+    const t = useTranslations();
+
     return (
         <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white 
             fixed left-0 top-0 w-full z-60 
@@ -17,10 +20,10 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                     <img src="/logo.png" style={{ width: 63 }} alt="logo" />
                 </Link>
 
-                <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" />
+                <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" placeholder={t.navbar.searchPlaceholder} />
 
                 <Link to="/partners" className="text-[14px] font-bold max-small:hidden">
-                    Партнеры
+                    {t.navbar.partners}
                 </Link>
 
                 <div className="ml-auto flex items-center">
@@ -35,7 +38,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                         target="_blank"
                         className="bg-[#79109D] hover:bg-[#8a1aad] max-small:hidden transition-colors px-4 py-3 rounded-[10px] text-[14px] font-bold leading-5"
                     >
-                        Перейти в Unite Gaming
+                        {t.navbar.goToUniteGaming}
                     </a>
                 </div>
             </nav>

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslations } from "../../translations";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "../../pages/Product";
 import { useCheckoutStore } from "../../store/checkoutStore";
@@ -25,6 +26,7 @@ type Props = {
 };
 
 function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
+    const t = useTranslations();
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
     const paying = useCheckoutStore((s) => s.paying);
@@ -45,10 +47,10 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
         if (!isSteamTopup) return fields;
 
         return [
-            { name: "steam_username", type: "text", label: "Где искать" },
-            { name: "email", type: "text", label: "Почта" },
+            { name: "steam_username", type: "text", label: t.product.whereToSearch },
+            { name: "email", type: "text", label: t.product.email },
         ];
-    }, [fields, groupName, mode]);
+    }, [fields, groupName, mode, t]);
 
     const rows = useMemo(() => {
         return resolvedFields.map((f) => {
@@ -65,7 +67,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
         });
     }, [resolvedFields, values]);
 
-    const bankText = String(values.bank ?? "Выбрать банк");
+    const bankText = String(values.bank ?? t.product.selectBank);
 
     const bankErr = showErrors ? errors.bank : "";
     const confirmErr = showErrors ? errors.confirmed : "";
@@ -127,7 +129,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 await submitPayment({ groupName, fields, amountTmt });
             }}
         >
-            <b className="text-[24px]">Оплата</b>
+            <b className="text-[24px]">{t.product.payment}</b>
 
             <div
                 id="field-bank"
@@ -145,7 +147,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <div>
                 <div className="total-div">
-                    <p>Регион</p>
+                    <p>{t.product.region}</p>
                     <p className='t-ellipsis' title={region}>
                         {region}
                     </p>
@@ -161,7 +163,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 ))}
 
                 <div className="total-div">
-                    <p className="whitespace-nowrap">К зачислению</p>
+                    <p className="whitespace-nowrap">{t.product.toBeCredited}</p>
                     <p className='t-ellipsis' title={creditText}>
                         {creditText}
                     </p>
@@ -169,7 +171,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             </div>
 
             <div className="flex items-center justify-between font-bold text-[20px] py-4">
-                <p>Итого</p>
+                <p>{t.product.total}</p>
                 <p className='t-ellipsis' title={enabled ? `${amountTmt} TMT` : "-"}>
                     {enabled ? `${amountTmt} TMT` : "-"}
                 </p>
@@ -177,7 +179,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <div className="my-4 flex items-center gap-2.5 bg-[#2F2F36] rounded-[10px] px-4 py-3">
                 <img src="/product/report.png" alt="report" className="w-6" />
-                <p className="w-fit text-[14px] font-medium">Товар возврату не подлежит</p>
+                <p className="w-fit text-[14px] font-medium">{t.product.nonReturnable}</p>
             </div>
 
             <label className="text-[13.75px] font-medium flex items-center gap-2.5 cursor-pointer select-none">
@@ -205,7 +207,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                         <FaCheck />
                     </IconContext.Provider>
                 </div>
-                <span>Я подтверждаю, что правильно указал все данные</span>
+                <span>{t.product.confirmData}</span>
             </label>
 
             <button
@@ -218,16 +220,16 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 className="text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
                     font-bold py-[14.5px] cursor-pointer flex items-center justify-center rounded-[10px]"
             >
-                {paying ? "Создаём платёж..." : enabled ? `Оплатить ${amountTmt} TMT` : "Оплатить"}
+                {paying ? t.product.creatingPayment : enabled ? t.product.payAmountTmt.replace("{amount}", String(amountTmt)) : t.product.pay}
             </button>
             {payError ? <p className="mt-2 text-[12px] text-red-500 font-medium">{payError}</p> : null}
             <center>
                 <p className="text-[12px] text-[#FFFFFF99] font-medium">
                     {groupName === "Steam"
-                        ? "Баланс Steam будет пополнен в течение 15 минут после успешной оплаты."
+                        ? t.product.steamBalanceMessage
                         : mode === "topup"
-                            ? "Инструкция по активации поступит на указанный адрес электронной почты."
-                            : "Ваучер и инструкция по активации поступит на указанный адрес электронной почты."}
+                            ? t.product.activationInstructionsMessage
+                            : t.product.voucherActivationMessage}
                 </p>
             </center>
         </form>

@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductGroupsQuery, type ProductGroupCategory } from "../../hooks/home/useProductGroupsQuery";
+import { useTranslations } from "../../translations";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Products() {
+    const t = useTranslations();
     const [activeCategory, setActiveCategory] = useState<ProductGroupCategory>("games");
     const { data, isLoading, isError, error, refetch } = useProductGroupsQuery();
 
@@ -28,7 +30,7 @@ export default function Products() {
                         style={{ width: 22 }}
                         className={activeCategory !== "games" ? "switch--inactive-img" : ""}
                     />
-                    <span>Игры</span>
+                    <span>{t.products.games}</span>
                 </button>
                 <button
                     type="button"
@@ -41,7 +43,7 @@ export default function Products() {
                         style={{ width: 22 }}
                         className={activeCategory !== "business" ? "switch--inactive-img" : ""}
                     />
-                    <span>Программы</span>
+                    <span>{t.products.programs}</span>
                 </button>
             </div>
 

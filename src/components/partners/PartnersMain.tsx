@@ -1,3 +1,4 @@
+import { useTranslations } from "../../translations"
 import type { Partner } from "../../hooks/partners/usePartnersMap"
 
 type PartnersMainProps = {
@@ -6,18 +7,20 @@ type PartnersMainProps = {
 }
 
 function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
+    const t = useTranslations()
+
     if (partners.length === 0) {
         return (
             <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
-                <b className="text-[32px] pb-6.5 flex text-white">Активные партнеры</b>
-                <div className="text-center py-10 text-[#969FA8]">Нет доступных партнёров</div>
+                <b className="text-[32px] pb-6.5 flex text-white">{t.partners.activePartners}</b>
+                <div className="text-center py-10 text-[#969FA8]">{t.partners.noAvailablePartners}</div>
             </div>
         )
     }
 
     return (
         <div className="bg-[#1C1D1D] p-8 rounded-[36px]">
-            <b className="text-[32px] pb-6.5 flex text-white">Активные партнеры</b>
+            <b className="text-[32px] pb-6.5 flex text-white">{t.partners.activePartners}</b>
 
             <div className="grid grid-cols-3 gap-7.5 text-white max-medium:grid-cols-3 max-medium:gap-4 max-small:grid-cols-1">
                 {partners.map((partner) => (
@@ -38,15 +41,15 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                                 </div>
                             </div>
                             <div className="flex items-center text-[14px] gap-4 justify-between py-4.5 border-b border-b-[#FFFFFF26]">
-                                <b>Город</b>
+                                <b>{t.partners.city}</b>
                                 <p className="text-[#FFFFFF99] font-medium">{partner.city || "—"}</p>
                             </div>
                             <div className="flex items-center text-[14px] gap-4 justify-between py-4.5 border-b border-b-[#FFFFFF26]">
-                                <b>Адрес</b>
+                                <b>{t.partners.address}</b>
                                 <p className="text-[#FFFFFF99] font-medium text-right w-41.5">{partner.location_note || partner.city || "—"}</p>
                             </div>
                             <div className="flex items-center text-[14px] gap-4 justify-between py-4.5">
-                                <b>Номер</b>
+                                <b>{t.partners.phone}</b>
                                 <p className="text-[#FFFFFF99] font-medium text-right">{partner.phone_support || "—"}</p>
                             </div>
                         </div>
@@ -56,7 +59,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                             onClick={() => onPartnerSelect?.(partner.id)}
                             className="uppercase bg-[#79109D] mt-6 w-full p-[11.5px] rounded-[10px] font-bold text-[14px] flex items-center justify-center cursor-pointer hover:bg-[#8a1aad] transition-colors"
                         >
-                            на карте
+                            {t.partners.onMap}
                         </a>
                     </div>
                 ))}

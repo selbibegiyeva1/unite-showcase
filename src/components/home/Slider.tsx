@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Link } from "react-router-dom";
+import { useTranslations } from "../../translations";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -10,16 +11,18 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
 function Slider() {
-    const [slides] = useState([
+    const t = useTranslations();
+
+    const slides = useMemo(() => [
         {
             id: "pubg",
             img: "/home/slider/1.png",
-            title: "PUBG Mobile",
-            description: "Быстрое и надёжное пополнение по UID",
+            title: t.slider.slide1.title,
+            description: t.slider.slide1.description,
             descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 group: "PUBG Mobile",
-                text: "Пополнить аккаунт",
+                text: t.slider.slide1.buttonText,
                 className:
                     "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
@@ -27,11 +30,11 @@ function Slider() {
         {
             id: "steam",
             img: "/home/slider/2.png",
-            title: "Удобно пополнить Steam онлайн",
+            title: t.slider.slide2.title,
             titleClassName: "text-[32px] max-xsmall:text-[24px] w-79 flex leading-9",
             button: {
                 group: "Steam",
-                text: "Пополнить аккаунт",
+                text: t.slider.slide2.buttonText,
                 className:
                     "text-[14px] max-xsmall:w-full mt-6 shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
@@ -39,12 +42,12 @@ function Slider() {
         {
             id: "ps",
             img: "/home/slider/3.png",
-            title: "PlayStation под рукой",
-            description: "Погружайся в мир топовых игр без ограничений.",
+            title: t.slider.slide3.title,
+            description: t.slider.slide3.description,
             descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 group: "Playstation",
-                text: "Посмотреть",
+                text: t.slider.slide3.buttonText,
                 className:
                     "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
@@ -52,17 +55,17 @@ function Slider() {
         {
             id: "partners",
             img: "/home/slider/4.png",
-            title: "Пополняйте у наших партнёров",
-            description: "Выбирай удобный способ оплаты и возвращайся в игру за секунды",
+            title: t.slider.slide4.title,
+            description: t.slider.slide4.description,
             descriptionClassName: "mt-3 mb-6 w-65 text-[14px] font-medium max-xsmall:mb-4",
             button: {
                 to: "/partners",
-                text: "Посмотреть",
+                text: t.slider.slide4.buttonText,
                 className:
                     "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
-    ]);
+    ], [t]);
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);

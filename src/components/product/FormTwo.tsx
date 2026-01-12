@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslations } from "../../translations";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import type { TopUpMode } from "./FormOne";
 
@@ -13,6 +14,7 @@ type Props = {
 };
 
 function FormTwo({ groupName, mode, fields, values, setValues, errors, showErrors }: Props) {
+    const t = useTranslations();
     const isSteamTopup = groupName === "Steam" && mode === "topup";
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
     const tooltipRef = useRef<HTMLDivElement>(null);
@@ -53,12 +55,12 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
     if (isSteamTopup) {
         return (
             <div className="p-8 bg-[#1D1D22] rounded-4xl">
-                <b className="text-[24px]">Пополнение аккаунта</b>
+                <b className="text-[24px]">{t.product.accountTopUp}</b>
 
                 <div className="mt-4 flex flex-col gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-3">
-                            <p className="text-[#FFFFFF99] text-[14px]">Где искать</p>
+                            <p className="text-[#FFFFFF99] text-[14px]">{t.product.whereToSearch}</p>
 
                             <div className="relative max-medium:static">
                                 <img
@@ -80,10 +82,10 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                 transition-all duration-150
                                             `}
                                         >
-                                            <p className="text-[24px] mb-6">Как найти свой логин в Steam?</p>
+                                            <p className="text-[24px] mb-6">{t.product.howToFindSteamLogin}</p>
                                             <ul className="mb-4 list-disc ml-5 flex flex-col gap-4">
-                                                <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
-                                                <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
+                                                <li>{t.product.steamLoginInstruction1}</li>
+                                                <li>{t.product.steamLoginInstruction2}</li>
                                             </ul>
                                             <img src="/product/steam.png" className="max-w-103.5" alt="steam" />
                                         </div>
@@ -97,7 +99,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                 onMouseDown={(e) => e.stopPropagation()}
                                             >
                                                 <div className="flex items-center gap-6 justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
-                                                    <p className="text-[28px] font-medium leading-9.5">Как найти свой логин в Steam?</p>
+                                                    <p className="text-[28px] font-medium leading-9.5">{t.product.howToFindSteamLogin}</p>
                                                     <button
                                                         type="button"
                                                         onClick={() => setIsTooltipOpen(false)}
@@ -110,8 +112,8 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                     </button>
                                                 </div>
                                                 <ul className="mb-4 list-disc ml-5 flex flex-col gap-4 text-[14px] font-medium">
-                                                    <li>Откройте клиент Steam. Нажмите на имя пользователя в правом верхнем углу главной страницы.</li>
-                                                    <li>В выпадающем меню выберите пункт «Об аккаунте».</li>
+                                                    <li>{t.product.steamLoginInstruction1}</li>
+                                                    <li>{t.product.steamLoginInstruction2}</li>
                                                 </ul>
                                                 <img src="/product/steam.png" className="w-full mt-4" alt="steam" />
                                             </div>
@@ -125,19 +127,19 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                             id="field-steam_username"
                             value={String(values.steam_username ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, steam_username: e.target.value }))}
-                            placeholder="Введите логин в Steam"
+                            placeholder={t.product.enterSteamLogin}
                             className={inputCls("steam_username")}
                         />
                         {err("steam_username") ? <p className={alertCls}>{err("steam_username")}</p> : null}
                     </div>
                     <div>
-                        <p className="text-[#FFFFFF99] text-[14px] mb-3">Почта</p>
+                        <p className="text-[#FFFFFF99] text-[14px] mb-3">{t.product.email}</p>
                         <input
                             type="email"
                             id="field-email"
                             value={String(values.email ?? "")}
                             onChange={(e) => setValues((prev) => ({ ...prev, email: e.target.value }))}
-                            placeholder="Введите свой e-mail"
+                            placeholder={t.product.enterEmail}
                             className={inputCls("email")}
                         />
                         {err("email") ? <p className={alertCls}>{err("email")}</p> : null}
@@ -151,7 +153,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
 
     return (
         <div className="p-8 bg-[#1D1D22] rounded-4xl">
-            <b className="text-[24px]">Оформление покупки</b>
+            <b className="text-[24px]">{t.product.checkout}</b>
 
             <div
                 className={`

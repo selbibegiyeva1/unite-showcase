@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { GoogleMap, MarkerF, InfoWindow, useJsApiLoader } from "@react-google-maps/api"
+import { useTranslations } from "../../translations"
 
 export type PartnerLocation = {
     id: string
@@ -18,6 +19,7 @@ type MapProps = {
 }
 
 function Map({ locations, selectedId, onSelect }: MapProps) {
+    const t = useTranslations()
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined
 
     const { isLoaded, loadError } = useJsApiLoader({
@@ -47,20 +49,20 @@ function Map({ locations, selectedId, onSelect }: MapProps) {
 
     return (
         <div className="p-6 w-147 bg-[#1D2023] rounded-[28.8px] text-white max-medium:w-full">
-            <b className="text-[24px] nap-h">Пополни баланс у ближайшего партнера</b>
+            <b className="text-[24px] nap-h">{t.partners.topUpAtNearestPartner}</b>
 
             <div className="mt-8.25 rounded-[18px] overflow-hidden border border-white/5 bg-black/20">
                 {!apiKey ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8] px-6 text-center">
-                        Не удалось загрузить ключ API!
+                        {t.partners.failedToLoadApiKey}
                     </div>
                 ) : loadError ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8] px-6 text-center">
-                        Не удалось загрузить Google Maps!
+                        {t.partners.failedToLoadGoogleMaps}
                     </div>
                 ) : !isLoaded ? (
                     <div className="h-85 flex items-center justify-center text-[#969FA8]">
-                        Загрузка...
+                        {t.partners.loading}
                     </div>
                 ) : (
                     <div>

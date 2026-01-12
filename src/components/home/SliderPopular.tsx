@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
+import { useTranslations } from "../../translations";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -9,6 +10,8 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
 function SliderPopular() {
+    const t = useTranslations();
+    
     const [slides] = useState([
         { id: 1, img: "/home/slider2/1.png", title: "Steam", group: "Steam" },
         { id: 2, img: "/home/slider2/2.png", title: "Spotify", group: "Spotify" },
@@ -28,7 +31,7 @@ function SliderPopular() {
     return (
         <div className="pb-10 relative max-w-255 m-auto max-lg:px-[48px] product">
             <div className="flex items-center justify-between pb-6">
-                <b className="text-[32px]">Популярное</b>
+                <b className="text-[32px]">{t.sliderPopular.title}</b>
 
                 <div className="flex gap-2">
                     <button
