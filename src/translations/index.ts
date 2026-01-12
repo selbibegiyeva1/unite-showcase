@@ -1,6 +1,7 @@
 import { useLanguageStore } from "../store/languageStore";
 import { RU } from "./RU";
 import { EN } from "./EN";
+import { TM } from "./TM";
 
 export type Translations = typeof RU;
 
@@ -9,6 +10,10 @@ export function useTranslations(): Translations {
     
     if (lang === "EN") {
         return EN;
+    }
+    
+    if (lang === "TM") {
+        return TM;
     }
     
     return RU;

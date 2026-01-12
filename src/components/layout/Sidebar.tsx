@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LanguageDropdown from "./LanguageDropdown";
 import SearchBar from "./SearchBar";
 import NewsBlock from "../home/NewsBlock";
+import { useTranslations } from "../../translations";
 
 interface SidebarProps {
     isSidebarOpen: boolean;
@@ -10,6 +11,8 @@ interface SidebarProps {
 }
 
 function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
+    const t = useTranslations();
+    
     return (
         <div className={`fixed top-0 left-0 w-full flex flex-col justify-between px-6 pb-[42px] h-full bg-[#18181B] z-70 text-white ${isSidebarOpen ? "block" : "hidden"}`}>
             <div>
@@ -24,18 +27,18 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
                 </div>
 
                 <div className="pt-4">
-                    <SearchBar onSuggestionClick={toggleSidebar} />
+                    <SearchBar onSuggestionClick={toggleSidebar} placeholder={t.navbar.searchPlaceholder} />
                 </div>
 
                 <ul className="pt-[34px]">
                     <li>
                         <Link to="/" className="font-medium" onClick={toggleSidebar}>
-                            <span>Главная</span>
+                            <span>{t.news.home}</span>
                         </Link>
                     </li>
                     <li className="mt-[24px]">
                         <Link to="/partners" className="font-medium" onClick={toggleSidebar}>
-                            <span>Партнеры</span>
+                            <span>{t.navbar.partners}</span>
                         </Link>
                     </li>
                 </ul>
@@ -47,7 +50,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
                     target="_blank"
                     className="bg-[#79109D] flex items-center justify-center mt-[32px] hover:bg-[#8a1aad] w-full transition-colors p-3.5 rounded-[10px] text-[14px] font-bold leading-5"
                 >
-                    Перейти в Unite Gaming
+                    {t.navbar.goToUniteGaming}
                 </a>
             </div>
         </div>
