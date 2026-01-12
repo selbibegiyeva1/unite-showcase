@@ -1,3 +1,4 @@
+import React from "react"
 import { Link } from "react-router-dom"
 import { useTranslations } from "../../translations"
 
@@ -23,21 +24,25 @@ function News33() {
 
                     <div className="mt-[32px] mb-[40px]">
                         <p className="text-[#888BAA] text-[14px] font-medium">07.01.2026</p>
-                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">Оплата товаров теперь доступна онлайн</p>
+                        <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">{t.news.news3.title}</p>
                     </div>
                     <img src="home/news/3.png" alt="news" className="w-full rounded-3xl" />
 
                     <div className="mt-[32px] mb-[70px] text-white">
-                        <p className="flex text-white font-medium text-[32px] leading-9">Уважаемые пользователи!</p>
+                        <p className="flex text-white font-medium text-[32px] leading-9">{t.news.news3.greeting}</p>
                         <br />
                         <p>
-                            По многочисленным просьбам мы добавили онлайн-оплату через банковскую карту (эквайринг), чтобы процесс покупки товаров и сервисов стал ещё удобнее и быстрее.
-                            <br /><br />
-                            Кроме того, мы активно расширяем сеть офлайн-точек по всем велаятам, чтобы у вас было больше возможностей для оплаты рядом с домом.
-                            <br /><br />
-                            В ближайшее время также планируем запустить оплату через мобильного оператора. Данный способ будет доступен с ограничениями по сумме — подробности сообщим дополнительно.
-                            <br /><br />
-                            Мы продолжаем работать над улучшением сервиса и благодарим вас за обратную связь и доверие.Следите за обновлениями!
+                            {t.news.news3.content.split('\n\n').map((para, idx, arr) => (
+                                <React.Fragment key={idx}>
+                                    {para.split('\n').map((line, lineIdx, lines) => (
+                                        <React.Fragment key={lineIdx}>
+                                            {line}
+                                            {lineIdx < lines.length - 1 && <br />}
+                                        </React.Fragment>
+                                    ))}
+                                    {idx < arr.length - 1 && <><br /><br /></>}
+                                </React.Fragment>
+                            ))}
                         </p>
                     </div>
 
