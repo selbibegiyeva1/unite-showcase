@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import LanguageDropdown from "./LanguageDropdown";
+import LanguageDropdown from "./LanguageDropdown";
 import SearchBar from "./SearchBar";
 
 interface NavbarProps {
@@ -23,11 +23,11 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                     Партнеры
                 </Link>
 
-                <div className="ml-auto flex items-center gap-6">
-                    {/* <LanguageDropdown /> */}
+                <div className="ml-auto flex items-center">
+                    <LanguageDropdown />
 
-                    <div className="w-6">
-                        <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block hidden cursor-pointer" />
+                    <div className="nav-gap flex items-center" style={{ width: 30 }}>
+                        <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block max-small:gap-6 hidden cursor-pointer" />
                     </div>
 
                     <a
