@@ -33,6 +33,7 @@ function PartnersMain({ partners, onPartnerSelect }: PartnersMainProps) {
                                         src={partner.logo_url || "/partner/unnamed.png"}
                                         className="w-full h-full object-cover"
                                         alt={partner.name}
+                                        loading="lazy"
                                         onError={(e) => {
                                             const target = e.target as HTMLImageElement
                                             target.src = "/partner/unnamed.png"

@@ -15,9 +15,9 @@ function News33() {
                 <div className="max-w-255 m-auto">
                     <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                         <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
-                            <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
+                            <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} loading="lazy" />
                             <span>{t.news.home}</span>
-                            <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} />
+                            <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} loading="lazy" />
                         </Link>
                         <p className="text-white">{t.news.news}</p>
                     </div>
@@ -26,7 +26,7 @@ function News33() {
                         <p className="text-[#888BAA] text-[14px] font-medium">07.01.2026</p>
                         <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">{t.news.news3.title}</p>
                     </div>
-                    <img src="home/news/3.png" alt="news" className="w-full rounded-3xl" />
+                    <img src="home/news/3.png" alt="news" className="w-full rounded-3xl" loading="lazy" />
 
                     <div className="mt-[32px] mb-[70px] text-white">
                         <p className="flex text-white font-medium text-[32px] leading-9">{t.news.news3.greeting}</p>

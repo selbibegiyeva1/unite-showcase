@@ -15,9 +15,9 @@ function News2() {
                 <div className="max-w-255 m-auto">
                     <div className="text-[15.67px] font-medium flex items-center gap-3.5">
                         <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
-                            <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
+                            <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} loading="lazy" />
                             <span>{t.news.home}</span>
-                            <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} />
+                            <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} loading="lazy" />
                         </Link>
                         <p className="text-white">{t.news.news}</p>
                     </div>
@@ -26,7 +26,7 @@ function News2() {
                         <p className="text-[#888BAA] text-[14px] font-medium">07.01.2026</p>
                         <p className="mt-[10px] flex text-white font-medium text-[32px] leading-9">{t.news.news2.title}</p>
                     </div>
-                    <img src="home/news/2.png" alt="news" className="w-full rounded-3xl" />
+                    <img src="home/news/2.png" alt="news" className="w-full rounded-3xl" loading="lazy" />
 
                     <div className="mt-[32px] mb-[70px] text-white">
                         <p>
@@ -65,7 +65,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.gta6Date}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/1.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/1.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -79,7 +79,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.wolverineDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/2.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/2.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -93,7 +93,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.firstLightDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/3.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/3.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -107,7 +107,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.tombRaiderDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/4.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/4.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -121,7 +121,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.marathonDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/5.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/5.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -135,7 +135,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.warhammerDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/6.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/6.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -149,7 +149,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.residentEvilDate}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/8.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/8.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />
@@ -163,7 +163,7 @@ function News2() {
                                     <b>{t.news.news2.releaseDate} {t.news.news2.marvel1943Date}</b>
                                 </p>
                             </div>
-                            <img src="/news/2/7.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" />
+                            <img src="/news/2/7.png" alt="hollow-knight" className="max-w-[524px] rounded-3xl max-lg:max-w-full" loading="lazy" />
                         </div>
 
                         <br /><br />

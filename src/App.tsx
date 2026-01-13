@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -8,14 +8,15 @@ import ScrollToTop from './components/layout/ScrollToTop'
 import UpButton from './components/layout/UpButton'
 import Sidebar from './components/layout/Sidebar'
 
-import Home from './pages/Home'
-import Product from './pages/Product'
-import Partners from './pages/Partners'
+// Lazy load pages for code splitting
+const Home = lazy(() => import('./pages/Home'))
+const Product = lazy(() => import('./pages/Product'))
+const Partners = lazy(() => import('./pages/Partners'))
 
-import News from './pages/news/News'
-import News2 from './pages/news/News2'
-import News33 from './pages/news/News33'
-import News4 from './pages/news/News4'
+const News = lazy(() => import('./pages/news/News'))
+const News2 = lazy(() => import('./pages/news/News2'))
+const News33 = lazy(() => import('./pages/news/News33'))
+const News4 = lazy(() => import('./pages/news/News4'))
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -30,16 +31,22 @@ function App() {
       <UpButton />
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/partners" element={<Partners />} />
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen bg-[#18181B]">
+          <div className="text-white text-lg">Loading...</div>
+        </div>
+      }>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/partners" element={<Partners />} />
 
-        <Route path="/news" element={<News />} />
-        <Route path="/news2" element={<News2 />} />
-        <Route path="/news3" element={<News33 />} />
-        <Route path="/news4" element={<News4 />} />
-      </Routes>
+          <Route path="/news" element={<News />} />
+          <Route path="/news2" element={<News2 />} />
+          <Route path="/news3" element={<News33 />} />
+          <Route path="/news4" element={<News4 />} />
+        </Routes>
+      </Suspense>
     </div>
   )
 }

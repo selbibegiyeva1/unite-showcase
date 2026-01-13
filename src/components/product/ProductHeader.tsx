@@ -16,6 +16,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
                         src={icon}
                         alt={group ?? "Product"}
                         className="w-40 rounded-3xl"
+                        loading="lazy"
                         onError={(e) => {
                             const img = e.currentTarget;
                             if (img.dataset.fallbackApplied) return;
@@ -24,7 +25,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
                         }}
                     />
                 ) : (
-                    <img src="/product/alt.png" alt={group ?? "Product"} className="w-40 rounded-3xl" />
+                    <img src="/product/alt.png" alt={group ?? "Product"} className="w-40 rounded-3xl" loading="lazy" />
                 )}
 
                 <div>
@@ -32,7 +33,7 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
 
                     {showAnyRegionBadge ? (
                         <div className="bg-[#79109D] w-fit flex items-center gap-3 leading-4 px-[19.5px] py-1.5 rounded-[10px] mt-3">
-                            <img src="/product/globe.png" alt="globe" className="w-5" />
+                            <img src="/product/globe.png" alt="globe" className="w-5" loading="lazy" />
                             <p className="text-[12px] font-bold">Для аккаунтов любого региона</p>
                         </div>
                     ) : null}

@@ -169,6 +169,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
                                     alt={slide.title}
                                     className="w-full h-full object-cover"
                                     draggable={false}
+                                    loading="lazy"
                                 />
                             </div>
                             <div className={`flex flex-col flex-1 ${compact ? "px-[11px] pt-[11px] pb-[30px]" : "p-5"}`}>

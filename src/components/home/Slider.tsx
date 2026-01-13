@@ -145,7 +145,7 @@ function Slider() {
                         <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
                             <Link to={slideUrl} className="block h-full w-full">
                                 <div className="h-90 slider-img">
-                                    <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} />
+                                    <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} loading="lazy" />
                                 </div>
 
                                 <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
@@ -177,7 +177,7 @@ function Slider() {
                 disabled={isEnd}
                 className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"} btn`}
             >
-                <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" />
+                <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" loading="lazy" />
             </button>
         </div>
     );

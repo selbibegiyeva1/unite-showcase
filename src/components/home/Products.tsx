@@ -29,6 +29,7 @@ export default function Products() {
                         alt="toy"
                         style={{ width: 22 }}
                         className={activeCategory !== "games" ? "switch--inactive-img" : ""}
+                        loading="lazy"
                     />
                     <span>{t.products.games}</span>
                 </button>
@@ -42,6 +43,7 @@ export default function Products() {
                         alt="desktop"
                         style={{ width: 22 }}
                         className={activeCategory !== "business" ? "switch--inactive-img" : ""}
+                        loading="lazy"
                     />
                     <span>{t.products.programs}</span>
                 </button>
@@ -86,6 +88,7 @@ export default function Products() {
                                         src={g.icon_url}
                                         alt="product"
                                         className="rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy"
                                         onError={(e) => {
                                             const img = e.currentTarget;
                                             if (img.dataset.fallbackApplied) return;

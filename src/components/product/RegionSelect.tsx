@@ -87,6 +87,7 @@ function FlagImg({ region, className }: { region: RegionItem; className?: string
             src={src}
             alt={region.label}
             className={className}
+            loading="lazy"
             onError={() => {
                 if (idx < candidates.length - 1) setIdx((i) => i + 1);
             }}
@@ -171,7 +172,7 @@ function RegionDropdown({ regions, value, selectedRegionLabel, onChange }: {
 
                     {selectedRegionLabel === "СНГ" ? (
                         <span className="relative shrink-0">
-                            <img src="/product/region.png" alt="region" className="w-5 peer" />
+                            <img src="/product/region.png" alt="region" className="w-5 peer" loading="lazy" />
                             <span
                                 className="
                                     absolute top-8.75 left-0 z-50
@@ -191,6 +192,7 @@ function RegionDropdown({ regions, value, selectedRegionLabel, onChange }: {
                     src="/product/arrow-down-simple.png"
                     alt="arrow"
                     className={`w-4 shrink-0 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+                    loading="lazy"
                 />
             </button>
 

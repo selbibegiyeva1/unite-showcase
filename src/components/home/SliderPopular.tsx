@@ -117,6 +117,7 @@ function SliderPopular() {
                                     alt={slide.title}
                                     className="w-full h-auto block rounded-3xl transition-transform duration-300 group-hover:scale-110"
                                     draggable={false}
+                                    loading="lazy"
                                 />
                             </div>
                             <p className="font-bold mt-2.5 text-center">{slide.title}</p>
