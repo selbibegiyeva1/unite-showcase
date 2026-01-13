@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-import { EffectCoverflow, Navigation } from "swiper/modules";
+import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
 
 function Slider() {
     const t = useTranslations();
@@ -124,8 +124,12 @@ function Slider() {
                     modifier: 0,
                     slideShadows: true,
                 }}
-                modules={[EffectCoverflow, Navigation]}
+                modules={[EffectCoverflow, Navigation, Autoplay]}
                 navigation={{ prevEl, nextEl }}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                }}
                 onInit={(s) => {
                     setIsBeginning(s.isBeginning);
                     setIsEnd(s.isEnd);
