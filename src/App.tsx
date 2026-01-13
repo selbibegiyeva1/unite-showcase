@@ -21,6 +21,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
+  // LazyLoading
   return (
     <div className="bg-[#18181B] min-h-screen relative">
       <div className='pb-28'>
