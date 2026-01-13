@@ -31,11 +31,7 @@ function App() {
       <UpButton />
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-      <Suspense fallback={
-        <div className="flex items-center justify-center min-h-screen bg-[#18181B]">
-          <div className="text-white text-lg">Loading...</div>
-        </div>
-      }>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
