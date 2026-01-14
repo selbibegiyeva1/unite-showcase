@@ -222,5 +222,6 @@ export const RU = {
         voucherActivationMessage: "Ваучер и инструкция по активации поступит на указанный адрес электронной почты.",
         selectYourBank: "Выберите ваш банк",
         otherBanks: "Другие банки",
+        or: "или",
     },
 };

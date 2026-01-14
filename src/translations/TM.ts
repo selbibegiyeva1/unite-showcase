@@ -222,5 +222,6 @@ export const TM = {
         voucherActivationMessage: "Wauçer we işjeňleşdiriş gollanmasy görkezilen e-mail adresine ugradylar.",
         selectYourBank: "Bankyňyzy saýlaň",
         otherBanks: "Başga banklar",
+        or: "ýa-da",
     },
 };

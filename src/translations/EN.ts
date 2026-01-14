@@ -222,5 +222,6 @@ export const EN = {
         voucherActivationMessage: "Voucher and activation instructions will be sent to the specified email address.",
         selectYourBank: "Select your bank",
         otherBanks: "Other banks",
+        or: "or",
     },
 };
