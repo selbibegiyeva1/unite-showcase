@@ -88,9 +88,9 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
 
                 <div className="mt-6">
                     <div className="flex items-center justify-center gap-4 mb-5">
-                        <div className="w-full h-[1px] bg-[#FFFFFF26]" />
+                        <div className="w-full h-px bg-[#FFFFFF26]" />
                         <p className="text-center text-[#FFFFFF99] text-[14px] text-nowrap">{t.product.or}</p>
-                        <div className="w-full h-[1px] bg-[#FFFFFF26]" />
+                        <div className="w-full h-px bg-[#FFFFFF26]" />
                     </div>
                     <Link
                         to="/partners"
