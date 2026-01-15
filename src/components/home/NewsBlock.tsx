@@ -21,6 +21,22 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
 
     const slides = useMemo(() => [
         {
+            id: 5,
+            img: "/home/news/5.png",
+            title: "Unite Shop — твой проводник в мире игровых покупок",
+            text: "Коротко о нас",
+            date: "20.04.2025",
+            to: "/news5",
+        },
+        {
+            id: 4,
+            img: "/home/news/4.png",
+            title: t.newsBlock.slide4.title,
+            text: t.newsBlock.slide4.text,
+            date: "07.01.2026",
+            to: "/news4",
+        },
+        {
             id: 1,
             img: "/home/news/1.png",
             title: t.newsBlock.slide1.title,
@@ -44,14 +60,6 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
             date: "07.01.2026",
             to: "/news3",
         },
-        {
-            id: 4,
-            img: "/home/news/4.png",
-            title: t.newsBlock.slide4.title,
-            text: t.newsBlock.slide4.text,
-            date: "07.01.2026",
-            to: "/news4",
-        }
     ], [t]);
 
     const prevRef = useRef<HTMLButtonElement | null>(null);
