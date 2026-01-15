@@ -93,7 +93,7 @@ export const RU = {
     partners: {
         home: "Главная",
         howToTopUp: "Как пополнить баланс?",
-        topUpThroughPartners: "Пополнение через партнёров",
+        topUpThroughPartners: "Оплатить наличными у партнеров",
         loadingPartners: "Загрузка партнёров...",
         errorLoadingPartners: "Ошибка загрузки партнёров: ",
         unknownError: "Неизвестная ошибка",

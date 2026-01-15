@@ -93,7 +93,7 @@ export const TM = {
     partners: {
         home: "Baş sahypa",
         howToTopUp: "Hasaby nädip doldurmaly?",
-        topUpThroughPartners: "Hyzmatdaşlar arkaly doldurmak",
+        topUpThroughPartners: "Tölegi nagyt hyzmatdaşlardan geçirmek",
         loadingPartners: "Hyzmatdaşlar ýüklenýär...",
         errorLoadingPartners: "Hyzmatdaşlary ýüklemekde säwlik ýüze çykdy: ",
         unknownError: "Näbelli säwlik",
