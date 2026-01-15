@@ -117,12 +117,12 @@ function News5() {
                                 <p className="text-[28px] leading-[34px] font-semibold max-md:text-[24px]">
                                     {t.news.news5.bannerTitle}
                                 </p>
-                                <p className="my-[18px] text-[16px] leading-[22px] text-[#FFFFFF99] max-md:text-[14px]">
+                                <p className="my-[18px] max-w-[465px] text-[16px] leading-[22px] text-[#FFFFFF99] max-md:text-[14px]">
                                     {t.news.news5.bannerDescription}
                                 </p>
 
                                 <Link
-                                    to="/news/4"
+                                    to="/news4"
                                     style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
                                     className="inline-flex text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 items-center justify-center rounded-[10px]"
                                 >
