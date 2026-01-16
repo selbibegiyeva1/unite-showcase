@@ -30,7 +30,7 @@ export const EN = {
     },
     products: {
         games: "Games",
-        programs: "Programs",
+        programs: "Services",
     },
     newsBlock: {
         title: "Popular",

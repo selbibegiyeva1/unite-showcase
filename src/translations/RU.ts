@@ -30,7 +30,7 @@ export const RU = {
     },
     products: {
         games: "Игры",
-        programs: "Программы",
+        programs: "Сервисы",
     },
     newsBlock: {
         title: "Популярное",

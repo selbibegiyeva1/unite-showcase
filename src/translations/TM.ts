@@ -30,7 +30,7 @@ export const TM = {
     },
     products: {
         games: "Oýunlar",
-        programs: "Programmalar",
+        programs: "Hyzmatlar",
     },
     newsBlock: {
         title: "Meşhur",
