@@ -48,16 +48,25 @@ function Product() {
     const voucherAvailable = Boolean(forms?.voucher_fields?.length);
     const topupAvailable = Boolean(forms?.topup_fields?.length);
 
+    const isRoblox = groupName === "Roblox";
+
     const onlyMode =
+        isRoblox ? "voucher" :
         voucherAvailable && !topupAvailable ? "voucher" :
             topupAvailable && !voucherAvailable ? "topup" :
                 null;
 
     useEffect(() => {
-        if (onlyMode) setMode(onlyMode);
-        else if (!voucherAvailable && topupAvailable) setMode("topup");
-        else if (!topupAvailable && voucherAvailable) setMode("voucher");
-    }, [onlyMode, voucherAvailable, topupAvailable, setMode]);
+        if (isRoblox) {
+            setMode("voucher");
+        } else if (onlyMode) {
+            setMode(onlyMode);
+        } else if (!voucherAvailable && topupAvailable) {
+            setMode("topup");
+        } else if (!topupAvailable && voucherAvailable) {
+            setMode("voucher");
+        }
+    }, [isRoblox, onlyMode, voucherAvailable, topupAvailable, setMode]);
 
     const activeFields = useMemo(() => {
         if (!forms) return [];
