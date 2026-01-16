@@ -74,13 +74,13 @@ function News5() {
 
                         <ul className="list-decimal pl-[24px] pt-[32px]">
                             <li>
-                                <b className="text-[#A132C7]">{t.news.news5.reliability}</b> {t.news.news5.reliabilityText}
+                                <b className="text-[#A132C7]">{t.news.news5.reliability}</b> <span dangerouslySetInnerHTML={{ __html: t.news.news5.reliabilityText }} />
                             </li>
                             <li>
-                                <b className="text-[#A132C7]">{t.news.news5.speed}</b>: {t.news.news5.speedText}
+                                <b className="text-[#A132C7]">{t.news.news5.speed}</b>: <span dangerouslySetInnerHTML={{ __html: t.news.news5.speedText }} />
                             </li>
                             <li>
-                                <b className="text-[#A132C7]">{t.news.news5.benefit}</b> {t.news.news5.benefitText}
+                                <b className="text-[#A132C7]">{t.news.news5.benefit}</b> <span dangerouslySetInnerHTML={{ __html: t.news.news5.benefitText }} />
                             </li>
                         </ul>
 

@@ -44,14 +44,25 @@ function News4() {
                             <br /><br />
                             <b>{t.news.news4.ifNotFound}</b>
                             <br /><br />
-                            <ul className="list-decimal list-inside">
-                                <li>{t.news.news4.step1}</li>
-                                <li>{t.news.news4.step2}</li>
-                                <li>{t.news.news4.step3}</li>
+                            <ul className="flex flex-col gap-2.5">
+                                <li className="bg-[#1D2023] px-[24px] py-[14px] rounded-[12px] flex items-center gap-[20px]">
+                                    <span className="text-[#A132C7] text-[24px] font-medium">1.</span>
+                                    {t.news.news4.step1}
+                                </li>
+                                <li className="bg-[#1D2023] px-[24px] py-[14px] rounded-[12px] flex items-center gap-[20px]">
+                                    <span className="text-[#A132C7] text-[24px] font-medium">2.</span>
+                                    {t.news.news4.step2}
+                                </li>
+                                <li className="bg-[#1D2023] px-[24px] py-[14px] rounded-[12px] flex items-center gap-[20px]">
+                                    <span className="text-[#A132C7] text-[24px] font-medium">3.</span>
+                                    {t.news.news4.step3}
+                                </li>
+                                <li className="bg-[#1D2023] px-[24px] py-[14px] rounded-[12px] flex items-center gap-[20px]">
+                                    <span className="text-[#A132C7] text-[24px] font-medium">4.</span>
+                                    {t.news.news4.done}
+                                </li>
                             </ul>
-                            <br />
-                            {t.news.news4.done}
-                            <br /><br /><br />
+                            <br /><br />
                             <b>{t.news.news4.whatsNext}</b>
                             <br /><br />
                             {t.news.news4.nextContent.split('\n\n').map((para, idx, arr) => (
