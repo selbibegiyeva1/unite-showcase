@@ -23,9 +23,17 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
     const voucherAvailable = (forms?.voucher_fields?.length ?? 0) > 0;
     const topupAvailable = (forms?.topup_fields?.length ?? 0) > 0;
 
-    const showModeSwitch = voucherAvailable && topupAvailable;
+    const isRoblox = groupName === "Roblox";
+    const showModeSwitch = voucherAvailable && topupAvailable && !isRoblox;
 
     const isSteamTopup = groupName === "Steam" && mode === "topup";
+
+    // Force voucher mode for Roblox
+    useEffect(() => {
+        if (isRoblox && mode !== "voucher") {
+            setMode("voucher");
+        }
+    }, [isRoblox, mode, setMode]);
 
     const fields = mode === "voucher" ? forms.voucher_fields : forms.topup_fields;
 
