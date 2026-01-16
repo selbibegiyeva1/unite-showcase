@@ -77,7 +77,7 @@ function News5() {
                                 <b className="text-[#A132C7]">{t.news.news5.reliability}</b> <span dangerouslySetInnerHTML={{ __html: t.news.news5.reliabilityText }} />
                             </li>
                             <li>
-                                <b className="text-[#A132C7]">{t.news.news5.speed}</b>: <span dangerouslySetInnerHTML={{ __html: t.news.news5.speedText }} />
+                                <b className="text-[#A132C7]">{t.news.news5.speed}</b> <span dangerouslySetInnerHTML={{ __html: t.news.news5.speedText }} />
                             </li>
                             <li>
                                 <b className="text-[#A132C7]">{t.news.news5.benefit}</b> <span dangerouslySetInnerHTML={{ __html: t.news.news5.benefitText }} />

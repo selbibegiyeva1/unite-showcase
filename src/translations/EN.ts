@@ -204,7 +204,7 @@ export const EN = {
             whyTrustUs: "Why can you trust us? Our 3 main principles:",
             reliability: "Reliability:",
             reliabilityText: "We work only with <b>official and verified partners</b>. For you, this means one thing — <b>no risk of account blocking</b>. Your purchases and your profile are completely safe.",
-            speed: "Speed",
+            speed: "Speed:",
             speedText: "We value your time. Steam balance top-up takes an <b style=\"color: #C732C0\">average of 5-10 minutes</b>, and game keys arrive instantly. Buy — and play immediately!",
             benefit: "Benefit:",
             benefitText: "We try to keep commissions at a minimum level, often <b style=\"color: #C732C0\">lower than others in our market</b>. Our goal is for you to spend money on games and services, not on overpayments.",

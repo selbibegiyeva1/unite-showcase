@@ -204,7 +204,7 @@ export const TM = {
             whyTrustUs: "Näme üçin bize ynanmaly? Biziň 3 esasy prinsipleriňiz:",
             reliability: "Ygtybarlylyk:",
             reliabilityText: "Biz diňe <b>resmi we barlanan hyzmatdaşlar</b> bilen işleýäris. Bu siz üçin bir zat aňladýar — <b>hasap bloklanmagyň hiç hili mümkinçiligi ýok</b>. Siziň satyn almalaryňyz we profilňiz doly howpsuz.",
-            speed: "Tizlik",
+            speed: "Tizlik:",
             speedText: "Biz siziň wagtyňyzy baha berýäris. Steam hasaby <b style=\"color: #C732C0\">ortaça 5-10 minutda</b> doldurylýar, oýun açarlary bolsa derrew gelýär. Satyn aldyňyz — we derrew oýnaň!",
             benefit: "Peýda:",
             benefitText: "Biz komissiýalary minimal derejede sakamak isleýäris, köplenç <b style=\"color: #C732C0\">bazarymyzdaky başgalardan pes</b>. Biziň maksadymyz — siziň pullaryňyzy oýunlar we hyzmatlar üçin sarp etmek, ýöne artykmaç tölegler üçin däl.",
