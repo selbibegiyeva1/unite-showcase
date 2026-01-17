@@ -83,6 +83,78 @@ export const EN = {
                 a: "Yes, you can specify any recipient email or forward the email with the code manually.",
             },
         ],
+        steamVoucher: [
+            {
+                q: "What is a Steam voucher?",
+                a: "This is a digital code for topping up a Steam account."
+            },
+            {
+                q: "Are there regional restrictions?",
+                a: "Yes, vouchers are tied to a region and cannot be exchanged if the wrong region is selected."
+            },
+            {
+                q: "How to find out your Steam account region?",
+                a: "1. In the top right corner, click on your profile name\n2. In the dropdown menu, select \"About account: ...\"\n3. Find the \"Country\" field\n4. The \"Country\" line will indicate your current region."
+            },
+            {
+                q: "How will I receive the voucher after payment?",
+                a: "After successful payment, the voucher and activation instructions will arrive within 3-15 minutes at your e-mail address specified during filling out.\n\nImportant: the point of sale and the client are responsible for correctly specifying the email. If there was an error in writing the address, the system will send the voucher to the wrong email, and this is not a technical glitch."
+            },
+            {
+                q: "What to do if the email with the voucher didn't arrive?",
+                a: "First, check your email's \"Spam\", \"Promotions\", and \"Mailings\" folders. Make sure the email address was entered without errors. If there was an error in specifying the email during checkout, the point of sale can personally hand the voucher to the client and manually provide the code. In the transaction history, a separate link \"QR/Instruction\" will be available, through which the seller can obtain the activation code and give it to the client."
+            },
+            {
+                q: "Can money be returned for a voucher after purchase?",
+                a: "Unfortunately, no. The voucher is non-refundable. If the voucher turns out to be invalid, we will conduct a check and provide a new working code."
+            },
+            {
+                q: "How long is the voucher valid?",
+                a: "The validity period is unlimited — you can activate it at any time."
+            },
+            {
+                q: "What to do if the system says the code is already activated?",
+                a: "Contact the support specified in the email. We will check the code with the supplier and replace it with a new one upon confirmation of the problem."
+            },
+            {
+                q: "Can I buy a voucher as a gift?",
+                a: "Yes, you can specify any recipient's email or forward the email with the code manually."
+            }
+        ],
+        steamTopup: [
+            {
+                q: "What is a Steam login?",
+                a: "This is a combination of letters, numbers, and the '_' symbol that you specify when logging into Steam. If you enter an incorrect login, the money will go to another user with this login.\n\nImportant: the point of sale and the client are responsible for the correct specification of the Steam login."
+            },
+            {
+                q: "How to find your Steam account region?",
+                a: "1. In the top right corner, click on your profile name\n2. In the dropdown menu, select \"About account: ...\"\n3. Find the \"Country\" field\n4. The \"Country\" line will indicate your current region."
+            },
+            {
+                q: "Which countries' Steam accounts can be topped up?",
+                a: "Topping up the game balance with a minimum commission is available for users from the following countries:\n• Russia\n• Turkmenistan\n• Azerbaijan\n• Armenia\n• Belarus\n• Kazakhstan\n• Kyrgyzstan\n• Moldova\n• Tajikistan\n• Uzbekistan"
+            },
+            {
+                q: "How to top up a new Steam account?",
+                a: "When topping up a new account for the first time, there is a risk of changing the Steam store country. For example, it might become Kazakhstani, and then prices everywhere will be in Tenge. To avoid this, follow the instructions:\n\n1. Log in to your Steam account in a browser or program. Do not use a VPN — otherwise, the account's home region will change, and Steam item prices will be shown in a different currency.\n2. Add at least two free games to the account. For example, PUBG and Dota 2. Games can be added via the Steam library in the smartphone app.\n3. Play the added games for at least 2-3 hours.\n4. Top up the account with a minimum amount — 100 manat."
+            },
+            {
+                q: "Can money be returned after topping up?",
+                a: "Unfortunately, this is not possible. Funds are credited to the Steam wallet instantly."
+            },
+            {
+                q: "How quickly is money credited to the Steam game wallet?",
+                a: "Funds will arrive on Steam within 15 minutes. In rare cases, it may take up to 2 hours. If the money has not arrived within a few hours, please write to our support team at the email specified in the letter. We will check the payment and try to assist."
+            },
+            {
+                q: "Is it possible to return money if I made a mistake in the login when topping up Steam?",
+                a: "If the entered login exists, the money cannot be returned."
+            },
+            {
+                q: "What if the payment is cancelled due to technical reasons?",
+                a: "Payment processing may be unavailable due to technical reasons during service updates; please try to perform the operation later."
+            }
+        ],
     },
     footer: {
         customerSupportTelegram: "Customer Support in Telegram",

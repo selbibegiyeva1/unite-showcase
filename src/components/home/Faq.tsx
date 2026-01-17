@@ -1,56 +1,74 @@
 import { useState, useMemo } from "react";
 import { useTranslations } from "../../translations";
+import type { TopUpMode } from "../../pages/Product";
 
 type FaqItem = {
     q: string;
     a: React.ReactNode;
 };
 
-function Faq() {
+type FaqProps = {
+    groupName?: string;
+    mode?: TopUpMode;
+};
+
+
+function formatAnswer(answer: string): React.ReactNode {
+    const paragraphs = answer.split("\n\n");
+    const answerParts: React.ReactNode[] = [];
+    
+    paragraphs.forEach((para, paraIdx) => {
+        if (paraIdx > 0) {
+            answerParts.push(<br key={`br-para-${paraIdx}`} />);
+            answerParts.push(<br key={`br-para2-${paraIdx}`} />);
+        }
+        
+        const lines = para.split("\n").filter(l => l.trim() !== "");
+        const isBoldSection = para.trim().startsWith("Важно:") || 
+                             para.trim().startsWith("Important:") ||
+                             para.trim().startsWith("Если вы ошиблись") ||
+                             para.trim().startsWith("If you made a mistake");
+        
+        lines.forEach((line, lineIdx) => {
+            if (lineIdx > 0) {
+                answerParts.push(<br key={`br-line-${paraIdx}-${lineIdx}`} />);
+            }
+            
+            if (isBoldSection) {
+                answerParts.push(<b key={`text-${paraIdx}-${lineIdx}`}>{line}</b>);
+            } else {
+                answerParts.push(<span key={`text-${paraIdx}-${lineIdx}`}>{line}</span>);
+            }
+        });
+    });
+    
+    return (
+        <p className="mt-2.5 text-[14px] font-light">
+            {answerParts}
+        </p>
+    );
+}
+
+function Faq({ groupName, mode }: FaqProps = {}) {
     const t = useTranslations();
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const faqs: FaqItem[] = useMemo(() => {
-        return t.faq.items.map((item) => {
-            // Split by double newline to handle paragraphs, then by single newline for line breaks
-            const paragraphs = item.a.split("\n\n");
-            const answerParts: React.ReactNode[] = [];
-            
-            paragraphs.forEach((para, paraIdx) => {
-                if (paraIdx > 0) {
-                    answerParts.push(<br key={`br-para-${paraIdx}`} />);
-                    answerParts.push(<br key={`br-para2-${paraIdx}`} />);
-                }
-                
-                const lines = para.split("\n").filter(l => l.trim() !== "");
-                const isBoldSection = para.trim().startsWith("Важно:") || 
-                                     para.trim().startsWith("Important:") ||
-                                     para.trim().startsWith("Если вы ошиблись") ||
-                                     para.trim().startsWith("If you made a mistake");
-                
-                lines.forEach((line, lineIdx) => {
-                    if (lineIdx > 0) {
-                        answerParts.push(<br key={`br-line-${paraIdx}-${lineIdx}`} />);
-                    }
-                    
-                    if (isBoldSection) {
-                        answerParts.push(<b key={`text-${paraIdx}-${lineIdx}`}>{line}</b>);
-                    } else {
-                        answerParts.push(<span key={`text-${paraIdx}-${lineIdx}`}>{line}</span>);
-                    }
-                });
-            });
-            
-            return {
+        // Use Steam-specific FAQs if on Steam product page
+        if (groupName === "Steam" && mode) {
+            const steamFaqs = mode === "voucher" ? t.faq.steamVoucher : t.faq.steamTopup;
+            return steamFaqs.map((item) => ({
                 q: item.q,
-                a: (
-                    <p className="mt-2.5 text-[14px] font-light">
-                        {answerParts}
-                    </p>
-                ),
-            };
-        });
-    }, [t]);
+                a: formatAnswer(item.a)
+            }));
+        }
+
+        // Default to translation-based FAQs
+        return t.faq.items.map((item) => ({
+            q: item.q,
+            a: formatAnswer(item.a)
+        }));
+    }, [t, groupName, mode]);
 
     const toggle = (idx: number) => {
         setOpenIndex((prev) => (prev === idx ? null : idx));

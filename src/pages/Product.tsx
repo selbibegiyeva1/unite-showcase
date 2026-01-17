@@ -213,7 +213,7 @@ function Product() {
                 />
 
                 <div className="pb-15 max-lg:px-[48px] product"><NewsBlock /></div>
-                <div className="pb-46 max-lg:px-[48px] product"><Faq /></div>
+                <div className="pb-46 max-lg:px-[48px] product"><Faq groupName={groupName} mode={mode} /></div>
             </div>
             <Footer />
         </div>

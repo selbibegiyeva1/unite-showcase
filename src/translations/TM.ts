@@ -83,6 +83,78 @@ export const TM = {
                 a: "Hawa, siz islendik alyjynyň e-mailini görkezip bilersiňiz ýa-da kody bolan haty el bilen başga birine ugradyp bilersiňiz.",
             },
         ],
+        steamVoucher: [
+            {
+                q: "Steam wauçeri näme?",
+                a: "Bu Steam hasabyny doldurmak üçin sanly kodyr."
+            },
+            {
+                q: "Sebit boýunça çäklendirmeler barmy?",
+                a: "Hawa, wauçerler sebit bilen baglanyşyklydyr we ýalňyş sebit saýlananda çalşyrylmaýar."
+            },
+            {
+                q: "Steam hasabyňyzyň sebitini nädip bilmeli?",
+                a: "1. Ýokarky sag burçda profil adyňyza basyň\n2. Açylýan menýuda \"Hasabym barada: ...\" saýlaň\n3. \"Ýurt\" meýdançasyny tapyň\n4. «Ýurt» setirinde häzirki sebitiňiz görkeziler."
+            },
+            {
+                q: "Tölegden soň wauçeri nädip alaryn?",
+                a: "Töleg üstünlikli amala aşyrylandan soň, wauçer we işjeňleşdiriş gollanmasy 3-15 minudyň dowamynda görkezilen e-mail adresiňize gelýär.\n\nMöhüm: satuw nokady we müşderi e-mail adresiniň dogry görkezilmegine jogapkärçilik çekýär. Eger adres ýalňyş ýazylanda, sistema wauçeri ýalňyş poçta adresine iberer we bu tehniki kemçilik hasaplanmaýar."
+            },
+            {
+                q: "Wauçerli hat gelmese näme etmeli?",
+                a: "Ilki bilen poçtaňyzdaky «Spam», «Promoaksiýalar» we «Rassylkalar» bukjalaryny barlaň. E-mail adresiňiziň ýalňyşsyz ýazylandygyna göz ýetiriň. Eger sargyt wagty poçta adresinde ýalňyşlyk goýberilen bolsa, satuw nokady wauçeri müşderä şahsy el bilen berip bilýär we kody el bilen geçirip bilýär. Tranzaksiýa taryhynda aýratyn \"QR/Gollanma\" sýlkasy elýeterli bolar, bu sýlka arkaly satyjyk işjeňleşdiriş kodyny alyp bilýär we müşderä berip bilýär."
+            },
+            {
+                q: "Satyn alandan soň wauçer üçin puly yzyna gaýtaryp bolýarmy?",
+                a: "Gynansak-da, ýok. Wauçer yzyna gaýtarylmaýar. Eger wauçer işlemeýän bolsa, biz barlag geçireris we täze işleýän kody bereris."
+            },
+            {
+                q: "Wauçeriň möhleti näçe wagt?",
+                a: "Möhlet çäklendirilmeýär — siz ony islendik wagtda işjeňleşdirip bilersiňiz."
+            },
+            {
+                q: "Sistema kod eýýäm işjeňleşdirilen diýip ýazsa näme etmeli?",
+                a: "Hatda görkezilen goldaw gullugyna ýüz tutuň. Biz kody üpjün edijiden barlarys we mesele tassyklanan ýagdaýynda ony täzesi bilen çalşyryp bereris."
+            },
+            {
+                q: "Wauçeri sowgat hökmünde satyn alyp bolýarmy?",
+                a: "Hawa, siz islendik alyjynyň e-mailini görkezip bilersiňiz ýa-da kody bolan haty el bilen ugradyp bilersiňiz."
+            }
+        ],
+        steamTopup: [
+            {
+                q: "Steam logini näme?",
+                a: "Bu Steam-e giriş wagtynda görkezýän harplaryň, sanlaryň we «_» nyşanynyň kombinasiýasydyr. Eger siz ýalňyş logini girizseňiz — pullar şol logini bolan başga bir ulanyjyga geçer.\n\nMöhüm: satuw nokady we müşderi Steam loginiň dogry görkezilmegine jogapkärçilik çekýär."
+            },
+            {
+                q: "Steam hasabyňyzyň sebitini nädip bilmeli?",
+                a: "1. Ýokarky sag burçda profil adyňyza basyň\n2. Açylýan menýuda \"Hasabym barada: ...\" saýlaň\n3. \"Ýurt\" meýdançasyny tapyň\n4. «Ýurt» setirinde häzirki sebitiňiz görkeziler."
+            },
+            {
+                q: "Haýsy ýurtlaryň Steam hasaplaryny dolduryp bolýar?",
+                a: "Minimal komissiýa bilen oýun balansyny doldurmak aşakdaky ýurtlaryň ulanyjylary üçin elýeterli:\n• Russiýa\n• Türkmenistan\n• Azerbaýjan\n• Ermenistan\n• Belorussiýa\n• Gazagystan\n• Gyrgyzystan\n• Moldowa\n• Täjigistan\n• Özbegistan"
+            },
+            {
+                q: "Täze Steam hasabyny nädip doldurmaly?",
+                a: "Täze hasaby ilkinji gezek dolduranda Steam dükanynyň ýurdyny üýtgetmek howpy bar. Meselem, ol gazagystanly bolup biler, şonda ähli bahalar tenge görkeziler. Munuň öňüni almak üçin gollanmaga eýeriň:\n\n1. Brauzer ýa-da programmada Steam hasabyňyza giriň. VPN ulanmaň — ýoksa hasabyň öý sebiti üýtgerer, Steam harytlarynyň bahalary başga walýutada görkeziler.\n2. Hasaba azyndan iki mugt oýun goşuň. Meselem, PUBG we Dota 2. Oýunlary smartfonda Steam kitaphanasy arkaly goşup bolýar.\n3. Goşulan oýunlarda azyndan 2-3 sagat oýnaň.\n4. Hasaby minimal mukdarda — 100 manat dolduryň."
+            },
+            {
+                q: "Doldurandan soň puly yzyna gaýtaryp bolýarmy?",
+                a: "Gynansak-da, bu mümkin däl. Serişdeler Steam gapjygyna derrew geçirilýär."
+            },
+            {
+                q: "Steam oýun gapjygyna pullar näçe çalt geçirilýär?",
+                a: "Pullar Steam-e 15 minudyň dowamynda gelýär. Nadir ýagdaýlarda — 2 sagada çenli. Eger pullar birnäçe sagatdan soň gelmese, hatda görkezilen goldaw gullugyna ýazyň. Biz tölegi barlarys we kömek etmäge synanyşarys."
+            },
+            {
+                q: "Steam dolduranda loginde ýalňyşlyk edilse puly yzyna gaýtaryp bolýarmy?",
+                a: "Eger girizilen login bar bolsa — puly yzyna gaýtaryp bolmaz."
+            },
+            {
+                q: "Eger töleg tehniki sebäpler üçin ýatyrylsa?",
+                a: "Hyzmat täzelenende tehniki sebäpler üçin töleg amala aşyrylmazlygy mümkin, operasiýany soňrak geçirmäge synanyşyň."
+            }
+        ],
     },
     footer: {
         customerSupportTelegram: "Telegram-da müşderi goldawy",
