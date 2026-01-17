@@ -51,14 +51,14 @@ export default function Products() {
 
             <div className="mt-4">
                 {isLoading && (
-                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3">
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {Array.from({ length: 8 }).map((_, i) => (
-                            <div key={i} className="flex flex-col gap-3">
-                                <div className="max-w-57.5 rounded-2xl overflow-hidden">
-                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" height={231} />
+                            <div key={i} className="flex flex-col gap-3 max-[500px]:gap-2">
+                                <div className="max-w-57.5 rounded-2xl overflow-hidden w-full">
+                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" height={231} className="max-[500px]:h-auto max-[500px]:aspect-square" />
                                 </div>
                                 <center>
-                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" borderRadius={8} width={120} height={21} />
+                                    <Skeleton baseColor="#2F2F33" highlightColor="#47474e" borderRadius={8} width={120} height={21} className="max-[500px]:w-20 max-[500px]:h-4" />
                                 </center>
                             </div>
                         ))}
@@ -76,18 +76,18 @@ export default function Products() {
                 )}
 
                 {!isLoading && !isError && (
-                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 products-grid">
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {activeGroups.map((g) => (
                             <Link
                                 to={`/product?group=${encodeURIComponent(g.group_name)}`}
                                 key={`${g.category}:${g.group_name}`}
-                                className="flex flex-col gap-3 group"
+                                className="flex flex-col gap-3 max-[500px]:gap-2 group"
                             >
                                 <div className="overflow-hidden rounded-2xl">
                                     <img
                                         src={g.icon_url}
                                         alt="product"
-                                        className="rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                                        className="w-full h-auto rounded-2xl transition-transform duration-300 group-hover:scale-110"
                                         loading="lazy"
                                         onError={(e) => {
                                             const img = e.currentTarget;
@@ -98,7 +98,7 @@ export default function Products() {
                                     />
                                 </div>
                                 <center>
-                                    <span className="font-bold">{g.group_name}</span>
+                                    <span className="font-bold text-sm">{g.group_name}</span>
                                 </center>
                             </Link>
                         ))}
