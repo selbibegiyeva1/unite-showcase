@@ -25,7 +25,44 @@ function resolvePath(groupName: string, mode: TopUpMode) {
 }
 
 function toNumberIfNumeric(v: any) {
-    if (typeof v === "number" && Number.isFinite(v)) return v;
+    // If it's already a number, return it (though we may have already lost precision)
+    if (typeof v === "number" && Number.isFinite(v)) {
+        return v;
+    }
+    
+    // If it's a string, check if it represents a large integer
+    if (typeof v === "string" && v.trim() !== "") {
+        // Check if the string represents a numeric value
+        // Use a regex to check if it's a valid integer string
+        const trimmed = v.trim();
+        const isIntegerString = /^-?\d+$/.test(trimmed);
+        
+        if (isIntegerString) {
+            // Compare the string directly to MAX_SAFE_INTEGER string to avoid precision loss
+            const maxSafeStr = String(Number.MAX_SAFE_INTEGER);
+            
+            // Check if the absolute value exceeds MAX_SAFE_INTEGER by string comparison
+            const absValue = trimmed.startsWith("-") ? trimmed.slice(1) : trimmed;
+            
+            if (absValue.length > maxSafeStr.length || 
+                (absValue.length === maxSafeStr.length && absValue > maxSafeStr)) {
+                // Keep as string to preserve precision for large integers
+                return v;
+            }
+            
+            // Safe to convert to number
+            const n = Number(v);
+            return Number.isFinite(n) ? n : v;
+        }
+        
+        // For decimal numbers or other formats, try normal conversion
+        const n = Number(v);
+        if (Number.isFinite(n)) {
+            return n;
+        }
+    }
+    
+    // Try to convert, but if it fails, return original value
     const n = Number(v);
     return Number.isFinite(n) ? n : v;
 }
