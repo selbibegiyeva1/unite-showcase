@@ -1,8 +1,10 @@
 export const RU = {
     navbar: {
         partners: "Партнеры",
+        aboutUs: "О нас",
         goToUniteGaming: "Перейти в Unite Gaming",
         searchPlaceholder: "Поиск по сайту",
+        searchNoResults: "Товар не найден",
     },
     slider: {
         slide1: {
@@ -31,6 +33,7 @@ export const RU = {
     products: {
         games: "Игры",
         programs: "Сервисы",
+        otherServices: "Другие сервисы",
     },
     newsBlock: {
         title: "Популярное",
@@ -290,6 +293,15 @@ export const RU = {
             bannerButton: "Подробнее",
         },
     },
+    support: {
+        bannerTitle: "Не нашли нужный сервис или подписку?",
+        bannerDescription: "Напишите нам — поможем быстро оформить и оплатить.",
+        bannerButton: "Написать нам",
+        modalTitle: "Не нашли нужный сервис или подписку?",
+        modalDescription: "Мы оказываем помощь с оплатой сервиса. Свяжитесь с нами — наши специалисты проконсультируют вас и сопроводят процесс.",
+        searchTitle: "Не нашли нужный сервис или подписку?",
+        searchButton: "Связаться с нами",
+    },
     product: {
         accountTopUp: "Пополнение аккаунта",
         whereToSearch: "Где искать",
@@ -308,7 +320,7 @@ export const RU = {
         selectRegion: "Выберите регион",
         any: "Любой",
         payment: "Оплата",
-        selectBank: "Выбрать банк",
+        selectBank: "Выбор способа оплаты",
         region: "Регион",
         toBeCredited: "К зачислению",
         total: "Итого",
@@ -320,7 +332,7 @@ export const RU = {
         steamBalanceMessage: "Баланс Steam будет пополнен в течение 15 минут после успешной оплаты.",
         activationInstructionsMessage: "Инструкция по активации поступит на указанный адрес электронной почты.",
         voucherActivationMessage: "Ваучер и инструкция по активации поступит на указанный адрес электронной почты.",
-        selectYourBank: "Выберите ваш банк",
+        selectYourBank: "Выбор способа оплаты",
         otherBanks: "Другие банки",
         or: "или",
     },

@@ -61,6 +61,10 @@
     .nav-gap {
         margin-left: 30px;
     }
+
+    .nav-link-underline {
+        display: none;
+    }
 }
 
 @layer {
@@ -124,6 +128,24 @@
     .scrollbar-regions::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0.22);
         border-radius: 9999px;
+    }
+
+    /* Navbar link underline (left-to-right on hover) */
+
+    .nav-link-underline {
+        @apply relative inline-block;
+    }
+
+    .nav-link-underline::after {
+        content: "";
+        @apply absolute left-0 h-0.5 bg-[#A132C7];
+        bottom: -4px;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link-underline:hover::after {
+        width: 100%;
     }
 
     /* // Partners List */

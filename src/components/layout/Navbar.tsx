@@ -22,8 +22,11 @@ function Navbar({ toggleSidebar }: NavbarProps) {
 
                 <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" placeholder={t.navbar.searchPlaceholder} />
 
-                <Link to="/partners" className="text-[14px] font-bold max-small:hidden">
+                <Link to="/partners" className="nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors">
                     {t.navbar.partners}
+                </Link>
+                <Link to="/about" className="nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors">
+                    {t.navbar.aboutUs}
                 </Link>
 
                 <div className="ml-auto flex items-center">

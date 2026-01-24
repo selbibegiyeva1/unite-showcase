@@ -7,11 +7,11 @@ export function useSearchBar(maxSuggestions = 8) {
     const [activeIndex, setActiveIndex] = useState(-1);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-    const { suggestions } = useProductGroupSearchSuggestions(value, maxSuggestions);
+    const { suggestions, isLoading } = useProductGroupSearchSuggestions(value, maxSuggestions);
 
     useEffect(() => {
         const q = value.trim();
-        setOpen(Boolean(q) && suggestions.length > 0);
+        setOpen(Boolean(q));
         setActiveIndex(-1);
     }, [value, suggestions.length]);
 
@@ -20,7 +20,7 @@ export function useSearchBar(maxSuggestions = 8) {
     };
 
     const handleFocus = () => {
-        if (value.trim() && suggestions.length > 0) {
+        if (value.trim()) {
             setOpen(true);
         }
     };
@@ -35,6 +35,7 @@ export function useSearchBar(maxSuggestions = 8) {
         open,
         activeIndex,
         suggestions,
+        isLoading,
         wrapperRef,
         handleChange,
         handleFocus,

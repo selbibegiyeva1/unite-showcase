@@ -41,6 +41,11 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
                             <span>{t.navbar.partners}</span>
                         </Link>
                     </li>
+                    <li className="mt-[24px]">
+                        <Link to="/about" className="font-medium" onClick={toggleSidebar}>
+                            <span>{t.navbar.aboutUs}</span>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="mt-[50px]">
