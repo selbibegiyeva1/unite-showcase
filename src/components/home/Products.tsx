@@ -2,19 +2,41 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductGroupsQuery, type ProductGroupCategory } from "../../hooks/home/useProductGroupsQuery";
 import { useTranslations } from "../../translations";
+import SupportHelpModal from "../product/SupportHelpModal";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+type ExtendedCategory = ProductGroupCategory | "other";
+
+const OTHER_SERVICES = [
+    { name: "Adobe", src: "/home/static/Adobe.png" },
+    { name: "Canva", src: "/home/static/Canva.png" },
+    { name: "ChatGPT Plus", src: "/home/static/ChatGPT Plus.png" },
+    { name: "Cursor", src: "/home/static/Cursor.png" },
+    { name: "Figma", src: "/home/static/Figma.png" },
+    { name: "Gemini", src: "/home/static/Gemini.png" },
+    { name: "Google Play", src: "/home/static/Google Play.png" },
+    { name: "Kling", src: "/home/static/Kling.png" },
+    { name: "Perplexity", src: "/home/static/Perplexity.png" },
+    { name: "Runway", src: "/home/static/Runway.png" },
+    { name: "Suno AI", src: "/home/static/Suno AI.png" },
+];
+
 export default function Products() {
     const t = useTranslations();
-    const [activeCategory, setActiveCategory] = useState<ProductGroupCategory>("games");
+    const [activeCategory, setActiveCategory] = useState<ExtendedCategory>("games");
+    const [isSupportOpen, setIsSupportOpen] = useState(false);
     const { data, isLoading, isError, error, refetch } = useProductGroupsQuery();
 
     const activeGroups = useMemo(() => {
+        if (activeCategory === "other") return [];
+
         const groups = data ?? [];
         return groups.filter((g) => g.category === activeCategory);
     }, [data, activeCategory]);
+
+    const isOther = activeCategory === "other";
 
     return (
         <div className="max-w-255 m-auto max-lg:px-[48px] product">
@@ -47,10 +69,24 @@ export default function Products() {
                     />
                     <span>{t.products.programs}</span>
                 </button>
+                <button
+                    type="button"
+                    className={`switch ${activeCategory === "other" ? "switch--active" : "switch--inactive"}`}
+                    onClick={() => setActiveCategory("other")}
+                >
+                    <img
+                        src="/home/add-block.png"
+                        alt="other services"
+                        style={{ width: 22 }}
+                        className={activeCategory !== "other" ? "switch--inactive-img" : ""}
+                        loading="lazy"
+                    />
+                    <span>{t.products.otherServices}</span>
+                </button>
             </div>
 
             <div className="mt-4">
-                {isLoading && (
+                {!isOther && isLoading && (
                     <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="flex flex-col gap-3 max-[500px]:gap-2">
@@ -64,7 +100,7 @@ export default function Products() {
                         ))}
                     </div>
                 )}
-                {isError && (
+                {!isOther && isError && (
                     <div>
                         <div style={{ color: "red" }}>
                             {(error as Error)?.message ?? "Error"}
@@ -75,7 +111,7 @@ export default function Products() {
                     </div>
                 )}
 
-                {!isLoading && !isError && (
+                {!isOther && !isLoading && !isError && (
                     <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {activeGroups.map((g) => (
                             <Link
@@ -103,6 +139,34 @@ export default function Products() {
                             </Link>
                         ))}
                     </div>
+                )}
+
+                {isOther && (
+                    <>
+                        <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
+                            {OTHER_SERVICES.map((service) => (
+                                <button
+                                    key={service.name}
+                                    type="button"
+                                    onClick={() => setIsSupportOpen(true)}
+                                    className="flex flex-col gap-3 max-[500px]:gap-2 text-left group"
+                                >
+                                    <div className="overflow-hidden rounded-2xl">
+                                        <img
+                                            src={service.src}
+                                            alt={service.name}
+                                            className="w-full h-auto rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <center>
+                                        <span className="font-bold text-sm">{service.name}</span>
+                                    </center>
+                                </button>
+                            ))}
+                        </div>
+                        <SupportHelpModal isOpen={isSupportOpen} onClose={() => setIsSupportOpen(false)} />
+                    </>
                 )}
             </div>
         </div>

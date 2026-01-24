@@ -21,14 +21,6 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
 
     const slides = useMemo(() => [
         {
-            id: 5,
-            img: "/home/news/5.png",
-            title: "Unite Shop — твой проводник в мире игровых покупок",
-            text: "Коротко о нас",
-            date: "20.04.2025",
-            to: "/news5",
-        },
-        {
             id: 4,
             img: "/home/news/4.png",
             title: t.newsBlock.slide4.title,

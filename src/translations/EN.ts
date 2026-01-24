@@ -1,8 +1,10 @@
 export const EN = {
     navbar: {
         partners: "Partners",
+        aboutUs: "About us",
         goToUniteGaming: "Go to Unite Gaming",
         searchPlaceholder: "Search the site",
+        searchNoResults: "Product not found",
     },
     slider: {
         slide1: {
@@ -31,6 +33,7 @@ export const EN = {
     products: {
         games: "Games",
         programs: "Services",
+        otherServices: "Other services",
     },
     newsBlock: {
         title: "Popular",
@@ -290,6 +293,15 @@ export const EN = {
             bannerButton: "Details",
         },
     },
+    support: {
+        bannerTitle: "Didn't find the service or subscription you need?",
+        bannerDescription: "Write to us — we'll help you quickly place and pay for your order.",
+        bannerButton: "Write to us",
+        modalTitle: "Didn't find the service or subscription you need?",
+        modalDescription: "We help with paying for services. Contact us — our specialists will consult you and guide you through the process.",
+        searchTitle: "Didn't find the service or subscription you need?",
+        searchButton: "Contact us",
+    },
     product: {
         accountTopUp: "Account Top-up",
         whereToSearch: "Where to search",
@@ -308,7 +320,7 @@ export const EN = {
         selectRegion: "Select region",
         any: "Any",
         payment: "Payment",
-        selectBank: "Select bank",
+        selectBank: "Selecting a payment method",
         region: "Region",
         toBeCredited: "To be credited",
         total: "Total",
@@ -320,7 +332,7 @@ export const EN = {
         steamBalanceMessage: "Steam balance will be topped up within 15 minutes after successful payment.",
         activationInstructionsMessage: "Activation instructions will be sent to the specified email address.",
         voucherActivationMessage: "Voucher and activation instructions will be sent to the specified email address.",
-        selectYourBank: "Select your bank",
+        selectYourBank: "Selecting a payment method",
         otherBanks: "Other banks",
         or: "or",
     },

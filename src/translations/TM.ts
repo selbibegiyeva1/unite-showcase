@@ -1,8 +1,10 @@
 export const TM = {
     navbar: {
         partners: "Hyzmatdaşlar",
+        aboutUs: "Biz barada",
         goToUniteGaming: "Unite Gaming-e geçmek",
         searchPlaceholder: "Saýt boýunça gözleg",
+        searchNoResults: "Önüm tapylmady",
     },
     slider: {
         slide1: {
@@ -31,6 +33,7 @@ export const TM = {
     products: {
         games: "Oýunlar",
         programs: "Hyzmatlar",
+        otherServices: "Beýleki hyzmatlar",
     },
     newsBlock: {
         title: "Meşhur",
@@ -290,6 +293,15 @@ export const TM = {
             bannerButton: "Giňişleýin",
         },
     },
+    support: {
+        bannerTitle: "Gerek hyzmatyňyzy ýa-da abunaňyzy tapmadyňyzmy?",
+        bannerDescription: "Bize ýazyň — hyzmaty çalt resmileşdirmäge we tölemäge kömek ederis.",
+        bannerButton: "Bize ýazmak",
+        modalTitle: "Gerek hyzmatyňyzy ýa-da abunaňyzy tapmadyňyzmy?",
+        modalDescription: "Hyzmat töleginde kömek berýäris. Bize ýüz tutuň — hünärmenlerimiz maslahat bererler we prosesi doly alyp bararlar.",
+        searchTitle: "Gerek hyzmatyňyzy ýa-da abunaňyzy tapmadyňyzmy?",
+        searchButton: "Bize ýüz tutuň",
+    },
     product: {
         accountTopUp: "Hasaby doldurmak",
         whereToSearch: "Nireden gözlemeli",
@@ -308,7 +320,7 @@ export const TM = {
         selectRegion: "Sebiti saýlaň",
         any: "Islendik",
         payment: "Töleg",
-        selectBank: "Banky saýlaň",
+        selectBank: "Töleg usulyny saýlamak",
         region: "Sebit",
         toBeCredited: "Hasaba geçirilýär",
         total: "Jemi",
@@ -320,7 +332,7 @@ export const TM = {
         steamBalanceMessage: "Steam balansy tölegden soň 15 minudyň dowamynda doldurylar.",
         activationInstructionsMessage: "Işjeňleşdiriş gollanmasy görkezilen e-mail adresine ugradylar.",
         voucherActivationMessage: "Wauçer we işjeňleşdiriş gollanmasy görkezilen e-mail adresine ugradylar.",
-        selectYourBank: "Bankyňyzy saýlaň",
+        selectYourBank: "Töleg usulyny saýlamak",
         otherBanks: "Başga banklar",
         or: "ýa-da",
     },
