@@ -65,6 +65,20 @@ function Slider() {
                     "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
             },
         },
+        {
+            id: "support",
+            img: "/home/slider/5.png",
+            mobileImg: "/home/slider/6.png",
+            title: t.support.bannerTitle,
+            description: t.support.bannerDescription,
+            descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium max-xsmall:mb-4",
+            button: {
+                to: "/about",
+                text: t.support.bannerButton,
+                className:
+                    "text-[14px] max-xsmall:w-full shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 flex w-52.5 items-center justify-center rounded-[10px]",
+            },
+        },
     ], [t]);
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
@@ -149,7 +163,18 @@ function Slider() {
                         <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
                             <Link to={slideUrl} className="block h-full w-full">
                                 <div className="h-90 slider-img">
-                                    <img src={slide.img} alt={slide.title} className="w-full h-full object-cover" draggable={false} loading="lazy" />
+                                    <picture>
+                                        {("mobileImg" in slide) && (
+                                            <source srcSet={(slide as any).mobileImg} media="(max-width: 500px)" />
+                                        )}
+                                        <img
+                                            src={slide.img}
+                                            alt={slide.title}
+                                            className="w-full h-full object-cover"
+                                            draggable={false}
+                                            loading="lazy"
+                                        />
+                                    </picture>
                                 </div>
 
                                 <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
