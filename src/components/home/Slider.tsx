@@ -216,7 +216,10 @@ function Slider() {
                     return (
                         <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
                             {isSupportSlide ? (
-                                <div className="block h-full w-full">
+                                <div 
+                                    className="block h-full w-full cursor-pointer"
+                                    onClick={() => setIsSupportOpen(true)}
+                                >
                                     {SlideContent}
                                 </div>
                             ) : (
