@@ -36,7 +36,7 @@ export const EN = {
         otherServices: "Other services",
     },
     newsBlock: {
-        title: "Popular",
+        title: "News",
         slide1: {
             title: "Steam Awards 2025 Results",
             text: "The best games of 2025 according to players have been named.",

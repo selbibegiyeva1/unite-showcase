@@ -148,6 +148,10 @@
         width: 100%;
     }
 
+    .nav-link-underline--active::after {
+        width: 100%;
+    }
+
     /* // Partners List */
 
     .scrollbar-partners {

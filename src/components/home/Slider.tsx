@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Link } from "react-router-dom";
 import { useTranslations } from "../../translations";
+import SupportHelpModal from "../product/SupportHelpModal";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -87,6 +88,7 @@ function Slider() {
 
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const [isSupportOpen, setIsSupportOpen] = useState(false);
 
     useEffect(() => {
         if (!swiper || !prevEl || !nextEl) return;
@@ -158,42 +160,70 @@ function Slider() {
             >
                 {slides.map((slide) => {
                     const slideUrl = slide.button?.to ?? (slide.button?.group ? `/product?group=${encodeURIComponent((slide.button as any).group)}` : "#");
+                    const isSupportSlide = slide.id === "support";
                     
-                    return (
-                        <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
-                            <Link to={slideUrl} className="block h-full w-full">
-                                <div className="h-90 slider-img">
-                                    <picture>
-                                        {("mobileImg" in slide) && (
-                                            <source srcSet={(slide as any).mobileImg} media="(max-width: 500px)" />
-                                        )}
-                                        <img
-                                            src={slide.img}
-                                            alt={slide.title}
-                                            className="w-full h-full object-cover"
-                                            draggable={false}
-                                            loading="lazy"
-                                        />
-                                    </picture>
-                                </div>
+                    const SlideContent = (
+                        <>
+                            <div className="h-90 slider-img">
+                                <picture>
+                                    {("mobileImg" in slide) && (
+                                        <source srcSet={(slide as any).mobileImg} media="(max-width: 500px)" />
+                                    )}
+                                    <img
+                                        src={slide.img}
+                                        alt={slide.title}
+                                        className="w-full h-full object-cover"
+                                        draggable={false}
+                                        loading="lazy"
+                                    />
+                                </picture>
+                            </div>
 
-                                <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
-                                    <b className={slide.titleClassName ?? "text-[32px] max-xsmall:text-[24px] max-xsmall:w-[300px] max-xsmall:leading-8 flex"}>{slide.title}</b>
+                            <div className="absolute bottom-0 p-8 w-full bg-linear-to-t from-black/60 via-black/40 to-transparent max-xsmall:p-4">
+                                <b className={slide.titleClassName ?? "text-[32px] max-xsmall:text-[24px] max-xsmall:w-[300px] max-xsmall:leading-8 flex"}>{slide.title}</b>
 
-                                    {slide.description ? (
-                                        <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
-                                    ) : null}
+                                {slide.description ? (
+                                    <p className={slide.descriptionClassName ?? "mt-3 mb-6 text-[14px] font-medium"}>{slide.description}</p>
+                                ) : null}
 
-                                    {slide.button ? (
+                                {slide.button ? (
+                                    isSupportSlide ? (
+                                        <button
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setIsSupportOpen(true);
+                                            }}
+                                            style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
+                                            className={`${slide.button.className ?? ""} cursor-pointer`}
+                                        >
+                                            {slide.button.text}
+                                        </button>
+                                    ) : (
                                         <div
                                             style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
                                             className={slide.button.className ?? ""}
                                         >
                                             {slide.button.text}
                                         </div>
-                                    ) : null}
+                                    )
+                                ) : null}
+                            </div>
+                        </>
+                    );
+                    
+                    return (
+                        <SwiperSlide key={slide.id} className="overflow-hidden rounded-3xl relative">
+                            {isSupportSlide ? (
+                                <div className="block h-full w-full">
+                                    {SlideContent}
                                 </div>
-                            </Link>
+                            ) : (
+                                <Link to={slideUrl} className="block h-full w-full">
+                                    {SlideContent}
+                                </Link>
+                            )}
                         </SwiperSlide>
                     );
                 })}
@@ -208,6 +238,7 @@ function Slider() {
             >
                 <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" loading="lazy" />
             </button>
+            <SupportHelpModal isOpen={isSupportOpen} onClose={() => setIsSupportOpen(false)} />
         </div>
     );
 }

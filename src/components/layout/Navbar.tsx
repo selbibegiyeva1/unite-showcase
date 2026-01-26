@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LanguageDropdown from "./LanguageDropdown";
 import SearchBar from "./SearchBar";
 import { useTranslations } from "../../translations";
@@ -9,6 +9,10 @@ interface NavbarProps {
 
 function Navbar({ toggleSidebar }: NavbarProps) {
     const t = useTranslations();
+    const location = useLocation();
+
+    const isPartnersActive = location.pathname === "/partners";
+    const isAboutActive = location.pathname === "/about";
 
     return (
         <div className="bg-[#222228CC] backdrop-blur-3xl border-b border-[#2D2D2D] px-4 text-white 
@@ -22,10 +26,16 @@ function Navbar({ toggleSidebar }: NavbarProps) {
 
                 <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" placeholder={t.navbar.searchPlaceholder} />
 
-                <Link to="/partners" className="nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors">
+                <Link 
+                    to="/partners" 
+                    className={`nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors ${isPartnersActive ? "text-[#A132C7] nav-link-underline--active" : ""}`}
+                >
                     {t.navbar.partners}
                 </Link>
-                <Link to="/about" className="nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors">
+                <Link 
+                    to="/about" 
+                    className={`nav-link-underline text-[14px] font-bold hover:text-[#A132C7] transition-colors ${isAboutActive ? "text-[#A132C7] nav-link-underline--active" : ""}`}
+                >
                     {t.navbar.aboutUs}
                 </Link>
 

@@ -36,7 +36,7 @@ export const RU = {
         otherServices: "Другие сервисы",
     },
     newsBlock: {
-        title: "Популярное",
+        title: "Новости",
         slide1: {
             title: "Итоги премии Steam 2025",
             text: "Названы лучшие игры 2025 года по версии игроков.",

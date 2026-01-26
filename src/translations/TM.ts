@@ -36,7 +36,7 @@ export const TM = {
         otherServices: "Beýleki hyzmatlar",
     },
     newsBlock: {
-        title: "Meşhur",
+        title: "Habarlar",
         slide1: {
             title: "Steam 2025 baýragynyň netijeleri",
             text: "Oýunçylaryň pikiriçe 2025-nji ýylyň iň oňat oýunlary yglan edildi.",
