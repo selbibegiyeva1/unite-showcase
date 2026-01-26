@@ -47,7 +47,7 @@ function Home() {
                                 type="button"
                                 onClick={() => setIsSupportOpen(true)}
                                 style={{ background: "linear-gradient(to right, #79109D, #A132C7)" }}
-                                className="inline-flex w-[206px] text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 items-center justify-center rounded-[10px]"
+                                className="inline-flex w-[206px] cursor-pointer text-[14px] shadow-[0px_4px_0px_#580873] font-bold py-[11.5px] px-8.75 items-center justify-center rounded-[10px]"
                             >
                                 {t.support.bannerButton}
                             </button>

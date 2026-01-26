@@ -149,7 +149,7 @@ export default function Products() {
                                     key={service.name}
                                     type="button"
                                     onClick={() => setIsSupportOpen(true)}
-                                    className="flex flex-col gap-3 max-[500px]:gap-2 text-left group cursor-grab active:cursor-grabbing"
+                                    className="flex flex-col gap-3 max-[500px]:gap-2 text-left group cursor-pointer active:cursor-grabbing"
                                 >
                                     <div className="overflow-hidden rounded-2xl">
                                         <img
