@@ -19,6 +19,26 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
     const tooltipRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLImageElement>(null);
+    const hoverLeaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const openTooltip = () => {
+        if (hoverLeaveTimeoutRef.current) {
+            clearTimeout(hoverLeaveTimeoutRef.current);
+            hoverLeaveTimeoutRef.current = null;
+        }
+        setIsTooltipOpen(true);
+    };
+
+    const handleTooltipMouseLeave = () => {
+        hoverLeaveTimeoutRef.current = setTimeout(() => setIsTooltipOpen(false), 100);
+    };
+
+    const handleTooltipMouseEnter = () => {
+        if (hoverLeaveTimeoutRef.current) {
+            clearTimeout(hoverLeaveTimeoutRef.current);
+            hoverLeaveTimeoutRef.current = null;
+        }
+    };
 
     useEffect(() => {
         if (!isTooltipOpen) return;
@@ -46,6 +66,10 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isTooltipOpen]);
 
+    useEffect(() => () => {
+        if (hoverLeaveTimeoutRef.current) clearTimeout(hoverLeaveTimeoutRef.current);
+    }, []);
+
     const err = (name: string) => (showErrors ? errors[name] : "");
     const inputCls = (name: string) =>
         `w-full outline-0 rounded-2xl appearance-none text-[14px] font-medium px-4 py-3.5 bg-[#1D1D22] border ${err(name) ? "border-red-500" : "border-[#FFFFFF1A]"
@@ -62,13 +86,17 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                         <div className="flex items-center gap-2 mb-3">
                             <p className="text-[#FFFFFF99] text-[14px]">{t.product.whereToSearch}</p>
 
-                            <div className="relative max-medium:static">
+                            <div
+                                className="relative max-medium:static inline-block"
+                                onMouseEnter={openTooltip}
+                                onMouseLeave={handleTooltipMouseLeave}
+                            >
                                 <img
                                     ref={triggerRef}
                                     src="/product/region.png"
                                     alt="info"
                                     className="w-5 cursor-pointer"
-                                    onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                                    onClick={() => setIsTooltipOpen((prev) => !prev)}
                                 />
                                 {isTooltipOpen && (
                                     <>
@@ -81,6 +109,8 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                 opacity-100 translate-y-0 pointer-events-auto
                                                 transition-all duration-150
                                             `}
+                                            onMouseEnter={handleTooltipMouseEnter}
+                                            onMouseLeave={handleTooltipMouseLeave}
                                         >
                                             <p className="text-[24px] mb-6">{t.product.howToFindSteamLogin}</p>
                                             <ul className="mb-4 list-disc ml-5 flex flex-col gap-4">

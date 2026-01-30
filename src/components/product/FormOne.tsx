@@ -100,6 +100,26 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
     const tooltipRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLImageElement>(null);
+    const hoverLeaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const openTooltip = () => {
+        if (hoverLeaveTimeoutRef.current) {
+            clearTimeout(hoverLeaveTimeoutRef.current);
+            hoverLeaveTimeoutRef.current = null;
+        }
+        setIsTooltipOpen(true);
+    };
+
+    const handleTooltipMouseLeave = () => {
+        hoverLeaveTimeoutRef.current = setTimeout(() => setIsTooltipOpen(false), 100);
+    };
+
+    const handleTooltipMouseEnter = () => {
+        if (hoverLeaveTimeoutRef.current) {
+            clearTimeout(hoverLeaveTimeoutRef.current);
+            hoverLeaveTimeoutRef.current = null;
+        }
+    };
 
     useEffect(() => {
         if (!isTooltipOpen) return;
@@ -126,6 +146,10 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isTooltipOpen]);
+
+    useEffect(() => () => {
+        if (hoverLeaveTimeoutRef.current) clearTimeout(hoverLeaveTimeoutRef.current);
+    }, []);
 
     return (
         <div className="flex flex-col gap-8 p-8 bg-[#1D1D22] rounded-4xl w-full">
@@ -172,7 +196,11 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                         >
                             {t.product.voucher}
 
-                            <div className="relative max-medium:static">
+                            <div
+                                className="relative max-medium:static inline-block"
+                                onMouseEnter={isVoucherActive ? openTooltip : undefined}
+                                onMouseLeave={isVoucherActive ? handleTooltipMouseLeave : undefined}
+                            >
                                 <img
                                     ref={triggerRef}
                                     src="/product/voucher.png"
@@ -181,7 +209,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                     onClick={(e) => {
                                         if (isVoucherActive) {
                                             e.stopPropagation();
-                                            setIsTooltipOpen(!isTooltipOpen);
+                                            setIsTooltipOpen((prev) => !prev);
                                         }
                                     }}
                                 />
@@ -196,6 +224,8 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                                 opacity-100 translate-y-0 pointer-events-auto
                                                 transition-all duration-150
                                             `}
+                                            onMouseEnter={handleTooltipMouseEnter}
+                                            onMouseLeave={handleTooltipMouseLeave}
                                         >
                                             {t.product.voucherDescription}
                                         </div>
