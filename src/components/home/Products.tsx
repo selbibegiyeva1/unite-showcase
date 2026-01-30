@@ -40,7 +40,7 @@ export default function Products() {
 
     return (
         <div className="max-w-255 m-auto max-lg:px-[48px] product">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
                 <button
                     type="button"
                     className={`switch ${activeCategory === "games" ? "switch--active" : "switch--inactive"}`}
