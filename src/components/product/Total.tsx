@@ -37,7 +37,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
         if (!enabled) return "-";
         if (rateLoading) return "...";
         if (rateError) return "-";
-        return typeof topupUsd === "number" ? `~${topupUsd.toFixed(2)} $` : "-";
+        return typeof topupUsd === "number" ? `~${topupUsd.toFixed(2)}` : "-";
     }, [enabled, rateLoading, rateError, topupUsd]);
 
     const region = String(values.region_label ?? values.region_value ?? "-");
