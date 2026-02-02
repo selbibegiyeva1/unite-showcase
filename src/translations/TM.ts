@@ -335,5 +335,7 @@ export const TM = {
         selectYourBank: "Töleg usulyny saýlamak",
         otherBanks: "Başga banklar",
         or: "ýa-da",
+        conditionalUnit: "ş.b.",
+        toBeCreditedDescription: "«ş.b.» — saýlanan sebitde sanly harydyň nominalyny görkezmek üçin ulanylýan şertli birlikler.",
     },
 };

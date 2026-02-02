@@ -335,5 +335,7 @@ export const RU = {
         selectYourBank: "Выбор способа оплаты",
         otherBanks: "Другие банки",
         or: "или",
+        conditionalUnit: "у.е.",
+        toBeCreditedDescription: "«у.е.» — условные единицы, используемые для обозначения номинала цифрового товара в выбранном регионе.",
     },
 };

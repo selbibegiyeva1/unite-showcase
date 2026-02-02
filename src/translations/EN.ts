@@ -335,5 +335,7 @@ export const EN = {
         selectYourBank: "Selecting a payment method",
         otherBanks: "Other banks",
         or: "or",
+        conditionalUnit: "c.u.",
+        toBeCreditedDescription: "\"c.u.\" — conditional units used to denote the nominal value of a digital product in the selected region.",
     },
 };
