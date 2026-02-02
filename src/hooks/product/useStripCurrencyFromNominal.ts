@@ -4,7 +4,7 @@ import { useCallback } from "react";
  * Common currency codes that may appear in nominal names from the backend.
  */
 const CURRENCY_CODES =
-    "USD|EUR|Euro|RM|WON|PH|Rupee IN|AUD|R|Yen|BR|UK|CAD|HUF|CZK|TL|AT|RON|Pound|NZD|Rp|EU|Twd|MYR|GBP|HKD|KW|RUB|Baht|PLN|TRY|CNY|JPY|INR|KZT|UZS|AZN|GEL|KGS|TJS|UAH|BYN|AMD|SGD|THB|IDR|PHP|VND|BRL|MXN|ARS|CLP|COP|PEN|AED|SAR|QAR|KWD|BHD|OMR|IRR|EGP|ZAR|NGN|KES|GHS";
+    "USD|EUR|Euro|RM|WON|PH|Rupee IN|AUD|R|Yen|AU|BR|UK|CAD|HUF|CZK|TL|AT|RON|Pound|NZD|Rp|EU|Twd|MYR|GBP|HKD|KW|RUB|Baht|PLN|TRY|CNY|JPY|INR|KZT|UZS|AZN|GEL|KGS|TJS|UAH|BYN|AMD|SGD|THB|IDR|PHP|VND|BRL|MXN|ARS|CLP|COP|PEN|AED|SAR|QAR|KWD|BHD|OMR|IRR|EGP|ZAR|NGN|KES|GHS";
 
 /** Currency as standalone word (with spaces) */
 const CURRENCY_WORD_PATTERN = new RegExp(`\\s*\\b(${CURRENCY_CODES})\\b\\s*`, "gi");
