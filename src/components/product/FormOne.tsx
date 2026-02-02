@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useTranslations } from "../../translations";
 import type { ProductGroupForms, FormFieldOption } from "../../hooks/product/useProductGroupDetailsQuery";
+import { useStripCurrencyFromNominal } from "../../hooks/product/useStripCurrencyFromNominal";
 import RegionSelect from "./RegionSelect";
 
 export type TopUpMode = "topup" | "voucher";
@@ -20,6 +21,7 @@ const STEAM_TOPUP_NOMINALS_TMT = [20, 40, 100, 150, 200, 500, 1000];
 
 function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) {
     const t = useTranslations();
+    const stripCurrency = useStripCurrencyFromNominal();
     const voucherAvailable = (forms?.voucher_fields?.length ?? 0) > 0;
     const topupAvailable = (forms?.topup_fields?.length ?? 0) > 0;
 
@@ -279,7 +281,8 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                     <div className="flex gap-3 flex-wrap">
                         {nominals.map((n) => {
                             const isActive = n.value === values.product_id;
-                            const label = n.product ?? String(n.value);
+                            const rawLabel = n.product ?? String(n.value);
+                            const label = stripCurrency(rawLabel);
 
                             return (
                                 <button
