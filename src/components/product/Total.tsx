@@ -76,12 +76,16 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
 
     const isSteamTopup = groupName === "Steam" && mode === "topup";
+    const rawNominal = (nominalLabel ?? "").replace(/\s+/g, " ").trim();
     const strippedNominal = stripCurrency(nominalLabel ?? "");
+    const hadCurrencyStripped = strippedNominal !== rawNominal;
     const creditText = isSteamTopup
-        ? (topupUsdText !== "-" && topupUsdText !== "..."
-            ? `${topupUsdText} ${t.product.conditionalUnit}`
-            : topupUsdText)
-        : strippedNominal ? `${strippedNominal} ${t.product.conditionalUnit}` : "-";
+        ? topupUsdText
+        : strippedNominal
+            ? hadCurrencyStripped
+                ? `${strippedNominal} ${t.product.conditionalUnit}`
+                : strippedNominal
+            : "-";
 
     const scrollToFirstError = () => {
         const errorKeys = Object.keys(errors);
