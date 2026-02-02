@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useTranslations } from "../../translations";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
+import { useStripCurrencyFromNominal } from "../../hooks/product/useStripCurrencyFromNominal";
 import type { TopUpMode } from "../../pages/Product";
 import { useCheckoutStore } from "../../store/checkoutStore";
 
@@ -27,6 +28,7 @@ type Props = {
 
 function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
     const t = useTranslations();
+    const stripCurrency = useStripCurrencyFromNominal();
     const enabled = typeof amountTmt === "number" && amountTmt > 0;
 
     const paying = useCheckoutStore((s) => s.paying);
@@ -74,7 +76,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const alertCls = "mt-2 text-[12px] text-red-500 font-medium";
 
     const isSteamTopup = groupName === "Steam" && mode === "topup";
-    const creditText = isSteamTopup ? topupUsdText : (nominalLabel ?? "-");
+    const creditText = isSteamTopup ? topupUsdText : stripCurrency(nominalLabel ?? "-");
 
     const scrollToFirstError = () => {
         const errorKeys = Object.keys(errors);
