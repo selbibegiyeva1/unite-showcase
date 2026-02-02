@@ -335,5 +335,6 @@ export const RU = {
         selectYourBank: "Выбор способа оплаты",
         otherBanks: "Другие банки",
         or: "или",
+        conditionalUnit: "у.е.",
     },
 };

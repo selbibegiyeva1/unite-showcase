@@ -282,7 +282,8 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                         {nominals.map((n) => {
                             const isActive = n.value === values.product_id;
                             const rawLabel = n.product ?? String(n.value);
-                            const label = stripCurrency(rawLabel);
+                            const stripped = stripCurrency(rawLabel);
+                            const label = stripped ? `${stripped} ${t.product.conditionalUnit}` : String(n.value);
 
                             return (
                                 <button

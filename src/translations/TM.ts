@@ -335,5 +335,6 @@ export const TM = {
         selectYourBank: "Töleg usulyny saýlamak",
         otherBanks: "Başga banklar",
         or: "ýa-da",
+        conditionalUnit: "ş.b.",
     },
 };

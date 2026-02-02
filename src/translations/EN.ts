@@ -335,5 +335,6 @@ export const EN = {
         selectYourBank: "Selecting a payment method",
         otherBanks: "Other banks",
         or: "or",
+        conditionalUnit: "c.u.",
     },
 };
