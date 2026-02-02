@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { useTranslations } from "../../translations";
 import type { FormField } from "../../hooks/product/useProductGroupDetailsQuery";
 import { useStripCurrencyFromNominal } from "../../hooks/product/useStripCurrencyFromNominal";
@@ -80,12 +80,73 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const strippedNominal = stripCurrency(nominalLabel ?? "");
     const hadCurrencyStripped = strippedNominal !== rawNominal;
     const creditText = isSteamTopup
-        ? topupUsdText
+        ? (topupUsdText !== "-" && topupUsdText !== "..."
+            ? `${topupUsdText} ${t.product.conditionalUnit}`
+            : topupUsdText)
         : strippedNominal
             ? hadCurrencyStripped
                 ? `${strippedNominal} ${t.product.conditionalUnit}`
                 : strippedNominal
             : "-";
+
+    const showCreditedTooltip = hadCurrencyStripped || isSteamTopup;
+
+    const [isCreditedTooltipOpen, setIsCreditedTooltipOpen] = useState(false);
+    const creditedTooltipRef = useRef<HTMLDivElement>(null);
+    const creditedTriggerRef = useRef<HTMLImageElement>(null);
+    const creditedTooltipLeaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const openCreditedTooltip = () => {
+        if (creditedTooltipLeaveTimeoutRef.current) {
+            clearTimeout(creditedTooltipLeaveTimeoutRef.current);
+            creditedTooltipLeaveTimeoutRef.current = null;
+        }
+        setIsCreditedTooltipOpen(true);
+    };
+
+    const handleCreditedTooltipMouseLeave = () => {
+        creditedTooltipLeaveTimeoutRef.current = setTimeout(() => setIsCreditedTooltipOpen(false), 100);
+    };
+
+    const handleCreditedTooltipMouseEnter = () => {
+        if (creditedTooltipLeaveTimeoutRef.current) {
+            clearTimeout(creditedTooltipLeaveTimeoutRef.current);
+            creditedTooltipLeaveTimeoutRef.current = null;
+        }
+    };
+
+    useEffect(() => {
+        if (!isCreditedTooltipOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsCreditedTooltipOpen(false);
+        };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [isCreditedTooltipOpen]);
+
+    useEffect(() => {
+        if (!isCreditedTooltipOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node;
+            if (
+                creditedTooltipRef.current &&
+                !creditedTooltipRef.current.contains(target) &&
+                creditedTriggerRef.current &&
+                !creditedTriggerRef.current.contains(target)
+            ) {
+                setIsCreditedTooltipOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isCreditedTooltipOpen]);
+
+    useEffect(
+        () => () => {
+            if (creditedTooltipLeaveTimeoutRef.current) clearTimeout(creditedTooltipLeaveTimeoutRef.current);
+        },
+        []
+    );
 
     const scrollToFirstError = () => {
         const errorKeys = Object.keys(errors);
@@ -175,9 +236,71 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
                 <div className="total-div">
                     <p className="whitespace-nowrap">{t.product.toBeCredited}</p>
-                    <p className='t-ellipsis' title={creditText}>
-                        {creditText}
-                    </p>
+                    {showCreditedTooltip ? (
+                        <div className="flex items-center gap-1.5 min-w-0">
+                            <p className="t-ellipsis flex-1 min-w-0" title={creditText}>
+                                {creditText}
+                            </p>
+                            <div
+                                className="relative shrink-0 inline-block"
+                                onMouseEnter={openCreditedTooltip}
+                                onMouseLeave={handleCreditedTooltipMouseLeave}
+                            >
+                                <img
+                                    ref={creditedTriggerRef}
+                                    src="/product/voucher.png"
+                                    alt=""
+                                    className="w-5 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsCreditedTooltipOpen((prev) => !prev);
+                                    }}
+                                />
+                                {isCreditedTooltipOpen && (
+                                    <>
+                                        <div
+                                            ref={creditedTooltipRef}
+                                            className="max-medium:hidden absolute top-7 right-0 z-10 bg-[#2F2F36] p-4 w-72.5 text-left rounded-2xl text-[14px] font-medium opacity-100 translate-y-0 pointer-events-auto transition-all duration-150"
+                                            onMouseEnter={handleCreditedTooltipMouseEnter}
+                                            onMouseLeave={handleCreditedTooltipMouseLeave}
+                                        >
+                                            {t.product.toBeCreditedDescription}
+                                        </div>
+                                        <div
+                                            className="hidden max-medium:grid fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 place-items-center max-medium:px-[24px]"
+                                            onMouseDown={() => setIsCreditedTooltipOpen(false)}
+                                        >
+                                            <div
+                                                className="bg-[#2F2F36] px-8 pt-8 pb-12 rounded-3xl w-full max-w-lg"
+                                                onMouseDown={(e) => e.stopPropagation()}
+                                            >
+                                                <div className="flex items-center justify-between mb-6 pb-6 border-b border-b-[#FFFFFF26]">
+                                                    <p className="text-[28px] font-medium">{t.product.toBeCredited}</p>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setIsCreditedTooltipOpen(false)}
+                                                        className="cursor-pointer"
+                                                        aria-label="Close"
+                                                    >
+                                                        <div className="w-12">
+                                                            <img src="/product/banks.png" className="w-full" alt="close" />
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                <p className="text-[14px] font-medium text-left">
+                                                    {t.product.toBeCreditedDescription}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        <p className="t-ellipsis" title={creditText}>
+                            {creditText}
+                        </p>
+                    )}
                 </div>
             </div>
 
