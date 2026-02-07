@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Брелок \"свиток\"",
+    "src": "/physical/Keychain-_10_.webp",
+    "price": 20,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Стикерпак серия \"Lego\"",
+    "src": "/physical/Stickers (7).webp",
+    "price": 3,
+    "nominals": ["1", "2", "3", "4 шт"],
+    "description": "Набор наклеек с 3D изображениями"
+  },
+  {
+    "name": "Стикерпак серия \"Гусь\"",
+    "src": "/physical/Stickers (10).webp",
+    "price": 5,
+    "nominals": ["1", "2", "3", "4 шт"],
+    "description": "Набор наклеек с 3D изображениями"
+  },
+  {
+    "name": "Майка \"Professional Gamer\"",
+    "src": "/physical/1 (8).webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Худи большая \"Kuromi\"",
+    "src": "/physical/Hudi (2).webp",
+    "price": 550,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Брелок \"Мячик\"",
+    "src": "/physical/Keychain-_6_.webp",
+    "price": 20,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Коврик для мыши \"лягушки\"",
+    "src": "/physical/mats-_5_.webp",
+    "price": 150,
+    "nominals": [],
+    "description": "Коврик для мыши: Тематическое игровое/рабочее покрытие"
+  },
+  {
+    "name": "Коврик для мыши \"облока\"",
+    "src": "/physical/mats-_11_.webp",
+    "price": 200,
+    "nominals": [],
+    "description": "Коврик для мыши: Тематическое игровое/рабочее покрытие"
+  },
+  {
+    "name": "Стикерпак серия \"3D\"",
+    "src": "/physical/Stickers (8).webp",
+    "price": 20,
+    "nominals": ["1", "2", "3", "4 шт"],
+    "description": "Набор наклеек с 3D изображениями"
+  },
+  {
+    "name": "Майка \"HearthStone\"",
+    "src": "/physical/1 (27).webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Professional Gamer\"",
+    "src": "/physical/1 (8).webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Коврик для мыши \"Тюльпаны\"",
+    "src": "/physical/mats-_9_.webp",
+    "price": 232,
+    "nominals": [],
+    "description": "Коврик для мыши: Тематическое игровое/рабочее покрытие"
+  },
+  {
+    "name": "Коврик для мыши \"котики\"",
+    "src": "/physical/mats-_10_.webp",
+    "price": 232,
+    "nominals": [],
+    "description": "Светлое игровое покрытие на весь стол"
+  },
+  {
+    "name": "Брелок \"Медальон\"",
+    "src": "/physical/Keychain-_16_.webp",
+    "price": 69,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Брелок \"Молот Тора\"",
+    "src": "/physical/Keychain-_18_.webp",
+    "price": 100,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  }
+]

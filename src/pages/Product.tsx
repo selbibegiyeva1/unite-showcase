@@ -15,12 +15,14 @@ import NewsBlock from "../components/home/NewsBlock";
 import Faq from "../components/home/Faq";
 import Footer from "../components/layout/Footer";
 import ProductLoading from "../components/product/ProductLoading";
+import PHYSICAL_PRODUCTS from "../data/physicalProducts.json";
 
 export type TopUpMode = "topup" | "voucher";
 
 function Product() {
     const [params] = useSearchParams();
     const group = params.get("group");
+    const productParam = params.get("product");
 
     const mode = useCheckoutStore((s) => s.mode);
     const values = useCheckoutStore((s) => s.values);
@@ -34,12 +36,48 @@ function Product() {
 
     const ensureGroup = useCheckoutStore((s) => s.ensureGroup);
 
-    const { data, isLoading, isError, error, refetch, amountTmt, rateQuery } =
-        useProductGroupDetailsQuery(group, { mode, productId: values.product_id });
+    const isPhysicalProduct = group === "Физ. товары";
+    
+    const physicalProduct = useMemo(() => {
+        if (!isPhysicalProduct || !productParam) return null;
+        return PHYSICAL_PRODUCTS.find((p) => p.name === productParam) ?? null;
+    }, [isPhysicalProduct, productParam]);
 
-    const forms: ProductGroupForms | null = data?.forms ?? null;
+    const { data, isLoading, isError, error, refetch, amountTmt: backendAmountTmt, rateQuery } =
+        useProductGroupDetailsQuery(isPhysicalProduct ? null : group, { mode, productId: values.product_id });
 
-    const groupName = data?.group ?? group ?? "";
+    const forms: ProductGroupForms | null = isPhysicalProduct ? {
+        voucher_fields: [
+            {
+                name: "product_id",
+                type: "options",
+                label: "Доступные вариант",
+                options: physicalProduct ? (
+                    physicalProduct.nominals.length > 0
+                        ? physicalProduct.nominals.map((nominal) => ({
+                            name: nominal,
+                            value: nominal,
+                            price: physicalProduct.price,
+                        }))
+                        : [{ name: physicalProduct.name, value: physicalProduct.name, price: physicalProduct.price }]
+                ) : [],
+            },
+        ],
+        topup_fields: [],
+    } : (data?.forms ?? null);
+
+    const groupName = isPhysicalProduct ? "Физ. товары" : (data?.group ?? group ?? "");
+
+    // Calculate amountTmt for physical products
+    const amountTmt = useMemo(() => {
+        if (!isPhysicalProduct) return backendAmountTmt;
+        if (!physicalProduct || !values.product_id) return null;
+        
+        const productField = forms?.voucher_fields?.find((f) => f.name === "product_id");
+        const selectedOption = productField?.options?.find((o) => String(o.value) === String(values.product_id));
+        
+        return typeof selectedOption?.price === "number" ? selectedOption.price : null;
+    }, [isPhysicalProduct, physicalProduct, values.product_id, forms, backendAmountTmt]);
 
     useEffect(() => {
         if (groupName) ensureGroup(groupName);
@@ -74,11 +112,16 @@ function Product() {
     }, [forms, mode]);
 
     const nominalLabel = useMemo(() => {
+        if (isPhysicalProduct) {
+            const productField = activeFields.find((f) => f.name === "product_id");
+            const opt = productField?.options?.find((o) => String(o.value) === String(values.product_id));
+            return opt?.name ? String(opt.name) : (physicalProduct?.name ?? "-");
+        }
         const productField = activeFields.find((f) => f.name === "product_id");
         const opt = productField?.options?.find((o) => String(o.value) === String(values.product_id));
 
         return opt?.name ? String(opt.name) : "-";
-    }, [activeFields, values.product_id]);
+    }, [activeFields, values.product_id, isPhysicalProduct, physicalProduct]);
 
     useEffect(() => {
         setValues((prev) => ({
@@ -104,12 +147,21 @@ function Product() {
     }, [activeFields, isSteamTopup, steamTopupFields]);
 
     const requiredFields: FormField[] = useMemo(() => {
+        if (isPhysicalProduct) {
+            return [{ name: "phone", type: "text", label: "Номер телефона" }];
+        }
         if (isSteamTopup) return steamTopupFields;
 
         return activeFields.filter((f) => f.name !== "region" && f.name !== "product_id");
-    }, [activeFields, isSteamTopup, steamTopupFields]);
+    }, [activeFields, isSteamTopup, steamTopupFields, isPhysicalProduct]);
 
     useEffect(() => {
+        if (isPhysicalProduct) {
+            const name = physicalProduct?.name || groupName || "Product";
+            document.title = `Unite Gaming Shop | ${name}`;
+            return;
+        }
+
         if (isLoading) {
             document.title = "Loading...";
             return;
@@ -117,7 +169,7 @@ function Product() {
 
         const name = groupName || group || "Product";
         document.title = `Unite Gaming Shop | ${name}`;
-    }, [isLoading, groupName, group]);
+    }, [isLoading, groupName, group, isPhysicalProduct, physicalProduct]);
 
     const validation = useCheckoutValidation({ requiredFields, values });
 
@@ -137,17 +189,38 @@ function Product() {
         return hasAnyInRegionOptions;
     }, [forms, mode]);
 
-    if (isLoading) return (
+    useEffect(() => {
+        if (isPhysicalProduct && physicalProduct && !values.product_id && forms) {
+            const productField = forms.voucher_fields?.find((f) => f.name === "product_id");
+            const firstOption = productField?.options?.[0];
+            if (firstOption) {
+                setValues((prev) => ({
+                    ...prev,
+                    product_id: firstOption.value,
+                }));
+            }
+        }
+    }, [isPhysicalProduct, physicalProduct, values.product_id, forms, setValues]);
+
+    if (!isPhysicalProduct && isLoading) return (
         <div className="max-lg:px-[48px]"> 
             <ProductLoading />
         </div>
     );
 
-    if (isError) {
+    if (!isPhysicalProduct && isError) {
         return (
             <div className="text-white px-4 max-w-255 m-auto">
                 <div style={{ color: "red" }}>{(error as Error)?.message ?? "Error"}</div>
                 <button type="button" onClick={() => refetch()}>Retry</button>
+            </div>
+        );
+    }
+
+    if (isPhysicalProduct && !physicalProduct) {
+        return (
+            <div className="text-white px-4 max-w-255 m-auto">
+                <div style={{ color: "red" }}>Product not found</div>
             </div>
         );
     }
@@ -158,15 +231,15 @@ function Product() {
                 <div className="flex items-start gap-4 pb-15 max-lg:px-[48px] max-medium:flex-col product">
                     <div className="flex flex-col gap-4 w-167 max-medium:w-full">
                         <ProductHeader
-                            icon={data?.icon}
-                            group={data?.group}
-                            short_info={data?.short_info}
+                            icon={isPhysicalProduct && physicalProduct ? physicalProduct.src : data?.icon}
+                            group={isPhysicalProduct && physicalProduct ? physicalProduct.name : groupName}
+                            short_info={isPhysicalProduct && physicalProduct ? physicalProduct.description : (data?.short_info ?? "")}
                             showAnyRegionBadge={showAnyRegionBadge}
                         />
 
                         <FormOne
                             groupName={groupName}
-                            forms={data!.forms}
+                            forms={forms!}
                             mode={mode}
                             setMode={setMode}
                             values={values}
@@ -199,6 +272,7 @@ function Product() {
                         errors={validation.errors}
                         showErrors={validation.showErrors}
                         onValidate={validation.validateNow}
+                        isPhysicalProduct={isPhysicalProduct}
                     />
                 </div>
 

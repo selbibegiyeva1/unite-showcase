@@ -26,7 +26,8 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
     const topupAvailable = (forms?.topup_fields?.length ?? 0) > 0;
 
     const isRoblox = groupName === "Roblox";
-    const showModeSwitch = voucherAvailable && topupAvailable && !isRoblox;
+    const isPhysicalProduct = groupName === "Физ. товары";
+    const showModeSwitch = voucherAvailable && topupAvailable && !isRoblox && !isPhysicalProduct;
 
     const isSteamTopup = groupName === "Steam" && mode === "topup";
 
@@ -60,6 +61,11 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
             })) as FormFieldOption[];
         }
 
+        // For physical products, return all options without region filtering
+        if (isPhysicalProduct) {
+            return productOptions;
+        }
+
         if (!productOptions.length) return [];
 
         // Check if all products have region "Любой" (Any) - special case
@@ -83,7 +89,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
         }
 
         return [];
-    }, [isSteamTopup, productOptions, selectedRegionLabel, selectedRegionValue, t.product.any]);
+    }, [isSteamTopup, isPhysicalProduct, productOptions, selectedRegionLabel, selectedRegionValue, t.product.any]);
 
     useEffect(() => {
         if (!nominals.length) return;
@@ -266,25 +272,34 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                 </div>
             ) : null}
 
-            <RegionSelect
-                mode={mode}
-                regionOptions={regionField?.options}
-                productOptions={productOptions}
-                values={values}
-                setValues={setValues}
-            />
+            {!isPhysicalProduct && (
+                <RegionSelect
+                    mode={mode}
+                    regionOptions={regionField?.options}
+                    productOptions={productOptions}
+                    values={values}
+                    setValues={setValues}
+                />
+            )}
 
             {nominals.length ? (
                 <div className="flex flex-col gap-4">
-                    <b className="text-[24px]">{t.product.selectNominal}</b>
+                    <b className="text-[24px]">{isPhysicalProduct ? t.product.availableOptions : t.product.selectNominal}</b>
 
                     <div className="flex gap-3 flex-wrap">
                         {nominals.map((n) => {
                             const isActive = n.value === values.product_id;
-                            const rawLabel = n.product ?? String(n.value);
-                            const stripped = stripCurrency(rawLabel);
-                            const hadCurrencyStripped = stripped !== rawLabel.replace(/\s+/g, " ").trim();
-                            const label = hadCurrencyStripped ? `${stripped} ${t.product.conditionalUnit}` : stripped || String(n.value);
+                            let label: string;
+                            
+                            if (isPhysicalProduct) {
+                                // For physical products, show the nominal name directly
+                                label = String(n.name ?? n.value ?? "");
+                            } else {
+                                const rawLabel = n.product ?? String(n.value);
+                                const stripped = stripCurrency(rawLabel);
+                                const hadCurrencyStripped = stripped !== rawLabel.replace(/\s+/g, " ").trim();
+                                label = hadCurrencyStripped ? `${stripped} ${t.product.conditionalUnit}` : stripped || String(n.value);
+                            }
 
                             return (
                                 <button

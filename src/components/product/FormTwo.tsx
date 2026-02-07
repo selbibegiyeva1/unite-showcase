@@ -16,6 +16,7 @@ type Props = {
 function FormTwo({ groupName, mode, fields, values, setValues, errors, showErrors }: Props) {
     const t = useTranslations();
     const isSteamTopup = groupName === "Steam" && mode === "topup";
+    const isPhysicalProduct = groupName === "Физ. товары";
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
     const tooltipRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLImageElement>(null);
@@ -180,6 +181,29 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
     }
 
     const renderFields = fields.filter((f) => f.name !== "region" && f.name !== "product_id");
+
+    if (isPhysicalProduct) {
+        return (
+            <div className="p-8 bg-[#1D1D22] rounded-4xl">
+                <b className="text-[24px]">{t.product.checkout}</b>
+
+                <div className="mt-4 flex flex-col gap-4">
+                    <div className="flex flex-col justify-between">
+                        <p className="text-[#FFFFFF99] text-[14px] mb-3">{t.product.phoneNumber}</p>
+                        <input
+                            type="text"
+                            id="field-phone"
+                            value={String(values.phone ?? "")}
+                            onChange={(e) => setValues((prev) => ({ ...prev, phone: e.target.value }))}
+                            placeholder={t.product.phoneNumber}
+                            className={inputCls("phone")}
+                        />
+                        {err("phone") ? <p className={alertCls}>{err("phone")}</p> : null}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="p-8 bg-[#1D1D22] rounded-4xl">

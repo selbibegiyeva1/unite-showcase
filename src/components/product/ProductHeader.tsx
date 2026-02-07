@@ -2,11 +2,12 @@ type ProductHeaderProps = {
     icon?: string | null;
     group?: string | null;
     short_info?: string | null;
+    description?: string | null;
     showAnyRegionBadge?: boolean;
 };
 
-export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: ProductHeaderProps) {
-    if (!group && !icon && !short_info) return null;
+export function ProductHeader({ icon, group, short_info, description, showAnyRegionBadge }: ProductHeaderProps) {
+    if (!group && !icon && !short_info && !description) return null;
 
     return (
         <div className="px-8 py-8 bg-[#1D1D22] rounded-4xl">
@@ -30,6 +31,10 @@ export function ProductHeader({ icon, group, short_info, showAnyRegionBadge }: P
 
                 <div>
                     <h1 className="text-2xl font-bold">{group}</h1>
+
+                    {description ? (
+                        <p className="mt-4.5 text-[13px] font-medium text-[#FFFFFF99]">{description}</p>
+                    ) : null}
 
                     {showAnyRegionBadge ? (
                         <div className="bg-[#79109D] w-fit flex items-center gap-3 leading-4 px-[19.5px] py-1.5 rounded-[10px] mt-3">
