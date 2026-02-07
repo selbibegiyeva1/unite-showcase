@@ -24,12 +24,13 @@ type Props = {
     showErrors: boolean;
     onValidate: () => boolean;
     setValues: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+    isPhysicalProduct?: boolean;
 };
 
-function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate }: Props) {
+function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate, isPhysicalProduct = false }: Props) {
     const t = useTranslations();
     const stripCurrency = useStripCurrencyFromNominal();
-    const enabled = typeof amountTmt === "number" && amountTmt > 0;
+    const enabled = !isPhysicalProduct && typeof amountTmt === "number" && amountTmt > 0;
 
     const paying = useCheckoutStore((s) => s.paying);
     const payError = useCheckoutStore((s) => s.payError);
@@ -79,17 +80,19 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
     const rawNominal = (nominalLabel ?? "").replace(/\s+/g, " ").trim();
     const strippedNominal = stripCurrency(nominalLabel ?? "");
     const hadCurrencyStripped = strippedNominal !== rawNominal;
-    const creditText = isSteamTopup
-        ? (topupUsdText !== "-" && topupUsdText !== "..."
-            ? `${topupUsdText} ${t.product.conditionalUnit}`
-            : topupUsdText)
-        : strippedNominal
-            ? hadCurrencyStripped
-                ? `${strippedNominal} ${t.product.conditionalUnit}`
-                : strippedNominal
-            : "-";
+    const creditText = isPhysicalProduct
+        ? (nominalLabel ?? "-")
+        : isSteamTopup
+            ? (topupUsdText !== "-" && topupUsdText !== "..."
+                ? `${topupUsdText} ${t.product.conditionalUnit}`
+                : topupUsdText)
+            : strippedNominal
+                ? hadCurrencyStripped
+                    ? `${strippedNominal} ${t.product.conditionalUnit}`
+                    : strippedNominal
+                : "-";
 
-    const showCreditedTooltip = hadCurrencyStripped || isSteamTopup;
+    const showCreditedTooltip = !isPhysicalProduct && (hadCurrencyStripped || isSteamTopup);
 
     const [isCreditedTooltipOpen, setIsCreditedTooltipOpen] = useState(false);
     const creditedTooltipRef = useRef<HTMLDivElement>(null);
@@ -218,14 +221,16 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             {bankErr ? <p className={alertCls}>{bankErr}</p> : null}
 
             <div>
-                <div className="total-div">
-                    <p>{t.product.region}</p>
-                    <p className='t-ellipsis' title={region}>
-                        {region}
-                    </p>
-                </div>
+                {!isPhysicalProduct && (
+                    <div className="total-div">
+                        <p>{t.product.region}</p>
+                        <p className='t-ellipsis' title={region}>
+                            {region}
+                        </p>
+                    </div>
+                )}
 
-                {rows.map((r) => (
+                {!isPhysicalProduct && rows.map((r) => (
                     <div key={r.label} className="total-div">
                         <p>{r.label}</p>
                         <p className='t-ellipsis' title={r.value}>
@@ -306,8 +311,8 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <div className="flex items-center justify-between font-bold text-[20px] py-4">
                 <p>{t.product.total}</p>
-                <p className='t-ellipsis' title={enabled ? `${amountTmt} TMT` : "-"}>
-                    {enabled ? `${amountTmt} TMT` : "-"}
+                <p className='t-ellipsis' title={typeof amountTmt === "number" ? `${amountTmt} TMT` : "-"}>
+                    {typeof amountTmt === "number" ? `${amountTmt} TMT` : "-"}
                 </p>
             </div>
 
@@ -346,24 +351,26 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <button
                 type="submit"
-                disabled={!enabled || paying}
+                disabled={true}
                 style={{
                     background: "linear-gradient(to right, #79109D, #A132C7)",
-                    opacity: enabled && !paying ? 1 : 0.6,
+                    opacity: 0.6,
                 }}
                 className="text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
-                    font-bold py-[14.5px] cursor-pointer flex items-center justify-center rounded-[10px]"
+                    font-bold py-[14.5px] cursor-not-allowed flex items-center justify-center rounded-[10px]"
             >
-                {paying ? t.product.creatingPayment : enabled ? t.product.payAmountTmt.replace("{amount}", String(amountTmt)) : t.product.pay}
+                {isPhysicalProduct ? t.product.outOfStock : (paying ? t.product.creatingPayment : enabled ? t.product.payAmountTmt.replace("{amount}", String(amountTmt)) : t.product.pay)}
             </button>
             {payError ? <p className="mt-2 text-[12px] text-red-500 font-medium">{payError}</p> : null}
             <center>
                 <p className="text-[12px] text-[#FFFFFF99] font-medium">
-                    {groupName === "Steam"
-                        ? t.product.steamBalanceMessage
-                        : mode === "topup"
-                            ? t.product.activationInstructionsMessage
-                            : t.product.voucherActivationMessage}
+                    {isPhysicalProduct
+                        ? t.product.physicalProductContactMessage
+                        : (groupName === "Steam"
+                            ? t.product.steamBalanceMessage
+                            : mode === "topup"
+                                ? t.product.activationInstructionsMessage
+                                : t.product.voucherActivationMessage)}
                 </p>
             </center>
         </form>

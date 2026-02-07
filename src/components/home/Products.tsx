@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useProductGroupsQuery, type ProductGroupCategory } from "../../hooks/home/useProductGroupsQuery";
 import { useTranslations } from "../../translations";
 import SupportHelpModal from "../product/SupportHelpModal";
+import PHYSICAL_PRODUCTS from "../../data/physicalProducts.json";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-type ExtendedCategory = ProductGroupCategory | "other";
+type ExtendedCategory = ProductGroupCategory | "other" | "physical";
 
 const OTHER_SERVICES = [
     { name: "Adobe", src: "/home/static/Adobe.png" },
@@ -30,13 +31,14 @@ export default function Products() {
     const { data, isLoading, isError, error, refetch } = useProductGroupsQuery();
 
     const activeGroups = useMemo(() => {
-        if (activeCategory === "other") return [];
+        if (activeCategory === "other" || activeCategory === "physical") return [];
 
         const groups = data ?? [];
         return groups.filter((g) => g.category === activeCategory);
     }, [data, activeCategory]);
 
     const isOther = activeCategory === "other";
+    const isPhysical = activeCategory === "physical";
 
     return (
         <div className="max-w-255 m-auto max-lg:px-[48px] product">
@@ -83,10 +85,24 @@ export default function Products() {
                     />
                     <span>{t.products.otherServices}</span>
                 </button>
+                <button
+                    type="button"
+                    className={`switch ${activeCategory === "physical" ? "switch--active" : "switch--inactive"}`}
+                    onClick={() => setActiveCategory("physical")}
+                >
+                    <img
+                        src="/home/add-block.png"
+                        alt="physical products"
+                        style={{ width: 22 }}
+                        className={activeCategory !== "physical" ? "switch--inactive-img" : ""}
+                        loading="lazy"
+                    />
+                    <span>{t.products.physicalProducts}</span>
+                </button>
             </div>
 
             <div className="mt-4">
-                {!isOther && isLoading && (
+                {!isOther && !isPhysical && isLoading && (
                     <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="flex flex-col gap-3 max-[500px]:gap-2">
@@ -100,7 +116,7 @@ export default function Products() {
                         ))}
                     </div>
                 )}
-                {!isOther && isError && (
+                {!isOther && !isPhysical && isError && (
                     <div>
                         <div style={{ color: "red" }}>
                             {(error as Error)?.message ?? "Error"}
@@ -111,7 +127,7 @@ export default function Products() {
                     </div>
                 )}
 
-                {!isOther && !isLoading && !isError && (
+                {!isOther && !isPhysical && !isLoading && !isError && (
                     <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
                         {activeGroups.map((g) => (
                             <Link
@@ -167,6 +183,36 @@ export default function Products() {
                         </div>
                         <SupportHelpModal isOpen={isSupportOpen} onClose={() => setIsSupportOpen(false)} />
                     </>
+                )}
+
+                {isPhysical && (
+                    <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
+                        {PHYSICAL_PRODUCTS.map((product) => (
+                            <Link
+                                to={`/product?group=${encodeURIComponent("Физ. товары")}&product=${encodeURIComponent(product.name)}`}
+                                key={product.name}
+                                className="flex flex-col gap-3 max-[500px]:gap-2 group"
+                            >
+                                <div className="overflow-hidden rounded-2xl">
+                                    <img
+                                        src={product.src}
+                                        alt={product.name}
+                                        className="w-full h-auto rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            const img = e.currentTarget;
+                                            if (img.dataset.fallbackApplied) return;
+                                            img.dataset.fallbackApplied = "1";
+                                            img.src = "/product/alt.png";
+                                        }}
+                                    />
+                                </div>
+                                <center>
+                                    <span className="font-bold text-sm">{product.name}</span>
+                                </center>
+                            </Link>
+                        ))}
+                    </div>
                 )}
             </div>
         </div>
