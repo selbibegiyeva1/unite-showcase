@@ -30,11 +30,12 @@ type Props = {
 function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoading, rateError, nominalLabel, onOpenBanks, setValues, errors, showErrors, onValidate, isPhysicalProduct = false }: Props) {
     const t = useTranslations();
     const stripCurrency = useStripCurrencyFromNominal();
-    const enabled = !isPhysicalProduct && typeof amountTmt === "number" && amountTmt > 0;
-
     const paying = useCheckoutStore((s) => s.paying);
     const payError = useCheckoutStore((s) => s.payError);
     const submitPayment = useCheckoutStore((s) => s.submitPayment);
+
+    const enabled = !isPhysicalProduct && typeof amountTmt === "number" && amountTmt > 0;
+    const buttonDisabled = isPhysicalProduct || paying || !enabled;
 
     const topupUsdText = useMemo(() => {
         if (!enabled) return "-";
@@ -351,13 +352,13 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
 
             <button
                 type="submit"
-                disabled={true}
+                disabled={buttonDisabled}
                 style={{
                     background: "linear-gradient(to right, #79109D, #A132C7)",
-                    opacity: 0.6,
+                    ...(buttonDisabled ? { opacity: 0.6 } : {}),
                 }}
-                className="text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
-                    font-bold py-[14.5px] cursor-not-allowed flex items-center justify-center rounded-[10px]"
+                className={`text-[14px] my-4 w-full shadow-[0px_4px_0px_#580873]
+                    font-bold py-[14.5px] flex items-center justify-center rounded-[10px] ${buttonDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
             >
                 {isPhysicalProduct ? t.product.outOfStock : (paying ? t.product.creatingPayment : enabled ? t.product.payAmountTmt.replace("{amount}", String(amountTmt)) : t.product.pay)}
             </button>
