@@ -10,14 +10,14 @@
     "name": "Стикерпак серия \"Lego\"",
     "src": "/physical/Stickers (7).webp",
     "price": 3,
-    "nominals": ["1", "2", "3", "4 шт"],
+    "nominals": ["1 шт", "2 шт", "3 шт", "4 шт"],
     "description": "Набор наклеек с 3D изображениями"
   },
   {
     "name": "Стикерпак серия \"Гусь\"",
     "src": "/physical/Stickers (10).webp",
     "price": 5,
-    "nominals": ["1", "2", "3", "4 шт"],
+    "nominals": ["1 шт", "2 шт", "3 шт", "4 шт"],
     "description": "Набор наклеек с 3D изображениями"
   },
   {
@@ -59,7 +59,7 @@
     "name": "Стикерпак серия \"3D\"",
     "src": "/physical/Stickers (8).webp",
     "price": 20,
-    "nominals": ["1", "2", "3", "4 шт"],
+    "nominals": ["1 шт", "2 шт", "3 шт", "4 шт"],
     "description": "Набор наклеек с 3D изображениями"
   },
   {
