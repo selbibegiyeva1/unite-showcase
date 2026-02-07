@@ -54,11 +54,12 @@ function Product() {
                 label: "Доступные вариант",
                 options: physicalProduct ? (
                     physicalProduct.nominals.length > 0
-                        ? physicalProduct.nominals.map((nominal) => ({
-                            name: nominal,
-                            value: nominal,
-                            price: physicalProduct.price,
-                        }))
+                        ? physicalProduct.nominals.map((nominal) => {
+                            const qtyMatch = String(nominal).match(/^(\d+)\s*шт$/i);
+                            const qty = qtyMatch ? parseInt(qtyMatch[1], 10) : 1;
+                            const price = physicalProduct.price * qty;
+                            return { name: nominal, value: nominal, price };
+                        })
                         : [{ name: physicalProduct.name, value: physicalProduct.name, price: physicalProduct.price }]
                 ) : [],
             },
