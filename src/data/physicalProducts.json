@@ -103,5 +103,103 @@
     "price": 100,
     "nominals": [],
     "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Худи большая \"Киготі\"",
+    "src": "/physical/Готовое/Hudi (2).webp",
+    "price": 550,
+    "nominals": [],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Брелок для ключей - \"Swift blink\"",
+    "src": "/physical/Готовое/Swift blink.webp",
+    "price": 100,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Майка \"Растап\" размер L",
+    "src": "/physical/Готовое/Pacman.webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Коллекционная фигурка \"стальной алхимимк\"",
+    "src": "/physical/Готовое/steel.webp",
+    "price": 175,
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Кулон \"Shadow fiend\"",
+    "src": "/physical/Готовое/Shadow fiend.webp",
+    "price": 128,
+    "nominals": [],
+    "description": "Компактный сувенир - кулон"
+  },
+  {
+    "name": "Коллекционная фигурка \"VENOM\"",
+    "src": "/physical/Готовое/VENOM.webp",
+    "price": 439,
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Майка \"Press start\" размер L",
+    "src": "/physical/Готовое/Press start.webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Коллекционная фигурка \"Hollow Knight\"",
+    "src": "/physical/Готовое/hoolowknight.webp",
+    "price": 331,
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Худи утепленное \"zip\" размер XL",
+    "src": "/physical/Готовое/Zip hudi.webp",
+    "price": 669,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Худи большая \"mortred\" размер XL",
+    "src": "/physical/Готовое/mortred.webp",
+    "price": 633,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Реалистичная коллекционная фигурка \"Leonardo\"",
+    "src": "/physical/Готовое/Leonardo.webp",
+    "price": 1163,
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Майка \"Jfggernaut\" размер L",
+    "src": "/physical/Готовое/juggernautblack.webp",
+    "price": 200,
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Брелок для ключей - \"blade mail\"",
+    "src": "/physical/Готовое/blade mail.webp",
+    "price": 100,
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Реалистичная коллекционная фигурка \"Nier automata\"",
+    "src": "/physical/Готовое/Niar automatia.webp",
+    "price": 1163,
+    "nominals": [],
+    "description": "Коллекционная фигурка"
   }
 ]
