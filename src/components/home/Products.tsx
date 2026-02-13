@@ -37,6 +37,27 @@ export default function Products() {
         return groups.filter((g) => g.category === activeCategory);
     }, [data, activeCategory]);
 
+    const sortedPhysicalProducts = useMemo(() => {
+        const typeOrder = ["T-shirts", "Hudi", "Figurines", "Keychain", "Stickers"];
+        return [...PHYSICAL_PRODUCTS].sort((a, b) => {
+            const typeA = (a as typeof PHYSICAL_PRODUCTS[0] & { type?: string }).type || "";
+            const typeB = (b as typeof PHYSICAL_PRODUCTS[0] & { type?: string }).type || "";
+            const indexA = typeOrder.indexOf(typeA);
+            const indexB = typeOrder.indexOf(typeB);
+            
+            // If both types are in the order list, sort by their position
+            if (indexA !== -1 && indexB !== -1) {
+                return indexA - indexB;
+            }
+            // If only A is in the list, A comes first
+            if (indexA !== -1) return -1;
+            // If only B is in the list, B comes first
+            if (indexB !== -1) return 1;
+            // If neither is in the list, maintain original order
+            return 0;
+        });
+    }, []);
+
     const isOther = activeCategory === "other";
     const isPhysical = activeCategory === "physical";
 
@@ -187,7 +208,7 @@ export default function Products() {
 
                 {isPhysical && (
                     <div className="grid grid-cols-4 gap-6 mt-6 max-lg:grid-cols-3 max-[500px]:gap-4 products-grid">
-                        {PHYSICAL_PRODUCTS.map((product) => (
+                        {sortedPhysicalProducts.map((product) => (
                             <Link
                                 to={`/product?group=${encodeURIComponent("Физ. товары")}&product=${encodeURIComponent(product.name)}`}
                                 key={product.name}
