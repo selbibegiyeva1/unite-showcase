@@ -34,7 +34,7 @@ export const RU = {
         games: "Игры",
         programs: "Сервисы",
         otherServices: "Другие сервисы",
-        physicalProducts: "Физ. товары",
+        physicalProducts: "Сувениры",
     },
     newsBlock: {
         title: "Новости",

@@ -34,7 +34,7 @@ export const EN = {
         games: "Games",
         programs: "Services",
         otherServices: "Other services",
-        physicalProducts: "Physical goods",
+        physicalProducts: "Souvenirs",
     },
     newsBlock: {
         title: "News",

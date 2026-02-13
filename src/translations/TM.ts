@@ -34,7 +34,7 @@ export const TM = {
         games: "Oýunlar",
         programs: "Hyzmatlar",
         otherServices: "Beýleki hyzmatlar",
-        physicalProducts: "Fiziki harytlar",
+        physicalProducts: "Sowgatlar",
     },
     newsBlock: {
         title: "Habarlar",
