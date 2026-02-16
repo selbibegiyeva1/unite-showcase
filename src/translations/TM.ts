@@ -80,11 +80,11 @@ export const TM = {
             },
             {
                 q: "Wauçeriň möhleti näçe wagt?",
-                a: "Hatda görkezilen goldaw gullugyna ýüz tutuň. Biz kody üpjün edijiden barlarys we mesele tassyklanan ýagdaýynda ony täzesi bilen çalşyryp bereris.",
+                a: "Möhlet çäklendirilmedik — ony islendik wagtda işjeňleşdirip bilersiňiz.",
             },
             {
                 q: "Sistema kod eýýäm işjeňleşdirilen diýip ýazsa näme etmeli?",
-                a: "Hawa, siz islendik alyjynyň e-mailini görkezip bilersiňiz ýa-da kody bolan haty el bilen başga birine ugradyp bilersiňiz.",
+                a: "Hatda görkezilen goldaw hyzmatyna ýüz tutuň. Biz kody üpjünçiden barlarys we mesele tassyk edilse, ony täze koda çalyşarys.",
             },
         ],
         steamVoucher: [
