@@ -222,5 +222,213 @@
     "type": "Figurines",
     "nominals": [],
     "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Майка \"Shadow demon\"",
+    "src": "/physical/imgs/Shadow demon.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Start mission\"",
+    "src": "/physical/imgs/Start mission.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Starfield\"",
+    "src": "/physical/imgs/Starfield.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Phasmophobia\"",
+    "src": "/physical/imgs/Phasmophobia.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Lancer\"",
+    "src": "/physical/imgs/Lancer.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Legend\"",
+    "src": "/physical/imgs/Legend.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Dont panic bro\"",
+    "src": "/physical/imgs/Dont panic.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Gaming zone\"",
+    "src": "/physical/imgs/Gaming zone.webp",
+    "price": 200,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Капибара\"",
+    "src": "/physical/imgs/Kapibara.webp",
+    "price": 280,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Майка \"Gamer\"",
+    "src": "/physical/imgs/Gamer2.webp",
+    "price": 280,
+    "type": "T-shirts",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Хлопковая майка с геймерским принтом"
+  },
+  {
+    "name": "Худи утепленное \"Dazzle\"",
+    "src": "/physical/imgs/Dazzle.webp",
+    "price": 633,
+    "type": "Hudi",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Худи утепленное \"Void\"",
+    "src": "/physical/imgs/Void.webp",
+    "price": 633,
+    "type": "Hudi",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Худи утепленное \"Angel\"",
+    "src": "/physical/imgs/Angel.webp",
+    "price": 633,
+    "type": "Hudi",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Худи утепленное \"Cube\"",
+    "src": "/physical/imgs/Cube.webp",
+    "price": 633,
+    "type": "Hudi",
+    "nominals": ["S", "M", "L", "XL", "XL2"],
+    "description": "Уютная оверсайз-толстовка"
+  },
+  {
+    "name": "Брелок для ключей - \"Refresh\"",
+    "src": "/physical/imgs/Refresh.webp",
+    "price": 100,
+    "type": "Keychain",
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Брелок для ключей - \"Radiance\"",
+    "src": "/physical/imgs/Radiance.webp",
+    "price": 100,
+    "type": "Keychain",
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Брелок для ключей \"Bloodthorn\"",
+    "src": "/physical/imgs/Bloodthorn .webp",
+    "price": 100,
+    "type": "Keychain",
+    "nominals": [],
+    "description": "Компактный сувенир на связку ключей"
+  },
+  {
+    "name": "Коллекционная фигурка \"Dandadan\"",
+    "src": "/physical/imgs/Dandadan.webp",
+    "price": 940,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Rick pickle\"",
+    "src": "/physical/imgs/Rick pickle.webp",
+    "price": 175,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Artorias\"",
+    "src": "/physical/imgs/Artorias .webp",
+    "price": 175,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Void\"",
+    "src": "/physical/imgs/Void (2).webp",
+    "price": 135,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Bloodseeker\"",
+    "src": "/physical/imgs/Bloodseeker.webp",
+    "price": 135,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Lina\"",
+    "src": "/physical/imgs/Lina.webp",
+    "price": 135,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Queen of the pain\"",
+    "src": "/physical/imgs/Qotp.webp",
+    "price": 135,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Bounty Hunter\"",
+    "src": "/physical/imgs/Bounty Hunter.webp",
+    "price": 135,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
+  },
+  {
+    "name": "Коллекционная фигурка \"Shark\"",
+    "src": "/physical/imgs/Shark.webp",
+    "price": 439,
+    "type": "Figurines",
+    "nominals": [],
+    "description": "Коллекционная фигурка"
   }
 ]
