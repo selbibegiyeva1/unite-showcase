@@ -151,8 +151,8 @@ export const TM = {
                 a: "Pullar Steam-e 15 minudyň dowamynda gelýär. Nadir ýagdaýlarda — 2 sagada çenli. Eger pullar birnäçe sagatdan soň gelmese, hatda görkezilen goldaw gullugyna ýazyň. Biz tölegi barlarys we kömek etmäge synanyşarys."
             },
             {
-                q: "Steam dolduranda loginde ýalňyşlyk edilse puly yzyna gaýtaryp bolýarmy?",
-                a: "Eger girizilen login bar bolsa — puly yzyna gaýtaryp bolmaz."
+                q: "Steam hasabyny dolduranyňyzda logini ýalňyş ýazan bolsaňyz, puly yzyna alyp bolýarmy?",
+                a: "Eger girizilen login bar bolsa — puly yzyna gaýtaryp bolmaýar."
             },
             {
                 q: "Eger töleg tehniki sebäpler üçin ýatyrylsa?",
@@ -341,6 +341,6 @@ export const TM = {
         otherBanks: "Başga banklar",
         or: "ýa-da",
         conditionalUnit: "ş.b.",
-        toBeCreditedDescription: "«ş.b.» — saýlanan sebitde sanly harydyň nominalyny görkezmek üçin ulanylýan şertli birlikler.",
+        toBeCreditedDescription: "«Ş.b.» (şertli birlik) — saýlanan sebitde sanly harydyň nominalyny aňlatmak üçin ulanylýan şertli birliklerdir.",
     },
 };
