@@ -80,14 +80,6 @@
     "description": "Хлопковая майка с геймерским принтом"
   },
   {
-    "name": "Майка \"Professional Gamer\"",
-    "src": "/physical/1 (8).webp",
-    "price": 200,
-    "type": "T-shirts",
-    "nominals": ["S", "M", "L", "XL", "XL2"],
-    "description": "Хлопковая майка с геймерским принтом"
-  },
-  {
     "name": "Коврик для мыши \"Тюльпаны\"",
     "src": "/physical/mats-_9_.webp",
     "price": 232,
