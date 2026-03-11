@@ -211,7 +211,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                             >
                                 <img
                                     ref={triggerRef}
-                                    src="/product/voucher.png"
+                                    src="/product/voucher.webp"
                                     alt="voucher"
                                     className={`w-5 cursor-pointer ${!isVoucherActive ? "opacity-60" : ""}`}
                                     onClick={(e) => {
@@ -255,7 +255,7 @@ function FormOne({ groupName, forms, mode, setMode, values, setValues }: Props) 
                                                         aria-label="Close"
                                                     >
                                                         <div className="w-12">
-                                                            <img src="/product/banks.png" className="w-full" alt="close" />
+                                                            <img src="/product/banks.webp" className="w-full" alt="close" />
                                                         </div>
                                                     </button>
                                                 </div>

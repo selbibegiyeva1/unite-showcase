@@ -74,7 +74,7 @@ function Banks({ isOpen, onClose, selectedBank, onSelect }: Props) {
 
                     <button type="button" onClick={onClose} className="cursor-pointer" aria-label="Close">
                         <div className="w-8">
-                            <img src="/product/banks.png" className="w-full" alt="close" loading="lazy" />
+                            <img src="/product/banks.webp" className="w-full" alt="close" loading="lazy" />
                         </div>
                     </button>
                 </div>

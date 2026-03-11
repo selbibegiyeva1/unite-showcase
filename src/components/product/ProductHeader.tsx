@@ -22,11 +22,11 @@ export function ProductHeader({ icon, group, short_info, description, showAnyReg
                             const img = e.currentTarget;
                             if (img.dataset.fallbackApplied) return;
                             img.dataset.fallbackApplied = "1";
-                            img.src = "/product/alt.png";
+                            img.src = "/product/alt.webp";
                         }}
                     />
                 ) : (
-                    <img src="/product/alt.png" alt={group ?? "Product"} className="w-40 rounded-3xl" loading="lazy" />
+                    <img src="/product/alt.webp" alt={group ?? "Product"} className="w-40 rounded-3xl" loading="lazy" />
                 )}
 
                 <div>
@@ -38,7 +38,7 @@ export function ProductHeader({ icon, group, short_info, description, showAnyReg
 
                     {showAnyRegionBadge ? (
                         <div className="bg-[#79109D] w-fit flex items-center gap-3 leading-4 px-[19.5px] py-1.5 rounded-[10px] mt-3">
-                            <img src="/product/globe.png" alt="globe" className="w-5" loading="lazy" />
+                            <img src="/product/globe.webp" alt="globe" className="w-5" loading="lazy" />
                             <p className="text-[12px] font-bold">Для аккаунтов любого региона</p>
                         </div>
                     ) : null}

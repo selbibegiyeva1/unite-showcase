@@ -21,7 +21,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
         >
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
                 <Link to="/">
-                    <img src="/logo.png" style={{ width: 63 }} alt="logo" />
+                    <img src="/logo.webp" style={{ width: 63 }} alt="logo" />
                 </Link>
 
                 <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" placeholder={t.navbar.searchPlaceholder} />
@@ -43,7 +43,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
                     <LanguageDropdown />
 
                     <div className="nav-gap flex items-center" style={{ width: 30 }}>
-                        <img src="/menu.png" onClick={toggleSidebar} alt="" className="max-small:block max-small:gap-6 hidden cursor-pointer" />
+                        <img src="/menu.webp" onClick={toggleSidebar} alt="" className="max-small:block max-small:gap-6 hidden cursor-pointer" />
                     </div>
 
                     <a

@@ -30,9 +30,9 @@ function Partners() {
             <div className="px-4 max-lg:px-[64px] max-lg:m-0 product">
                 <div className="text-[15.67px] font-medium flex items-center gap-3.5 max-w-255 m-auto">
                     <Link to="/" className="flex items-center gap-1 w-fit text-[#969FA8]">
-                        <img src="/partner/grid.png" alt="grid" style={{ width: 24 }} />
+                        <img src="/partner/grid.webp" alt="grid" style={{ width: 24 }} />
                         <span>{t.partners.home}</span>
-                        <img src="partner/arrow.png" alt="arrow" style={{ width: 24 }} />
+                        <img src="partner/arrow.webp" alt="arrow" style={{ width: 24 }} />
                     </Link>
                     <p className="text-white">{t.partners.howToTopUp}</p>
                 </div>

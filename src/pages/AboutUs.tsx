@@ -101,7 +101,7 @@ function AboutUs() {
                         <div
                             className="mt-[60px] overflow-hidden relative rounded-3xl px-[32px] py-[32px] max-lg:px-[24px] max-lg:py-[24px] flex flex-col lg:flex-row items-center justify-between gap-[24px]"
                             style={{
-                                backgroundImage: "url('/news/5/bg.png')",
+                                backgroundImage: "url('/news/5/bg.webp')",
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                             }}
@@ -126,7 +126,7 @@ function AboutUs() {
 
                             <div className="relative max-w-[200px] z-10 max-lg:w-[253px] lg:w-[320px] xl:w-[380px]">
                                 <img
-                                    src="/news/5/about.png"
+                                    src="/news/5/about.webp"
                                     alt="about"
                                     className="w-full h-full object-contain select-none pointer-events-none"
                                     loading="lazy"

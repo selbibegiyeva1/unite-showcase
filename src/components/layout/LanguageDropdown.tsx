@@ -71,7 +71,7 @@ function LanguageDropdown({ className = "", dropdownClassName = "" }: LanguageDr
             >
                 <span>{selectedLang.label}</span>
                 <img
-                    src="/product/arrow-down-simple.png"
+                    src="/product/arrow-down-simple.webp"
                     alt="arrow"
                     className={`w-4 transition-transform duration-150 ${langOpen ? "rotate-180" : ""}`}
                 />

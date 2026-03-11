@@ -217,7 +217,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                 onClick={onOpenBanks}
             >
                 <p className="overflow-hidden text-ellipsis whitespace-nowrap">{bankText}</p>
-                <img src="/product/chevron-down.png" alt="chevron-down" className="w-6" />
+                <img src="/product/chevron-down.webp" alt="chevron-down" className="w-6" />
             </div>
             {bankErr ? <p className={alertCls}>{bankErr}</p> : null}
 
@@ -254,7 +254,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                             >
                                 <img
                                     ref={creditedTriggerRef}
-                                    src="/product/voucher.png"
+                                    src="/product/voucher.webp"
                                     alt=""
                                     className="w-5 cursor-pointer"
                                     onClick={(e) => {
@@ -289,7 +289,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
                                                         aria-label="Close"
                                                     >
                                                         <div className="w-12">
-                                                            <img src="/product/banks.png" className="w-full" alt="close" />
+                                                            <img src="/product/banks.webp" className="w-full" alt="close" />
                                                         </div>
                                                     </button>
                                                 </div>
@@ -318,7 +318,7 @@ function Total({ groupName, mode, fields, values, amountTmt, topupUsd, rateLoadi
             </div>
 
             <div className="my-4 flex items-center gap-2.5 bg-[#2F2F36] rounded-[10px] px-4 py-3">
-                <img src="/product/report.png" alt="report" className="w-6" />
+                <img src="/product/report.webp" alt="report" className="w-6" />
                 <p className="w-fit text-[14px] font-medium">{t.product.nonReturnable}</p>
             </div>
 

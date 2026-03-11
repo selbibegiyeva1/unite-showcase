@@ -94,7 +94,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                             >
                                 <img
                                     ref={triggerRef}
-                                    src="/product/region.png"
+                                    src="/product/region.webp"
                                     alt="info"
                                     className="w-5 cursor-pointer"
                                     onClick={() => setIsTooltipOpen((prev) => !prev)}
@@ -118,7 +118,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                 <li>{t.product.steamLoginInstruction1}</li>
                                                 <li>{t.product.steamLoginInstruction2}</li>
                                             </ul>
-                                            <img src="/product/steam.png" className="max-w-103.5" alt="steam" />
+                                            <img src="/product/steam.webp" className="max-w-103.5" alt="steam" />
                                         </div>
                                         <div
                                             className="hidden max-medium:grid fixed top-0 left-0 bg-[#00000090] w-full h-screen z-60 place-items-center max-medium:px-[24px]"
@@ -138,7 +138,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                         aria-label="Close"
                                                     >
                                                         <div className="w-12">
-                                                            <img src="/product/banks.png" className="w-full" alt="close" />
+                                                            <img src="/product/banks.webp" className="w-full" alt="close" />
                                                         </div>
                                                     </button>
                                                 </div>
@@ -146,7 +146,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                                     <li>{t.product.steamLoginInstruction1}</li>
                                                     <li>{t.product.steamLoginInstruction2}</li>
                                                 </ul>
-                                                <img src="/product/steam.png" className="w-full mt-4" alt="steam" />
+                                                <img src="/product/steam.webp" className="w-full mt-4" alt="steam" />
                                             </div>
                                         </div>
                                     </>
@@ -252,7 +252,7 @@ function FormTwo({ groupName, mode, fields, values, setValues, errors, showError
                                         ))}
                                     </select>
                                     <img
-                                        src="/product/arrow-down-simple.png"
+                                        src="/product/arrow-down-simple.webp"
                                         alt="arrow-down-simple"
                                         className="absolute top-1/2 right-4 -translate-y-1/2 w-4 pointer-events-none"
                                     />

@@ -35,7 +35,7 @@ function PartnersList({ locations, selectedId, onSelect }: PartnersListProps) {
             <b className="text-[24px] nap-h">{t.partners.allPartners}</b>
 
             <div className="mt-5 flex items-center gap-2.5 px-5 rounded-[14px] bg-[#282730]">
-                <img src="/partner/search.png" alt="search" style={{ width: 24 }} loading="lazy" />
+                <img src="/partner/search.webp" alt="search" style={{ width: 24 }} loading="lazy" />
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
