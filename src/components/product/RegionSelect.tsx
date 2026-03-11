@@ -39,8 +39,8 @@ function camelToKebab(s: string) {
     return s.replace(/([a-z])([A-Z])/g, "$1-$2");
 }
 
-function fileUrl(base: string, filename: string) {
-    return `${base}${encodeURIComponent(filename)}.png`;
+function fileUrl(base: string, filename: string, ext: "webp" | "png" = "webp") {
+    return `${base}${encodeURIComponent(filename)}.${ext}`;
 }
 
 function buildFlagCandidates(region: RegionItem) {
@@ -67,7 +67,11 @@ function buildFlagCandidates(region: RegionItem) {
 
     const paths: string[] = [];
     for (const base of FLAG_BASE_DIRS) {
-        for (const n of names) paths.push(fileUrl(base, n));
+        for (const n of names) {
+            // Prefer modern WebP assets, then fall back to legacy PNG if present
+            paths.push(fileUrl(base, n, "webp"));
+            paths.push(fileUrl(base, n, "png"));
+        }
     }
 
     paths.push(FALLBACK_FLAG_SRC);

@@ -13,6 +13,7 @@
     --breakpoint-small: 755px;
     --breakpoint-xsmall: 500px;
     --breakpoint-footer: 590px;
+    --breakpoint-product-header: 470px;
 }
 
 @media(max-width: 886px) {

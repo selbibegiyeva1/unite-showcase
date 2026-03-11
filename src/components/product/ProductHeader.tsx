@@ -11,12 +11,12 @@ export function ProductHeader({ icon, group, short_info, description, showAnyReg
 
     return (
         <div className="px-8 py-8 bg-[#1D1D22] rounded-4xl">
-            <div className="flex items-center gap-7.25">
+            <div className="flex items-center gap-7.25 max-product-header:flex-col max-product-header:items-start">
                 {icon ? (
                     <img
                         src={icon}
                         alt={group ?? "Product"}
-                        className="w-40 rounded-3xl"
+                        className="w-40 rounded-3xl max-product-header:w-full"
                         loading="lazy"
                         onError={(e) => {
                             const img = e.currentTarget;
