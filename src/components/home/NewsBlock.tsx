@@ -22,7 +22,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
     const slides = useMemo(() => [
         {
             id: 4,
-            img: "/home/news/4.png",
+            img: "/home/news/4.webp",
             title: t.newsBlock.slide4.title,
             text: t.newsBlock.slide4.text,
             date: "07.01.2026",
@@ -30,7 +30,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
         },
         {
             id: 1,
-            img: "/home/news/1.png",
+            img: "/home/news/1.webp",
             title: t.newsBlock.slide1.title,
             text: t.newsBlock.slide1.text,
             date: "07.01.2026",
@@ -38,7 +38,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
         },
         {
             id: 2,
-            img: "/home/news/2.png",
+            img: "/home/news/2.webp",
             title: t.newsBlock.slide2.title,
             text: t.newsBlock.slide2.text,
             date: "07.01.2026",
@@ -46,7 +46,7 @@ function NewsBlock({ compact = false, onNewsClick, isVisible }: NewsBlockProps =
         },
         {
             id: 3,
-            img: "/home/news/3.png",
+            img: "/home/news/3.webp",
             title: t.newsBlock.slide3.title,
             text: t.newsBlock.slide3.text,
             date: "07.01.2026",

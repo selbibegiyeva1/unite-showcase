@@ -13,13 +13,13 @@ function SliderPopular() {
     const t = useTranslations();
     
     const [slides] = useState([
-        { id: 1, img: "/home/slider2/1.png", title: "Steam", group: "Steam" },
-        { id: 2, img: "/home/slider2/2.png", title: "Spotify", group: "Spotify" },
-        { id: 3, img: "/home/slider2/3.png", title: "PlayStation", group: "Playstation" },
-        { id: 4, img: "/home/slider2/4.png", title: "PUBG Mobile", group: "PUBG Mobile" },
-        { id: 5, img: "/home/slider2/5.png", title: "APPLE ID", group: "APPLE ID" },
-        { id: 6, img: "/home/slider2/6.png", title: "Roblox", group: "Roblox" },
-        { id: 7, img: "/home/slider2/7.png", title: "Netflix", group: "Netflix" },
+        { id: 1, img: "/home/slider2/1.webp", title: "Steam", group: "Steam" },
+        { id: 2, img: "/home/slider2/2.webp", title: "Spotify", group: "Spotify" },
+        { id: 3, img: "/home/slider2/3.webp", title: "PlayStation", group: "Playstation" },
+        { id: 4, img: "/home/slider2/4.webp", title: "PUBG Mobile", group: "PUBG Mobile" },
+        { id: 5, img: "/home/slider2/5.webp", title: "APPLE ID", group: "APPLE ID" },
+        { id: 6, img: "/home/slider2/6.webp", title: "Roblox", group: "Roblox" },
+        { id: 7, img: "/home/slider2/7.webp", title: "Netflix", group: "Netflix" },
     ]);
 
     const prevRef = useRef<HTMLButtonElement | null>(null);

@@ -18,7 +18,7 @@ function AboutUs() {
                     <div className="mt-[32px] mb-[40px]">
                         <h1 className="text-white font-medium text-[32px] leading-9">{t.news.news5.title}</h1>
                     </div>
-                    <img src="home/news/5.png" alt="" className="w-full rounded-3xl" loading="lazy" />
+                    <img src="home/news/5.webp" alt="" className="w-full rounded-3xl" loading="lazy" />
 
                     <div className="mt-[32px] mb-[70px] text-white">
                         <center>

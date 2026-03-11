@@ -11,17 +11,17 @@ import "react-loading-skeleton/dist/skeleton.css";
 type ExtendedCategory = ProductGroupCategory | "other" | "physical";
 
 const OTHER_SERVICES = [
-    { name: "Adobe", src: "/home/static/Adobe.png" },
-    { name: "Canva", src: "/home/static/Canva.png" },
-    { name: "ChatGPT Plus", src: "/home/static/ChatGPT Plus.png" },
-    { name: "Cursor", src: "/home/static/Cursor.png" },
-    { name: "Figma", src: "/home/static/Figma.png" },
-    { name: "Gemini", src: "/home/static/Gemini.png" },
-    { name: "Google Play", src: "/home/static/Google Play.png" },
-    { name: "Kling", src: "/home/static/Kling.png" },
-    { name: "Perplexity", src: "/home/static/Perplexity.png" },
-    { name: "Runway", src: "/home/static/Runway.png" },
-    { name: "Suno AI", src: "/home/static/Suno AI.png" },
+    { name: "Adobe", src: "/home/static/Adobe.webp" },
+    { name: "Canva", src: "/home/static/Canva.webp" },
+    { name: "ChatGPT Plus", src: "/home/static/ChatGPT Plus.webp" },
+    { name: "Cursor", src: "/home/static/Cursor.webp" },
+    { name: "Figma", src: "/home/static/Figma.webp" },
+    { name: "Gemini", src: "/home/static/Gemini.webp" },
+    { name: "Google Play", src: "/home/static/Google Play.webp" },
+    { name: "Kling", src: "/home/static/Kling.webp" },
+    { name: "Perplexity", src: "/home/static/Perplexity.webp" },
+    { name: "Runway", src: "/home/static/Runway.webp" },
+    { name: "Suno AI", src: "/home/static/Suno AI.webp" },
 ];
 
 export default function Products() {
@@ -70,7 +70,7 @@ export default function Products() {
                     onClick={() => setActiveCategory("games")}
                 >
                     <img
-                        src="/home/toy.png"
+                        src="/home/toy.webp"
                         alt="toy"
                         style={{ width: 22 }}
                         className={activeCategory !== "games" ? "switch--inactive-img" : ""}
@@ -84,7 +84,7 @@ export default function Products() {
                     onClick={() => setActiveCategory("business")}
                 >
                     <img
-                        src="/home/desktop.png"
+                        src="/home/desktop.webp"
                         alt="desktop"
                         style={{ width: 22 }}
                         className={activeCategory !== "business" ? "switch--inactive-img" : ""}
@@ -98,7 +98,7 @@ export default function Products() {
                     onClick={() => setActiveCategory("other")}
                 >
                     <img
-                        src="/home/add-block.png"
+                        src="/home/add-block.webp"
                         alt="other services"
                         style={{ width: 22 }}
                         className={activeCategory !== "other" ? "switch--inactive-img" : ""}
@@ -112,7 +112,7 @@ export default function Products() {
                     onClick={() => setActiveCategory("physical")}
                 >
                     <img
-                        src="/home/add-block.png"
+                        src="/home/add-block.webp"
                         alt="physical products"
                         style={{ width: 22 }}
                         className={activeCategory !== "physical" ? "switch--inactive-img" : ""}

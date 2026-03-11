@@ -17,7 +17,7 @@ function Slider() {
     const slides = useMemo(() => [
         {
             id: "pubg",
-            img: "/home/slider/1.png",
+            img: "/home/slider/1.webp",
             title: t.slider.slide1.title,
             description: t.slider.slide1.description,
             descriptionClassName: "mt-3 mb-6 w-58.75 text-[14px] font-medium max-xsmall:mb-4",
@@ -30,7 +30,7 @@ function Slider() {
         },
         {
             id: "steam",
-            img: "/home/slider/2.png",
+            img: "/home/slider/2.webp",
             title: t.slider.slide2.title,
             titleClassName: "text-[32px] max-xsmall:text-[24px] w-79 flex leading-9",
             button: {
@@ -42,7 +42,7 @@ function Slider() {
         },
         {
             id: "ps",
-            img: "/home/slider/3.png",
+            img: "/home/slider/3.webp",
             title: t.slider.slide3.title,
             description: t.slider.slide3.description,
             descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium max-xsmall:mb-4",
@@ -55,7 +55,7 @@ function Slider() {
         },
         {
             id: "partners",
-            img: "/home/slider/4.png",
+            img: "/home/slider/4.webp",
             title: t.slider.slide4.title,
             description: t.slider.slide4.description,
             descriptionClassName: "mt-3 mb-6 w-65 text-[14px] font-medium max-xsmall:mb-4",
@@ -68,8 +68,8 @@ function Slider() {
         },
         {
             id: "support",
-            img: "/home/slider/5.png",
-            mobileImg: "/home/slider/6.png",
+            img: "/home/slider/5.webp",
+            mobileImg: "/home/slider/6.webp",
             title: t.support.bannerTitle,
             description: t.support.bannerDescription,
             descriptionClassName: "mt-3 mb-6 w-70 text-[14px] font-medium max-xsmall:mb-4",
@@ -239,7 +239,7 @@ function Slider() {
                 disabled={isEnd}
                 className={`slider-arrow ${isEnd ? "slider-arrow--inactive" : "slider-arrow--active"} btn`}
             >
-                <img src="/home/arrow-forward.png" className="w-5" alt="arrow-forward" loading="lazy" />
+                <img src="/home/arrow-forward.webp" className="w-5" alt="arrow-forward" loading="lazy" />
             </button>
             <SupportHelpModal isOpen={isSupportOpen} onClose={() => setIsSupportOpen(false)} />
         </div>
