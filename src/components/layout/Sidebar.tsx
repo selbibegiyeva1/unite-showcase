@@ -18,11 +18,11 @@ function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
             <div>
                 <div className="flex items-center justify-between h-[72px]">
                     <Link to="/" onClick={toggleSidebar}>
-                        <img src="/logo.png" style={{ width: 63 }} alt="logo" />
+                        <img src="/logo.webp" style={{ width: 63 }} alt="logo" />
                     </Link>
                     <div className="flex items-center gap-6">
                         <LanguageDropdown />
-                        <img src="/product/banks.png" onClick={toggleSidebar} alt="" className="w-[32px] cursor-pointer" />
+                        <img src="/product/banks.webp" onClick={toggleSidebar} alt="" className="w-[32px] cursor-pointer" />
                     </div>
                 </div>
 
