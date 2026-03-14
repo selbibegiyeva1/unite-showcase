@@ -21,7 +21,7 @@ function Navbar({ toggleSidebar }: NavbarProps) {
         >
             <nav className="m-auto max-w-255 h-18 flex items-center gap-6">
                 <Link to="/">
-                    <img src="/logo.webp" style={{ width: 63 }} alt="logo" />
+                    <img src="/logo.webp" className="w-[63px] min-w-[63px] max-w-[63px] shrink-0" alt="logo" />
                 </Link>
 
                 <SearchBar className="w-87.5 max-nav:w-[200px] max-small:w-full" placeholder={t.navbar.searchPlaceholder} />
