@@ -156,7 +156,7 @@ export default function Products() {
                                 key={`${g.category}:${g.group_name}`}
                                 className="flex flex-col gap-3 max-[500px]:gap-2 group"
                             >
-                                <div className="overflow-hidden rounded-2xl">
+                                <div className="overflow-hidden rounded-3xl">
                                     <img
                                         src={g.icon_url}
                                         alt="product"
@@ -188,7 +188,7 @@ export default function Products() {
                                     onClick={() => setIsSupportOpen(true)}
                                     className="flex flex-col gap-3 max-[500px]:gap-2 text-left group cursor-pointer active:cursor-grabbing"
                                 >
-                                    <div className="overflow-hidden rounded-2xl">
+                                    <div className="overflow-hidden rounded-3xl">
                                         <img
                                             src={service.src}
                                             alt={service.name}
@@ -214,7 +214,7 @@ export default function Products() {
                                 key={product.name}
                                 className="flex flex-col gap-3 max-[500px]:gap-2 group"
                             >
-                                <div className="overflow-hidden rounded-2xl">
+                                <div className="overflow-hidden rounded-3xl">
                                     <img
                                         src={product.src}
                                         alt={product.name}
